@@ -4,6 +4,7 @@
 <div>
   <label>名前：</label>
   <input type="text" name="name" required>
+  <input type="text">
 </div>
 
 </form>

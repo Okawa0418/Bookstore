@@ -58,7 +58,7 @@ class Database1 {
     function createPurchase($item_name, $code_product, $quantity, $user_id) {
         $dbh = $this->dbConnect();
         // SQL準備
-        $sql  = 'INSERT INTO post_tb (item_name, code_product, quantity, user_id) 
+        $sql  = 'INSERT INTO purchase (item_name, code_product, quantity, user_id) 
                     VALUES(:item_name, :code_product, :quantity, :user_id)';
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':item_name', $item_name, PDO::PARAM_STR);

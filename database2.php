@@ -9,7 +9,6 @@ function database(){
     $mail=$_POST['mail_address'];
     $post=$_POST['post_address'];
     $tel=$_POST['tel'];
-
     // パスワードのハッシュ化
     $pass=password_hash($_POST['password'],PASSWORD_DEFAULT);
     
@@ -29,7 +28,7 @@ function database(){
     }  
 
     // usersテーブルからメールアドレスが一致するものを検索
-    $sql="SELECT*FROM users WHERE mail_address = :mail_address";
+    $sql="SELECT*FROM user WHERE mail_address = :mail_address";
 
     // SQLの準備
     $stmt = $dbh->prepare($sql);

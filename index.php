@@ -3,12 +3,12 @@
     require_once('database1.php');
 
     $database = new Database1;
-    $results = $database->getAllProduct();
+    $allProduct = $database->getAllProduct();
 
     // 購入するボタンを押した場合
     if (isset($_POST['buy'])) {
-        // priceをkeyとした価格の配列を取得
-        $result = $database->getPriceByProductId($_POST['product_id']);
+        // 特定の商品レコードを取得
+        $result = $database->getProductByProductId($_POST['product_id']);
         // 配列の価格のみ取得し変数へ代入
         $price = $result['price'];
         // 合計金額を計算
@@ -20,7 +20,7 @@
         $_SESSION['product']['quantity'] = $_POST['quantity'];
        
         // ログイン情報がセッションで保持されている場合
-        if (isset($_SESSION['id'])) {
+        if (isset($_SESSION['user_id'])) {
             header('Location: confirm.php');
             exit;
         }
@@ -52,7 +52,7 @@
     <!-- 商品一覧の購入フォーム -->
     <form action="index.php" method="post">
     <!-- foreach文で商品テーブルのレコードを全て表示 -->
-    <?php foreach ($results as $result) : ?>
+    <?php foreach ($allProduct as $result) : ?>
         <tr>
             <!-- 商品名、価格 -->
             <td><?= $result['product_name']; ?></td>

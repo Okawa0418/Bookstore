@@ -3,7 +3,7 @@ session_start();
 $mail = $_POST['mail_address'];
 $dsn = "mysql:host=localhost; dbname=bookstore; charset=utf8";
 $username = "root";
-$password = "";
+$password = "Rilakkuma1231";
 try {
     $dbh = new PDO($dsn, $username, $password);
 } catch (PDOException $e) {

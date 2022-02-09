@@ -10,7 +10,7 @@
     // データベースへの接続
     $dsn="mysql:host=localhost; dbname=bookstore; charset=utf8";
     $username="root";
-    $password="";
+    $password="Rilakkuma1231";
 
     // データベース接続エラーチェック
       // 例外が発生しうる処理（PDOのインスタンス化）

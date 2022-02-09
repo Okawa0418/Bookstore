@@ -7,17 +7,17 @@
     <h1>在庫発注</h1>
     <h2>新規追加</h2>
     <from name ="form2" method="post" action="">
-    <input type="submit" value="発注する" name="include">
+    <input type="submit" value="確定" name="include">
     <from name ="form2" method="post" action="">
-    <input type="submit" value="発注する" name="include">
+    <input type="submit" value="確定" name="include">
     <from name ="form2" method="post" action="">
-    <input type="submit" value="発注する" name="include">
+    <input type="submit" value="確定" name="include">
     <from name ="form2" method="post" action="">
-    <input type="submit" value="発注する" name="include">
+    <input type="submit" value="確定" name="include">
     <from name ="form2" method="post" action="">
-    <input type="submit" value="発注する" name="include">
+    <input type="submit" value="確定" name="include">
     <from name ="form2" method="post" action="">
-    <input type="submit" value="発注する" name="include">
+    <input type="submit" value="確定" name="include">
     </form>
 </body>
 </html>

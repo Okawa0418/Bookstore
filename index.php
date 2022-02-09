@@ -5,31 +5,14 @@
     $database = new Database1;
     $allProduct = $database->getAllProduct();
 
-    // 購入するボタンを押した場合
-    if (isset($_POST['buy'])) {
-        // 特定の商品レコードを取得
-        $result = $database->getProductByProductId($_POST['product_id']);
-        // 配列の価格のみ取得し変数へ代入
-        $price = $result['price'];
-        // 合計金額を計算
-        $sum = $_POST['quantity'] * $price;
-        // 合計金額をセッション変数へ代入
-        $_SESSION['sum'] = $sum;
-        // 商品のidと数量をセッションで保持する
-        $_SESSION['product']['id'] = $_POST['product_id'];
-        $_SESSION['product']['quantity'] = $_POST['quantity'];
-       
-        // ログイン情報がセッションで保持されている場合
-        if (isset($_SESSION['user_id'])) {
-            header('Location: confirm.php');
-            exit;
-        }
-
-        // signup.phpへ遷移
-        header('Location: signup.php');
-        exit;
+    // セッション変数にエラーメッセージが格納されていた場合
+    if (isset($_SESSION['msg'])) {
+        // 変数へ代入
+        $msg = $_SESSION['msg'];
+        // エラーメッセージのセッション破棄
+        unset($_SESSION['msg']);
     }
-
+    
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +25,9 @@
 </head>
 <body>
     <h1>商品一覧画面</h1>
+    <?php if (isset($msg)) : ?>
+        <?= $msg; ?>
+    <?php endif ; ?>
     <table>
         <tr>
             <th>商品名</th>
@@ -49,10 +35,10 @@
             <th>数量</th>
             <th>購入ボタン</th>
         </tr>
-    <!-- 商品一覧の購入フォーム -->
-    <form action="index.php" method="post">
     <!-- foreach文で商品テーブルのレコードを全て表示 -->
     <?php foreach ($allProduct as $result) : ?>
+    <!-- 商品一覧の購入フォーム -->
+    <form action="index2.php" method="post">
         <tr>
             <!-- 商品名、価格 -->
             <td><?= $result['product_name']; ?></td>
@@ -71,8 +57,8 @@
             <!-- 購入ボタン -->
             <td><input type="submit" name="buy" value="購入する"></td>
         </tr>
-    <?php endforeach ; ?>
     </form>
+    <?php endforeach ; ?>
     </table>
 </body>
 </html>

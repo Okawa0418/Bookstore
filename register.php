@@ -7,6 +7,26 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <?php
+require_once('database1.php');
+?>
+
+<?php
+if(empty($_POST['user_name'])){
+  echo '名前は必須項目です。';
+}
+if(empty($_POST['mail_address'])){
+    echo 'メールアドレスは必須項目です。';
+  }
+if(empty($_POST['post_address'])){
+    echo '住所は必須項目です。';
+  }
+if(empty($_POST['tel'])){
+    echo '電話番号は必須項目です。';
+  }
+if(empty($_POST['password'])){
+    echo 'パスワードは必須項目です。';
+  }
+exit;
 // ファイルの取り込み
     // フォームからの値をそれぞれ変数に代入
     $name=$_POST['user_name'];
@@ -16,35 +36,25 @@
     // パスワードのハッシュ化
     $pass=password_hash($_POST['password'],PASSWORD_DEFAULT);
 
-    // データベースへの接続
-    $dsn="mysql:host=localhost; dbname=bookstore; charset=utf8";
-    $username="root";
-    $password="Rilakkuma1231";
+    // データベース接続
+    $data1=new Database1();
+    $dbh = $data1->dbConnect();
 
-    // データベース接続エラーチェック
-      // 例外が発生しうる処理（PDOのインスタンス化）
-    try {
-        $dbh = new PDO($dsn, $username, $password);
-
-    // 例外発生時の処理
-    } catch (PDOException $e) {
-        $msg = $e->getMessage();
-    }  
-
+    // メールアドレスの重複チェック
     // userテーブルからメールアドレスが一致するものを検索
     $sql="SELECT*FROM user WHERE mail_address = :mail_address";
-
     // SQLの準備
     $stmt = $dbh->prepare($sql);
-
     // プレースホルダの値を設定
     $stmt->bindValue(':mail_address', $mail);
-
     // SQLを実行
     $stmt->execute();
-
     $member = $stmt->fetch();
-    
+
+    if($member['mail_address'] === $mail){
+        $msg='同じメールアドレスが存在します。';
+        $link='<a href="signup.php">戻る</a>';
+    }else{
     // 登録されていなければinsert
     $sql = "INSERT INTO user(user_name, mail_address, password,post_address,tel) VALUES (:user_name, :mail_address, :password,:post_address,:tel)";
     $stmt = $dbh->prepare($sql);
@@ -56,7 +66,7 @@
     $stmt->execute();
     $msg = '会員登録が完了しました';
     $link = '<a href="login_form.php">ログインページ</a>';
-
+}
 ?>
 
 <h1><?php echo $msg; ?></h1><!--メッセージの出力-->

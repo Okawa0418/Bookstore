@@ -9,7 +9,10 @@ try {
     $password = 'Rilakkuma1231';
     $dbh = new PDO($dsn, $user, $password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "SELECT product_name FROM product WHERE product_id = '" . $product_id . "'";
+    $sql =
+        "SELECT product_name FROM product WHERE product_id = '" .
+        $product_id .
+        "'";
     $stmt = $dbh->query($sql);
     $results = $stmt->fetch(PDO::FETCH_ASSOC);
 } catch (Exception $e) {

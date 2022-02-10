@@ -32,7 +32,7 @@ class Database1 {
         return $results; 
     }
 
-    // productテーブルから特定の商品のレコードを取得する（引数：product_id、返り値：$results）
+    // productテーブルから1つの商品のレコードを取得する（引数：product_id、返り値：$results）
     function getProductByProductId($id) {
         $dbh = $this->dbConnect();
         // SQL準備
@@ -54,7 +54,7 @@ class Database1 {
         $product_name = $results['product_name'];
         return $product_name;
     }
-
+    // 購入履歴をデータベースに挿入（purchaseテーブルに挿入）
     function createPurchase($item_name, $code_product, $quantity, $user_id) {
         $dbh = $this->dbConnect();
         // SQL準備
@@ -67,6 +67,29 @@ class Database1 {
         $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
         // SQL実行（データベースに投稿内容を入れる）
         $stmt->execute();
+    }
+
+    // productテーブルからproduct_nameで検索する(引数：検索する文字列)
+    function searchProduct($search) {
+        $dbh = $this->dbConnect();
+        // SQL準備
+        $sql = "SELECT product_name, price 
+                FROM product 
+                WHERE product_name LIKE :search ";
+        $stmt = $dbh->prepare($sql);
+        // ワイルドカードを前後に使用し変数に再代入
+        $search = '%' . $search . '%';
+        // ワイルドカードを入れた変数をバインドする
+        $stmt->bindValue(':search', $search, PDO::PARAM_STR);
+
+        // SQL実行
+        $stmt->execute();
+
+        // 結果を取得
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($results);
+        // exit;
+        return $results;
     }
 
 }

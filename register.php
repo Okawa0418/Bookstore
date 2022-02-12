@@ -11,22 +11,56 @@ require_once('database1.php');
 ?>
 
 <?php
+session_start();
+?>
+
+<?php
+// ユーザーネームが空の場合
 if(empty($_POST['user_name'])){
-  echo '名前は必須項目です。';
+        // エラーメッセージをセッションに格納
+        $_SESSION['msg'] = 'ユーザー名を入力してください。';
+        // 登録画面に戻る
+        header('Location: signup.php');
+        exit;
+    }
+?>
+
+<?php
+// エラーメッセージ
+$err=[];
+// バリデーション
+if(!$name=filter_input(INPUT_POST,'user_name')){
+$err[]='ユーザー名を入力してください。';
 }
-if(empty($_POST['mail_address'])){
-    echo 'メールアドレスは必須項目です。';
+
+if(!$mail=filter_input(INPUT_POST,'mail_address')){
+$err[]='メールアドレスを入力してください。';
+}
+if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+  echo '正しいEメールアドレスを指定してください。';
+}
+
+if(!$post=filter_input(INPUT_POST,'post_address')){
+$err[]='住所を入力してください。';
+}
+
+if(!$tel=filter_input(INPUT_POST,'tel')){
+  $err[]='電話番号を入力してください。';
   }
-if(empty($_POST['post_address'])){
-    echo '住所は必須項目です。';
-  }
-if(empty($_POST['tel'])){
-    echo '電話番号は必須項目です。';
-  }
-if(empty($_POST['password'])){
-    echo 'パスワードは必須項目です。';
-  }
-exit;
+  
+$password=filter_input(INPUT_POST,'password');
+if (!preg_match("/\A[a-z\d]{8,100}+\z/i",$password)){
+  $err[]='パスワードは英数字8文字以上100文字以下にしてください。';
+}
+?>
+
+<?php if (count($err)>0):?>
+  <?php foreach ($err as $e):?>
+    <p><?php echo $e ?></p>
+    <?php endforeach?>
+  <?php endif?>
+
+<?php
 // ファイルの取り込み
     // フォームからの値をそれぞれ変数に代入
     $name=$_POST['user_name'];
@@ -50,6 +84,8 @@ exit;
     // SQLを実行
     $stmt->execute();
     $member = $stmt->fetch();
+
+    // var_dump($stmt);
 
     if($member['mail_address'] === $mail){
         $msg='同じメールアドレスが存在します。';

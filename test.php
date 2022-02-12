@@ -37,3 +37,27 @@ if (count($err)===0){
 }
 
 ?>
+
+<?php
+// ユーザーネームが空の場合
+if(empty($_POST['user_name'])){
+        // エラーメッセージをセッションに格納
+        $_SESSION['msg'] = 'ユーザー名を入力してください。';
+        // 登録画面に戻る
+        header('Location: signup.php');
+        exit;
+    }
+?>
+
+<?php
+    // セッション変数にエラーメッセージが格納されていた場合
+    if (isset($_SESSION['msg'])) {
+      var_dump($_SESSION);
+      exit;
+      // 変数へ代入
+      $msg = $_SESSION['msg'];
+  }
+?>
+<?php if (isset($msg)) : ?>
+        <?= $msg; ?>
+    <?php endif ; ?>

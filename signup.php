@@ -29,9 +29,24 @@
 </body>
 </html>
 
+<?php
+session_start();
+    // セッション変数にエラーメッセージが格納されていた場合
+    if (isset($_SESSION['msg'])) {
+    // 変数へ代入
+    $msg = $_SESSION['msg'];
+    // エラーメッセージのセッション破棄
+    unset($_SESSION['msg']);
+}
+?>
+<!-- エラーメッセージの表示 -->
+<?php if (isset($msg)) : ?>
+  <?= $msg; ?>
+<?php endif ; ?>
+
 <form action="register.php" method="post">
 <div>
-  <label>名前：</label>
+  <label>ユーザー名：</label>
   <input type="text" name="user_name">
 </div>
 <div>

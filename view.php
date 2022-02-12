@@ -1,18 +1,3 @@
-<?php
-// エラーメッセージ
-$err = [];
-// バリデーション
-if (!($name = filter_input(INPUT_POST, 'name'))) {
-    $err[] = '名前を記入してください';
-}
-if (!($price = filter_input(INPUT_POST, 'price'))) {
-    $err[] = '値段を記入してください';
-}
-
-if (count($err) === 0) {
-    // 発注処理
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +5,6 @@ if (count($err) === 0) {
 </head>
 <body>
 <?php
-// var_dump($_POST);
-// exit();
 $db_user = 'root';
 $db_pass = 'Rilakkuma1231';
 $db_host = 'localhost';
@@ -34,7 +17,7 @@ try {
     $pdo = new PDO($dsn, $db_user, $db_pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    print '接続しました <br>';
+    print '発注中 <br>';
 } catch (PDOException $Exception) {
     die('エラー:' . $Exception->getMessage());
 }
@@ -51,12 +34,6 @@ try {
     $pdo->rollBack();
     print 'エラー:' . $Exception->getMessage();
 }
-
-// $if (count($err) > 0):
-// $foreach ($err as $e):
-// $endforeach;
-// $else:
-// $endif;
 ?>
 </body>
 </html>

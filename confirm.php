@@ -2,7 +2,14 @@
 session_start();
 $product_id = $_SESSION['product']['id'];
 $amount_quantity = $_SESSION['product']['quantity'];
-$total_sum = $_SESSION['sum'];
+$total_amount = $_SESSION['product']['total_amount'];
+// $_SESSION['product']['id'] = $_POST['product_id'];
+// // 商品数量の配列
+// $_SESSION['product']['quantity'] = $_POST['quantity'];
+// // 商品各々の金額の配列
+// $_SESSION['product']['price'] = $_POST['price'];
+// // 合計金額
+// $_SESSION['product']['total_amount'] = $total_amount;
 try {
     $dsn = 'mysql:host=localhost; dbname=bookstore; charset=utf8';
     $user = 'root';

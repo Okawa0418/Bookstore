@@ -1,36 +1,32 @@
 <!-- バリデーション実装 -->
 <?php
-
-$name='';
-$price='';
-
-$errors =[];
-
-if (isset($_POST)) {
-
-    if(empty($_POST['product_id']))
-{
-       $errors[] ='名前は必須項目です';
+session_start();
+var_dump($_POST);
+exit;
+if(empty($_POST['name'])){
+    // エラーメッセージをセッションに格納
+    $_SESSION['msg'] = 'ユーザー名を入力してください。';
+    // 登録画面に戻る
+    header('Location: include.php');
+    exit;
 }
-if (empty($_POST['price'])) {
-       $errors[] ='値段を入れてください';
-}
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Document</title>
-</head>
-<body>
-    <h1>ヴァリデーション結果</h1>
-    <?php if (empty($errors)):
-?>
-    <?php else: ?>
-    <ul>
-        <?php foreach ($errors as $msg): ?>
-        <li><?=msg ?></li>
-        <?php endforeach; ?>
-    </ul>
-    <?php endif; >
+        // セッション変数にエラーメッセージが格納されていた場合
+    if (isset($_SESSION['msg'])) {
+        // 変数へ代入
+        $msg = $_SESSION['msg'];
+        // エラーメッセージのセッション破棄
+        unset($_SESSION['msg']);
+    }
+    // エラーメッセージ
+    $err=[];
+    // バリデーション
+    if(!$name=filter_input(INPUT_POST,'name')){
+    $err[]='名前を入力してください。';
+    }
+    
+    if(!$price=filter_input(INPUT_POST,'price')){
+    $err[]='値段を入力してください';
+    }
+?> 
 </body>
 </html>

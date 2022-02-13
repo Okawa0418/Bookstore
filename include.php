@@ -1,22 +1,31 @@
-
+ <!-- エラーメッセージの表示 -->
+ <?php
+ session_start();
+ // セッション変数にエラーメッセージが格納されていた場合
+ if (isset($_SESSION['msg'])) {
+     // 変数へ代入
+     $msg = $_SESSION['msg'];
+     // エラーメッセージのセッション破棄
+     unset($_SESSION['msg']);
+ }
+ ?>
+<!-- エラーメッセージの表示 -->
+<?php if (isset($msg)): ?>
+  <?= $msg ?>
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="en">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-<!-- Bootstrap Javascript(jQuery含む) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <head>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<!-- 新規リスト -->
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-md">
         <a class="navbar-brand" href="#">新規発注</a>
     </div>
 </nav>
-</head>
-<!-- 新規リスト -->
-<body>
     <table class="table table-success table-striped">
     <tr>
             <th>新商品</th>
@@ -59,16 +68,20 @@
             <th><form action="" method="post">準新規商品</td>
         </tr>
     </table>
-<!-- 発注実装 -->
+    <!-- 発注実装 -->
     <div style="font-size:14px">新規本を追加してください</div>
-    <form name="form1" method="post" action="view.php">
+    <form method="post" action="index.php">
         名前を記入してください:<br>
         <input type="text" name="name">
         <br>
         値段を記入してください:<br>
         <input type="text" name="price">
-        <br>
-        <input type="submit" value="発注">
+        <!-- <br> -->
+        <input type="submit" name="validate" value="発注">
     </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
+

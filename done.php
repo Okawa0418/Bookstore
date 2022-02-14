@@ -16,20 +16,7 @@
         exit;
     }
 
-    // 数量が0以外の商品をインサートしたい
-    // まず、quantityで0を検索してインデックス番号を取得
-    $zero_quantities = array_keys($_SESSION['product']['quantity'], '0');
-    // インデックス番号と一致するid、数量、価格を配列内から削除する
-    for ($i=0; $i < count($zero_quantities); $i++) {
-        // idの配列から数量が0であるid要素を削除
-        array_splice($_SESSION['product']['id'], $zero_quantities[$i], 1);
-        // quantityの配列から数量が0であるid要素を削除
-        array_splice($_SESSION['product']['quantity'], $zero_quantities[$i], 1);
-        // priceの配列から数量が0であるid要素を削除
-        array_splice($_SESSION['product']['price'], $zero_quantities[$i], 1);
-    }
-    // $_SESSION['product']の中身は数量0を抜いた配列になっている
-    // 削除された状態でfor文を使用してインサートしていく
+    // for文を使用してpurchaseテーブルへインサートしていく（購入履歴）
     for ($i=0; $i < count($_SESSION['product']['id']); $i++) {
         // 購入履歴のテーブルへ挿入する
         $database = new Database1;

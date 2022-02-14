@@ -61,3 +61,24 @@ if(empty($_POST['user_name'])){
 <?php if (isset($msg)) : ?>
         <?= $msg; ?>
     <?php endif ; ?>
+
+
+
+    <h1><?php echo $done; ?></h1><!--メッセージの出力-->
+<?php echo $link; ?>
+
+<?php
+    if (isset($_SESSION['msg6'])) {
+    $msg6 = $_SESSION['msg6'];
+    unset($_SESSION['msg6']);
+}
+?>
+<?php if (isset($msg6)) : ?>
+  <?= $msg6; ?>
+  <br><br>
+<?php endif ; ?>
+
+if (!empty($_POST['password'])&&!preg_match("/\A[a-z\d]{8,100}+\z/i",$password)){
+  $_SESSION['msg6'] ='パスワードは英数字8文字以上100文字以下にしてください。';
+  header('Location: signup.php');
+}

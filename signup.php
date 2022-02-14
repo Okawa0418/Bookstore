@@ -42,6 +42,51 @@ session_start();
 <!-- エラーメッセージの表示 -->
 <?php if (isset($msg)) : ?>
   <?= $msg; ?>
+  <br>
+<?php endif ; ?>
+
+<?php
+    if (isset($_SESSION['msg2'])) {
+    $msg2 = $_SESSION['msg2'];
+    unset($_SESSION['msg2']);
+}
+?>
+<?php if (isset($msg2)) : ?>
+  <?= $msg2; ?>
+  <br>
+<?php endif ; ?>
+
+<?php
+    if (isset($_SESSION['msg3'])) {
+    $msg3 = $_SESSION['msg3'];
+    unset($_SESSION['msg3']);
+}
+?>
+<?php if (isset($msg3)) : ?>
+  <?= $msg3; ?>
+  <br>
+<?php endif ; ?>
+
+<?php
+    if (isset($_SESSION['msg4'])) {
+    $msg4 = $_SESSION['msg4'];
+    unset($_SESSION['msg4']);
+}
+?>
+<?php if (isset($msg4)) : ?>
+  <?= $msg4; ?>
+  <br>
+<?php endif ; ?>
+
+<?php
+    if (isset($_SESSION['msg5'])) {
+    $msg5 = $_SESSION['msg5'];
+    unset($_SESSION['msg5']);
+}
+?>
+<?php if (isset($msg5)) : ?>
+  <?= $msg5; ?>
+  <br>
 <?php endif ; ?>
 
 <form action="register.php" method="post">

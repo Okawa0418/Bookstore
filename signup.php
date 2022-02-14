@@ -33,9 +33,7 @@
 session_start();
     // セッション変数にエラーメッセージが格納されていた場合
     if (isset($_SESSION['msg'])) {
-    // 変数へ代入
     $msg = $_SESSION['msg'];
-    // エラーメッセージのセッション破棄
     unset($_SESSION['msg']);
 }
 ?>
@@ -111,10 +109,9 @@ session_start();
   <input type="password" name="password">
 </div>
 <br>
-        <div class="row">
-            <div class="col-md">
+    <div class="row">
+        <div class="col-md">
           <input type="submit" class="btn btn-warning" value="新規登録(購入画面へ)">
-            </div>
         </div>
     </div>
 <br>

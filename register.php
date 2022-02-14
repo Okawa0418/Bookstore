@@ -8,38 +8,27 @@
 
 <?php
 require_once('database1.php');
+session_start();
 ?>
 
 <?php
-session_start();
-
-// ファイルの取り込み
-    // フォームからの値をそれぞれ変数に代入
     $name=$_POST['user_name'];
     $mail=$_POST['mail_address'];
     $post=$_POST['post_address'];
     $tel=$_POST['tel'];
-    // パスワードのハッシュ化
+
     $pass=password_hash($_POST['password'],PASSWORD_DEFAULT);
 
-    // データベース接続
     $data1=new Database1();
     $dbh = $data1->dbConnect();
 
-    // メールアドレスの重複チェック
-    // userテーブルからメールアドレスが一致するものを検索
     $sql="SELECT*FROM user WHERE mail_address = :mail_address";
-    // SQLの準備
     $stmt = $dbh->prepare($sql);
-    // プレースホルダの値を設定
     $stmt->bindValue(':mail_address', $mail);
-    // SQLを実行
     $stmt->execute();
     $member = $stmt->fetch();
 
-    // var_dump($sql);
-
-
+    // var_dump($member);
     
 if(empty($_POST['user_name'])){
         $_SESSION['msg'] = '※ユーザー名を入力してください。';

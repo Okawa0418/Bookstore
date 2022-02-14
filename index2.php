@@ -2,10 +2,19 @@
 // 購入ボタンを押した後の処理
 
 session_start();
-require_once('database1.php');
 
-// 購入するボタンを押した場合
-if (isset($_POST['buy'])) {
+// POSTでtokenの項目名で送信されているかどうか
+// セッションに保存された値と一致する場合
+if (isset($_POST["token"]) 
+    && $_POST["token"] === $_SESSION['token']) {
+
+    // トークンの破棄
+    unset($_SESSION['token']);
+    // セッションの保存
+    session_write_close();
+    // セッションの再開
+    session_start();
+    
     // 数量の合計
     $sum = array_sum($_POST['quantity']);
 
@@ -20,7 +29,6 @@ if (isset($_POST['buy'])) {
     }
 
     // 商品が選択された場合 
-
     // 合計金額の計算の準備
     // 商品の金額をキーとした数量の配列を作成
     $price_quantities = array_combine($_POST['price'], $_POST['quantity']);
@@ -34,11 +42,13 @@ if (isset($_POST['buy'])) {
     // 配列内で数量が0のものを削除する
     // 数量が0のインデックス番号を取得する
     $zero_quantities = array_keys($_POST['quantity'], '0');
-   
+
     // インデックス番号と一致するid、数量、価格を配列内から削除する
     for ($i=0; $i < count($zero_quantities); $i++) {
         // idの配列から数量が0であるid要素を削除
         unset($_POST['product_id'][$zero_quantities[$i]]);
+        // 商品名の配列から数量が0である要素を削除
+        unset($_POST['product_name'][$zero_quantities[$i]]);
         // quantityの配列から数量が0である数量要素を削除
         unset($_POST['quantity'][$zero_quantities[$i]]);
         // priceの配列から数量が0である価格要素を削除
@@ -53,6 +63,8 @@ if (isset($_POST['buy'])) {
     $_SESSION['product']['quantity'] = array_values($_POST['quantity']);
     // 商品各々の金額の配列
     $_SESSION['product']['price'] = array_values($_POST['price']);
+    // 商品名の配列
+    $_SESSION['product']['name'] = array_values($_POST['product_name']);
     // 合計金額
     $_SESSION['product']['total_amount'] = $total_amount;
 
@@ -66,5 +78,6 @@ if (isset($_POST['buy'])) {
     // ログインしていない場合はsignup.phpへ遷移
     header('Location: signup.php');
     exit;
-
 }
+
+exit('不正なリクエストです');

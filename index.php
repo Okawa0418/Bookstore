@@ -20,7 +20,12 @@
         $allProduct = $database->searchProduct($search);
     }
 
-
+    // 疑似ランダムなバイト文字列を生成
+    $toke_byte = random_bytes(32);
+    // バイナリデータを16進数に変換
+    $token = bin2hex($toke_byte);
+    // 生成したトークンをセッションに保存
+    $_SESSION['token'] = $token;
    
 
     
@@ -90,13 +95,17 @@
             </td>
             <!-- product_idを送る -->
             <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>">
-            <!-- 金額も送る -->
+            <!-- 商品名を送る -->
+            <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>">
+            <!-- 金額送る -->
             <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>">
         </tr>
         <?php endfor ; ?>
-            <!-- 購入ボタン -->
-            <td><input type="submit" name="buy" value="購入する"></td>
-        </form>
+        <!-- トークンを送る -->
+        <input type="hidden" name="token" value="<?=$token?>">
+        <!-- 購入ボタン -->
+        <td><input type="submit" name="buy" value="購入する"></td>
+    </form>
     </table>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

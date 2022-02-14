@@ -31,13 +31,28 @@ if (isset($_POST['buy'])) {
         $total_amount += $price * $quantity; 
     }
 
-    // 商品のidと数量をセッションで保持する
+    // 配列内で数量が0のものを削除する
+    // 数量が0のインデックス番号を取得する
+    $zero_quantities = array_keys($_POST['quantity'], '0');
+   
+    // インデックス番号と一致するid、数量、価格を配列内から削除する
+    for ($i=0; $i < count($zero_quantities); $i++) {
+        // idの配列から数量が0であるid要素を削除
+        unset($_POST['product_id'][$zero_quantities[$i]]);
+        // quantityの配列から数量が0である数量要素を削除
+        unset($_POST['quantity'][$zero_quantities[$i]]);
+        // priceの配列から数量が0である価格要素を削除
+        unset($_POST['price'][$zero_quantities[$i]]);
+    }
+
+    // 商品のid、数量、各価格、合計金額をセッションで保持する
+    // 削除されたインデックス番号を詰めてからセッション変数へ代入
     // 商品idの配列
-    $_SESSION['product']['id'] = $_POST['product_id'];
+    $_SESSION['product']['id'] = array_values($_POST['product_id']);
     // 商品数量の配列
-    $_SESSION['product']['quantity'] = $_POST['quantity'];
+    $_SESSION['product']['quantity'] = array_values($_POST['quantity']);
     // 商品各々の金額の配列
-    $_SESSION['product']['price'] = $_POST['price'];
+    $_SESSION['product']['price'] = array_values($_POST['price']);
     // 合計金額
     $_SESSION['product']['total_amount'] = $total_amount;
 

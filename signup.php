@@ -89,10 +89,11 @@ session_start();
   <br>
 <?php endif ; ?>
 
+
 <form action="register.php" method="post">
 <div>
   <label>ユーザー名：</label>
-  <input type="text" name="user_name">
+  <input type="text" name="user_name" value="<?php echo $text_value; ?>">
 </div>
 <div>
   <label>メールアドレス：</label>

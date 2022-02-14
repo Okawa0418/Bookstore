@@ -1,15 +1,30 @@
-<?php
-session_start();
-$product_id = $_SESSION['product']['id'];
-$amount_quantity = $_SESSION['product']['quantity'];
-$total_amount = $_SESSION['product']['total_amount'];
-// $_SESSION['product']['id'] = $_POST['product_id'];
-// // 商品数量の配列
-// $_SESSION['product']['quantity'] = $_POST['quantity'];
-// // 商品各々の金額の配列
-// $_SESSION['product']['price'] = $_POST['price'];
-// // 合計金額
-// $_SESSION['product']['total_amount'] = $total_amount;
+<!--  -->
+<!-- // session_start();
+// $product_id = $_SESSION['product']['id'];
+// $amount_quantity = $_SESSION['product']['quantity'];
+// $total_amount = $_SESSION['product']['total_amount'];
+// }
+// バリューのみを入れる
+// foreach ( $product_id as $product ) {
+//     echo '<pre>';
+//     echo $product;
+//     echo '<pre>';
+// }
+// キーとバリューを入れる
+// foreach ($amount_quantity as $key => $value) {
+//     echo '<pre>';
+//     echo $key . $value;
+//     echo '<pre>';
+// };
+// 多次元配列を出す
+// foreach( $_SESSION as $product ) {
+//     foreach($product as $value){
+//         echo '<pre>';
+//         echo $value;
+//         echo '<pre>';
+//     }
+// }
+
 try {
     $dsn = 'mysql:host=localhost; dbname=bookstore; charset=utf8';
     $user = 'root';
@@ -39,7 +54,7 @@ if (isset($_SESSION['user_id']) === true) {
     print "<a href='logout.php'>ログアウト</a>";
     print '<br><br>';
 }
-?>
+?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,11 +63,11 @@ if (isset($_SESSION['user_id']) === true) {
 <body>
 商品確認画面
 <h2>商品名</h2>
-<?php echo $results['product_name']; ?>
+<?php foreach ($_POST as $product_id); ?>
 <h2>数量</h2>
-<?php echo $amount_quantity; ?>
+<?php foreach ($_POST as $quantity); ?>
 <h2>合計</h2>
-<?php echo $total_sum; ?>
+<?php foreach ( $_POST as $total_amount ); ?>
 <!--アクションで完了画面へ -->
 <form name ="form1" method="post" action="done.php">
  <input type="submit" value="注文を確定する" name="confirm">

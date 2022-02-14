@@ -86,14 +86,13 @@ session_start();
 ?>
 <?php if (isset($msg5)) : ?>
   <?= $msg5; ?>
-  <br>
+  <br><br>
 <?php endif ; ?>
-
 
 <form action="register.php" method="post">
 <div>
   <label>ユーザー名：</label>
-  <input type="text" name="user_name" value="<?php echo $text_value; ?>">
+  <input type="text" name="user_name">
 </div>
 <div>
   <label>メールアドレス：</label>
@@ -111,12 +110,13 @@ session_start();
   <label>パスワード：</label>
   <input type="password" name="password">
 </div>
+<br>
         <div class="row">
             <div class="col-md">
           <input type="submit" class="btn btn-warning" value="新規登録(購入画面へ)">
             </div>
         </div>
     </div>
-
+<br>
 </form>
 <p>既に登録済みの方は<a href="login_form.php">こちら</a></p>

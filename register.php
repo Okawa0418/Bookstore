@@ -12,24 +12,7 @@ require_once('database1.php');
 
 <?php
 session_start();
-if(empty($_POST['user_name'])){
-        $_SESSION['msg'] = '※ユーザー名を入力してください。';
-    }
-if(empty($_POST['mail_address'])){
-        $_SESSION['msg2'] = '※メールアドレスを入力してください。';
-    }
-if(empty($_POST['post_address'])){
-      $_SESSION['msg3'] = '※住所を入力してください。';
-  }
-if(empty($_POST['tel'])){
-    $_SESSION['msg4'] = '※電話番号を入力してください。';
-}
-if(empty($_POST['password'])){
-      $_SESSION['msg5'] = '※パスワードを入力してください。';
-}
-  header('Location: signup.php');
 
-  
 // ファイルの取り込み
     // フォームからの値をそれぞれ変数に代入
     $name=$_POST['user_name'];
@@ -54,13 +37,34 @@ if(empty($_POST['password'])){
     $stmt->execute();
     $member = $stmt->fetch();
 
-    // var_dump($stmt);
+    // var_dump($sql);
 
-    if($member['mail_address'] === $mail){
-        $msg='同じメールアドレスが存在します。';
-        $link='<a href="signup.php">戻る</a>';
-    }else{
-    // 登録されていなければinsert
+
+    
+if(empty($_POST['user_name'])){
+        $_SESSION['msg'] = '※ユーザー名を入力してください。';
+    }
+if(empty($_POST['mail_address'])){
+        $_SESSION['msg2'] = '※メールアドレスを入力してください。';
+    }
+if(empty($_POST['post_address'])){
+        $_SESSION['msg3'] = '※住所を入力してください。';
+  }
+if(empty($_POST['tel'])){
+    $_SESSION['msg4'] = '※電話番号を入力してください。';
+}
+if(empty($_POST['password'])){
+      $_SESSION['msg5'] = '※パスワードを入力してください。';
+      header('Location: signup.php');
+}
+
+if($member['mail_address'] === $mail){
+  $msg='<h2>同じメールアドレスが存在します。</h2>';
+  $link='<a href="signup.php">戻る</a>';
+  echo $msg;
+  echo $link;
+  }
+else{
     $sql = "INSERT INTO user(user_name, mail_address, password,post_address,tel) VALUES (:user_name, :mail_address, :password,:post_address,:tel)";
     $stmt = $dbh->prepare($sql);
     $stmt->bindValue(':user_name', $name);
@@ -69,10 +73,9 @@ if(empty($_POST['password'])){
     $stmt->bindValue(':post_address', $post);
     $stmt->bindValue(':tel', $tel);
     $stmt->execute();
-    $msg = '会員登録が完了しました';
+    $done = '会員登録が完了しました';
     $link = '<a href="login_form.php">ログインページ</a>';
+    echo "<h1>$done</h1>";
+    echo $link;
 }
 ?>
-
-<h1><?php echo $msg; ?></h1><!--メッセージの出力-->
-<?php echo $link; ?>

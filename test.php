@@ -61,3 +61,8 @@ if(empty($_POST['user_name'])){
 <?php if (isset($msg)) : ?>
         <?= $msg; ?>
     <?php endif ; ?>
+
+
+
+    <h1><?php echo $done; ?></h1><!--メッセージの出力-->
+<?php echo $link; ?>

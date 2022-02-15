@@ -44,7 +44,6 @@ session_start();
     unset($_SESSION['msg1']);
 }
 ?>
-<!-- エラーメッセージの表示 -->
 <?php if (isset($msg1)) : ?>
   <?= $msg1; ?>
   <br><br>

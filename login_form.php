@@ -52,11 +52,11 @@ session_start();
 <form action="login.php" method="post">
     <div>
         <label>メールアドレス：</label>
-        <input type="text" name=mail_address>
+        <input type="text" name=mail_address placeholder="例）abc@bookstore.co.jp">
     </div>
     <div>
         <label>パスワード：</label>
-        <input type="password" name="password">
+        <input type="password" name="password" placeholder="例）1234abcd">
     </div>
     <br>
     <div class="row">

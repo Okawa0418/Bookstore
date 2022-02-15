@@ -9,9 +9,7 @@
 <?php
 require_once('database1.php');
 session_start();
-?>
 
-<?php
     $name=$_POST['user_name'];
     $mail=$_POST['mail_address'];
     $post=$_POST['post_address'];
@@ -28,8 +26,6 @@ session_start();
     $stmt->execute();
     $member = $stmt->fetch();
 
-    // var_dump($member);
-    
 if(empty($_POST['user_name'])){
         $_SESSION['msg'] = '※ユーザー名を入力してください。';
     }
@@ -47,7 +43,7 @@ if(empty($_POST['password'])){
       header('Location: signup.php');
 }
 
-if($member['mail_address'] === $mail){
+if(isset($member['mail_address'])&&$member['mail_address']===$mail){
   $msg='<h2>同じメールアドレスが存在します。</h2>';
   $link='<a href="signup.php">戻る</a>';
   echo $msg;

@@ -20,11 +20,11 @@ class Database1 {
         return $dbh;
     }
 
-    // productテーブルから全投稿内容を取得していく（戻り値：全商品）
-    function getAllProduct() {
+    // テーブルから全レコードを取得（引数：データベースのテーブル名、戻り値：全レコード）
+    function getAllRecord($table_name) {
         $dbh = $this->dbConnect();
         // SQL準備
-        $sql = 'SELECT * FROM product';
+        $sql = 'SELECT * FROM '.$table_name.'';
         // SQL実行
         $stmt = $dbh->query($sql);
         // SQLの結果を受け取る
@@ -45,6 +45,22 @@ class Database1 {
 
         // 結果を取得
         $results = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
+    // productテーブルから指定したcategoryの商品のレコードを取得する（引数：ctg_id、返り値：$results）
+    function getProductByCtgId($ctg_id) {
+        $dbh = $this->dbConnect();
+        // SQL準備
+        $sql = 'SELECT * FROM product WHERE category = :ctg_id';
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':ctg_id', (int)$ctg_id, PDO::PARAM_INT);
+
+        // SQL実行
+        $stmt->execute();
+
+        // 結果を取得
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
 

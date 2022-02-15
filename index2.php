@@ -19,8 +19,8 @@ if (isset($_POST["token"])
     $sum = array_sum($_POST['quantity']);
 
     // バリデーション
-    // 購入の数量合計が0の場合
-    if ($sum === 0) {
+    // 購入の数量合計が0またはnullの場合
+    if ($sum === 0 || $sum == null) {
         // エラーメッセージをセッションに格納
         $_SESSION['msg'] = '商品を選択してください';
         // 商品一覧に戻る

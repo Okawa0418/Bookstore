@@ -22,7 +22,7 @@ if (isset($_POST["token"])
     // 購入の数量合計が0の場合
     if ($sum === 0) {
         // エラーメッセージをセッションに格納
-        $_SESSION['msg'] = '商品を選択してください。';
+        $_SESSION['msg'] = '商品を選択してください';
         // 商品一覧に戻る
         header('Location: index.php');
         exit;

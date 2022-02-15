@@ -2,10 +2,13 @@
     session_start();
     require_once('database1.php');
 
-    // 商品テーブルから全ての商品を取得
+    // productテーブルから全ての商品を取得
     $database = new Database1;
-    $allProduct = $database->getAllProduct();
+    $allProduct = $database->getAllRecord('product');
 
+    // categoryテーブルから全レコード取得
+    $allCategory = $database->getAllRecord('category');
+    
     // セッション変数にエラーメッセージが格納されていた場合
     if (isset($_SESSION['msg'])) {
         // 変数へ代入
@@ -21,15 +24,21 @@
         $allProduct = $database->searchProduct($search);
     }
 
+    // カテゴリー別を押したときの処理
+    if (isset($_POST['category'])) {
+        // ctg_idを受け取る
+        $ctg_id = $_POST['category'];
+        // productテーブルからcategoryが$ctg_idであるものを取得する
+        $allProduct = $database->getProductByCtgId($ctg_id);
+    }
+
     // 疑似ランダムなバイト文字列を生成
     $toke_byte = random_bytes(32);
     // バイナリデータを16進数に変換
     $token = bin2hex($toke_byte);
     // 生成したトークンをセッションに保存
     $_SESSION['token'] = $token;
-   
-
-    
+  
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +71,7 @@
                 <li class="nav-item">
                 <a class="nav-link" href="logout.php">ログアウト</a>
                 </li>
+            <!-- ログイン情報がない場合 -->
             <?php else : ?>
                 <li class="nav-item">
                 <a class="nav-link" href="login_form.php">ログイン</a>
@@ -70,31 +80,30 @@
                 <a class="nav-link" href="signup.php">新規会員登録</a>
                 </li>
             <?php endif ; ?>
+            <!-- カテゴリーのドロップダウンメニュー -->
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 カテゴリー
             </a>
+            <!-- ドロップダウンの中身 -->
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <form action="index.php" method="post">
-                <li><button class="dropdown-item" type="submit" name="category1">文学・評論・人文・思想</li>
-            </form>
-            <form action="index.php" method="post">
-                <li><button class="dropdown-item" type="submit" name="category2">ビジネス・コンピュータ</li>
-            </form>
-            <form action="index.php" method="post">
-                <li><button class="dropdown-item" type="submit" name="category3">生活・趣味・実用</li>
-            </form>
-            <form action="index.php" method="post">
-                <li><button class="dropdown-item" type="submit" name="category4">教育・資格</li>
-            </form>
-    
+            <!-- カテゴリーをfor文で表示していく -->
+            <?php for ($i=0; $i<count($allCategory); $i++) : ?>
+                <!-- カテゴリー別にフォームを送信する -->
+                <form action="index.php" method="post">
+                    <input type="hidden" name="category" value="<?=$allCategory[$i]['ctg_id']?>">
+                    <li><button class="dropdown-item" type="submit"><?=$allCategory[$i]['variation']?></li>
+                </form>
+            <?php endfor ; ?>
             </ul>
             </li>
         </ul>
+        <!-- 検索フォーム -->
         <form class="d-flex" action="index.php" method="post">
             <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        <!-- 検索フォームここまで -->
         </div>
     </div>
     </nav>
@@ -102,10 +111,13 @@
     <?php if (isset($msg)) : ?>
         <p>&#x26a0;<?= $msg; ?></p>
     <?php endif ; ?>
+
     <!-- 商品一覧の購入フォーム -->
     <form action="index2.php" method="post">
     <div class="table-responsive">
+    <!-- tableタグで商品一覧を表示 -->
     <table class="table align-middle">
+        <!-- 項目 -->
         <thead>
         <tr>
             <th>商品名</th>
@@ -116,6 +128,7 @@
             </th>
         </tr>
         </thead>
+        <!-- 商品名、価格、数量選択欄の表示 -->
         <tbody>
         <tr>
             <!-- for文で商品テーブルのレコードを全て表示 -->
@@ -142,14 +155,12 @@
             </tr>
             <?php endfor ; ?>
             <!-- トークンを送る -->
-            <input type="hidden" name="token" value="<?=$token?>">
-        
+            <input type="hidden" name="token" value="<?=$token?>">  
         </tbody>
     </table>
     </div>
     </form>
+    <!-- 購入フォームここまで -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
 </body>
 </html>

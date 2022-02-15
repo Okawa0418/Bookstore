@@ -28,17 +28,26 @@
     $member = $stmt->fetch();
 
     //指定したハッシュがパスワードにマッチしているかチェック
-    if (password_verify($_POST['password'], $member['password'])) {
+    if (isset($member['mail_address'])&&password_verify($_POST['password'], $member['password'])) {
     //DBのユーザー情報をセッションに保存
     $_SESSION['user_id'] = $member['user_id'];
     $_SESSION['user_name'] = $member['user_name'];
     $msg = '<h2>ログインしました。</h2>';
     $link = '<h1><a href="confirm.php">購入画面</a></h1>';
+    $link2 = '<h1><a href="index.php">商品一覧画面</a></h1>';
+
+    if (!isset($_SESSION['product'])){
+        echo $msg;
+        echo $link2;
+    }    else{
+            echo $msg;
+            echo $link;
+        }
+
 } else {
     $msg = '<h2>メールアドレスもしくはパスワードが間違っています。<h2>';
     $link = '<a href="login_form.php">戻る</a>';
+    echo $msg;
+    echo $link;
 }
 ?>
-
-<h1><?php echo $msg; ?></h1>
-<?php echo $link; ?>

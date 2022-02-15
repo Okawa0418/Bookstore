@@ -70,6 +70,7 @@ class Database1 {
         $product_name = $results['product_name'];
         return $product_name;
     }
+    
     // 購入履歴をデータベースに挿入（purchaseテーブルに挿入）
     function createPurchase($item_name, $code_product, $quantity, $user_id) {
         $dbh = $this->dbConnect();

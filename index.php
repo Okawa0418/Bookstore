@@ -2,6 +2,7 @@
     session_start();
     require_once('database1.php');
 
+    // 商品テーブルから全ての商品を取得
     $database = new Database1;
     $allProduct = $database->getAllProduct();
 
@@ -38,78 +39,117 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品一覧画面</title>
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
     <header>
         <h1>BOOK STORE</h1>
-        <a href="index.php">ホーム</a>
-        <!-- ログイン情報がセッションで保持されている場合 -->
-        <?php if (isset($_SESSION['user_id'])) : ?>
-            <a href="logout.php">ログアウト</a>
-        <?php else : ?>
-            <a href="login_form.php">ログイン</a>
-            <a href="signup.php">新規会員登録</a>
-        <?php endif ; ?>
     </header>
-    
-    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand"><h2>商品一覧画面</h2></a>
+        <a class="navbar-brand"><h2>商品一覧</h2></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.php">ホーム</a>
+            </li>
+            <!-- ログイン情報がセッションで保持されている場合 -->
+            <?php if (isset($_SESSION['user_id'])) : ?>
+                <li class="nav-item">
+                <a class="nav-link" href="logout.php">ログアウト</a>
+                </li>
+            <?php else : ?>
+                <li class="nav-item">
+                <a class="nav-link" href="login_form.php">ログイン</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="signup.php">新規会員登録</a>
+                </li>
+            <?php endif ; ?>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                カテゴリー
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <form action="index.php" method="post">
+                <li><button class="dropdown-item" type="submit" name="category1">文学・評論・人文・思想</li>
+            </form>
+            <form action="index.php" method="post">
+                <li><button class="dropdown-item" type="submit" name="category2">ビジネス・コンピュータ</li>
+            </form>
+            <form action="index.php" method="post">
+                <li><button class="dropdown-item" type="submit" name="category3">生活・趣味・実用</li>
+            </form>
+            <form action="index.php" method="post">
+                <li><button class="dropdown-item" type="submit" name="category4">教育・資格</li>
+            </form>
+    
+            </ul>
+            </li>
+        </ul>
         <form class="d-flex" action="index.php" method="post">
             <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        </div>
     </div>
-   
     </nav>
-    
     <!-- エラーメッセージの表示 -->
     <?php if (isset($msg)) : ?>
-        <?= $msg; ?>
+        <p>&#x26a0;<?= $msg; ?></p>
     <?php endif ; ?>
-    <table>
+    <!-- 商品一覧の購入フォーム -->
+    <form action="index2.php" method="post">
+    <div class="table-responsive">
+    <table class="table align-middle">
+        <thead>
         <tr>
             <th>商品名</th>
             <th>価格</th>
             <th>数量</th>
+            <th><!-- 購入ボタン -->
+            <button type="submit" class="btn btn-outline-secondary">購入する</button>
+            </th>
         </tr>
-    
-    <!-- 商品一覧の購入フォーム -->
-    <form action="index2.php" method="post">
-        <!-- for文で商品テーブルのレコードを全て表示 -->
-        <?php for ($i=0; $i < count($allProduct); $i++) : ?>
+        </thead>
+        <tbody>
         <tr>
-            <!-- 商品名、価格 -->
-            <td><?= $allProduct[$i]['product_name']; ?></td>
-            <td><?= $allProduct[$i]['price']; ?></td>
-            <td>
-            <!-- 数量選択 -->
-            <select name="quantity[<?= $i; ?>]">
-                <!-- 0~50を表示させる -->
-                <?php for ($j = 0; $j < 51; $j++) : ?>
-                    <option><?= $j ?></option>
-                <?php endfor ; ?>
-            </select>
-            </td>
-            <!-- product_idを送る -->
-            <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>">
-            <!-- 商品名を送る -->
-            <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>">
-            <!-- 金額送る -->
-            <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>">
-        </tr>
-        <?php endfor ; ?>
-        <!-- トークンを送る -->
-        <input type="hidden" name="token" value="<?=$token?>">
-        <!-- 購入ボタン -->
-        <td><input type="submit" name="buy" value="購入する"></td>
-    </form>
+            <!-- for文で商品テーブルのレコードを全て表示 -->
+            <?php for ($i=0; $i < count($allProduct); $i++) : ?>
+            <tr>
+                <!-- 商品名、価格 -->
+                <td><?= $allProduct[$i]['product_name']; ?></td>
+                <td><?= $allProduct[$i]['price']; ?></td>
+                <td>
+                <!-- 数量選択 -->
+                <select name="quantity[<?= $i; ?>]">
+                    <!-- 0~50を表示させる -->
+                    <?php for ($j = 0; $j < 51; $j++) : ?>
+                        <option><?= $j ?></option>
+                    <?php endfor ; ?>
+                </select>
+                </td>
+                <!-- product_idを送る -->
+                <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>">
+                <!-- 商品名を送る -->
+                <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>">
+                <!-- 金額送る -->
+                <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>">
+            </tr>
+            <?php endfor ; ?>
+            <!-- トークンを送る -->
+            <input type="hidden" name="token" value="<?=$token?>">
+        
+        </tbody>
     </table>
-
+    </div>
+    </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
 </body>
 </html>

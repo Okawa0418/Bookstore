@@ -81,31 +81,32 @@
       <br><br>
     <?php endif ; ?>
 
+    
 <form action="register.php" method="post">
     <div>
       <label>ユーザー名：</label>
-      <input type="text" name="user_name">
+      <input type="text" name="user_name" placeholder="例）山田太郎">
     </div>
     <div>
       <label>メールアドレス：</label>
-      <input type="text" name="mail_address">
+      <input type="email" name="mail_address" placeholder="例）abc@bookstore.co.jp">
     </div>
     <div>
       <label>住所：</label>
-      <input type="text" name="post_address">
+      <input type="text" name="post_address" placeholder="例）東京都豊島区">
     </div>
     <div>
       <label>電話番号：</label>
-      <input type="tel" name="tel">
+      <input type="tel" name="tel" placeholder="例）090-0000-0000">
     </div>
     <div>
       <label>パスワード：</label>
-      <input type="password" name="password">
+      <input type="password" name="password" placeholder="例）1234abcd">
     </div>
 <br>
     <div class="row">
         <div class="col-md">
-          <input type="submit" class="btn btn-warning" value="新規登録(購入画面へ)">
+          <input type="submit" class="btn btn-warning" value="新規登録">
         </div>
     </div>
 <br>

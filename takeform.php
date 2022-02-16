@@ -1,43 +1,30 @@
 <?php
-// DB接続ファイルの読み込み
-require_once ('database1.php');
-     // DB接続関数呼び出し
-     dbConnect();
-        $dsn = 'mysql:dbname=bookstore;host=localhost;charset=utf8';
-        $user = 'root';
-        $password = 'Rilakkuma1231';
-    // testテーブルからデータを取得
-     
-        // SQL準備
-        $sql = 'SELECT * FROM newbook';
-        // SQL実行
-        $stmt = $dbh->query($sql);
-        // SQLの結果を受け取る
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $results; 
-    // DB切断
-    $pdo = null;
-?>    
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Document</title>
-</head>
-<body>
-<h1>新規リスト</h1>
-    <?php foreach($results as $item): ?>
-        <p><?= $item ?></p>
-    <?php endforeach; ?>
-    <div style="font-size:14px">新規本を追加してください</div>
-        <form action="view.php" method="post">
-            <!-- 名前を記入してください:<br> -->
-            <input type="text" name="name" value="">
-            <br>
-            <!-- 値段を記入してください:<br> -->
-            <input type="text" name="price" value="">
-            <!-- <br> -->
-            <input type="submit" name="submit" value="発注">
-        </form>
-    </div>
-</body>
-</html>
+// データベース接続
+require_once('database1.php');
+$data1=new Database1();
+$dbh = $data1->dbConnect();
+session_start();
+
+
+try {
+    // ＳＱＬ　文
+    $sql ='SELECT * FROM bookstore WHERE newbook=?';  
+    $q= array('100');
+    // ＳＱＬ実行文の準備
+    $sth = $db->prepare($sql);
+    // ＳＱＬ実行文実行
+    $sth->execute($q);
+
+    // *データベースからの結果を連想配列で受け取る
+    $r = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+    // 接続エラー処理
+ } catch(PDOExceptioin $e) {
+        $ERROR[] = $e->getMessage();
+    // ログイン情報がセッションで保持されている場合
+    if (isset($_SESSION['item_name'])) {
+        // 商品確認画面へ遷移
+        header('Location:request_done.php ');
+        exit;
+    }
+?>

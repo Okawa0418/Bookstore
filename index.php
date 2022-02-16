@@ -2,9 +2,30 @@
     session_start();
     require_once('database1.php');
 
-    // productテーブルから全ての商品を取得
+    
     $database = new Database1;
-    $allProduct = $database->getAllRecord('product');
+
+    // 1ページに5件表示させる
+    define('max_view',5);
+
+    //現在いるページのページ番号を取得
+    if(!isset($_GET['page_id'])){
+        // page_idに値がない場合（初めてこのページを開く場合）
+        $now = 1;
+    }else{
+        // page_idに値が入っている場合
+        $now = $_GET['page_id'];
+    }
+
+    // 表示必要な商品レコードを取得
+    $allProduct = $database->getProductByPages($now);
+
+    // 必要ページ数の取得
+    $pages = $database->numberOfPages();
+
+
+    // productテーブルから全ての商品を取得
+    // $allProduct = $database->getAllRecord('product');
 
     // categoryテーブルから全レコード取得
     $allCategory = $database->getAllRecord('category');
@@ -124,6 +145,7 @@
         <!-- 項目 -->
         <thead>
         <tr>
+            <th>商品画像</th>
             <th>商品名</th>
             <th>価格</th>
             <th>数量</th>
@@ -138,6 +160,8 @@
             <!-- for文で商品テーブルのレコードを全て表示 -->
             <?php for ($i=0; $i < count($allProduct); $i++) : ?>
             <tr>
+                <!-- 商品画像 -->
+                <td><img src="<?= $allProduct[$i]['file_path']; ?>"width="100" height="150"></td>
                 <!-- 商品名、価格 -->
                 <td><?= $allProduct[$i]['product_name']; ?></td>
                 <td><?= $allProduct[$i]['price']; ?></td>
@@ -165,6 +189,17 @@
     </div>
     </form>
     <!-- 購入フォームここまで -->
+    <!-- 検索・カテゴリー別を押した場合はページネーションを表示させない -->
+    <?php if (!isset($_POST['search']) && !isset($_POST['category'])) : ?>
+        <!-- ページネーションを表示 -->
+        <?php for ($i=1; $i <= $pages; $i++) : ?>
+            <?php if ($i == $now) : ?>
+                <span style='padding: 5px;'><?= $now; ?></span>
+            <?php else : ?>
+                <a href="index.php?page_id=<?= $i; ?>" style="padding: 5px;"><?= $i; ?></a>
+            <?php endif ; ?>
+        <?php endfor ; ?>
+    <?php endif ; ?>
     <script type="text/javascript" src="sample.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

@@ -1,8 +1,7 @@
 <!-- バリデーション実装 -->
 <?php
 session_start();
-// var_dump($_POST);
-// exit;
+
 // 空の値が送信されてきた場合
 if (empty($_POST['name']) 
     || empty($_POST['price'])
@@ -36,6 +35,7 @@ if (1048576 < $filesize || $file_err == 2) {
 
 // 画像の拡張子をチェック
 $allow_ext = array ('jpg', 'jpeg', 'png', 'jfif');
+// 送信された画像の拡張子を取得
 $file_ext = pathinfo($filename, PATHINFO_EXTENSION);
 // 許容される拡張子かどうか判定（小文字にしてから判定する）
 if (!in_array(strtolower($file_ext), $allow_ext)) {

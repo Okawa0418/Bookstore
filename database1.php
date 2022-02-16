@@ -90,7 +90,7 @@ class Database1 {
     function searchProduct($search) {
         $dbh = $this->dbConnect();
         // SQL準備
-        $sql = "SELECT product_name, price 
+        $sql = "SELECT product_name, price, file_path, category 
                 FROM product 
                 WHERE product_name LIKE :search ";
         $stmt = $dbh->prepare($sql);
@@ -104,8 +104,50 @@ class Database1 {
 
         // 結果を取得
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // var_dump($results);
-        // exit;
+        return $results;
+    }
+
+    // ページングで使用する↓
+
+    // productテーブルのレコード数を数える
+    // 必要ページ数を取得する
+    function numberOfPages() {
+        // データベース接続
+        $dbh = $this->dbConnect();
+        // SQL準備
+        $sql = 'SELECT COUNT(*) AS count FROM product';
+        $count = $dbh->prepare($sql);
+        // SQL実行
+        $count->execute();
+        // 結果を取得
+        $total_count = $count->fetch(PDO::FETCH_ASSOC);
+        // 全レコード数を表示件数で割り、切り上げすることでページ数を取得する
+        $pages = ceil($total_count['count'] / max_view);
+        // 必要ページ数を返す
+        return $pages;
+    }
+
+
+    // 表示に必要な分の商品レコードを取得（引数：現在のページ番号、返り値：ページに必要な商品のレコード）
+    function getProductByPages($now) {
+        // データベース接続
+        $dbh = $this->dbConnect();
+        // 降順LIMITで5つだけ取得
+        $sql = "SELECT * FROM product ORDER BY product_id DESC LIMIT :start, :max ";
+        $stmt = $dbh->prepare($sql);
+        
+        // ページによる条件分岐
+        if ($now == 1) {
+            // 1ページ目の場合
+            $stmt->bindValue(":start", $now - 1, PDO::PARAM_INT);
+            $stmt->bindValue(":max", max_view, PDO::PARAM_INT);
+        } else {
+            // 1ページ目以外の場合
+            $stmt->bindValue(":start", ($now - 1) * 5, PDO::PARAM_INT);
+            $stmt->bindValue(":max", max_view, PDO::PARAM_INT);
+        }
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
 

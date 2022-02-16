@@ -1,17 +1,3 @@
-<?php
- session_start();
- require_once('database1.php');
- 
- // 商品テーブルから全ての商品を取得
- $database = new Database1;
- $allProduct = $database->getAllProduct('product');
-}
-?>
-<!-- //  データベース接続 参照コード
-//  $pdo = new PDO('mysql:charset=UTF;dbname=booksotre;host=localhost','username','password');
-// SQL作成
-// $stmt = $PDO->prepare("SELECT * FROM newbook WHERE id = :id");
-// 登録するデータをセット -->
 
 <!DOCTYPE html>
 <html lang="en">

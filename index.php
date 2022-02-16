@@ -81,6 +81,9 @@
                 <a class="nav-link" href="signup.php">新規会員登録</a>
                 </li>
             <?php endif ; ?>
+            <li class="nav-item">
+                <a class="nav-link" href="request.php">アンケートはこちら</a>
+            </li>
             <!-- カテゴリーのドロップダウンメニュー -->
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

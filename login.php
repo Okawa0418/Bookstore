@@ -34,7 +34,7 @@
     $_SESSION['user_name'] = $member['user_name'];
     $msg = '<h2>ログインしました。</h2>';
     $link = '<h1><a href="confirm.php">購入画面</a></h1>';
-    $link2 = '<h1><a href="index.php">商品一覧画面</a></h1>';
+    $link2 = '<h1><a href="index.php">トップページ</a></h1>';
 
     if (!isset($_SESSION['product'])){
         echo $msg;

@@ -1,17 +1,13 @@
 <?php
 session_start();
-// ログアウト処理
 // セッションを空にする
 $_SESSION = array();
-// セッションを切断するにはセッションクッキーも削除する。
 // セッションIDを保存する際にクッキーを使用している場合
 if (ini_get("session.use_cookies")) {
-    // 空のクッキーを送信する（有効期限は過去の値、ecサイト全体のクッキーについて破棄する）
+    // 空のクッキーを送信する
     setcookie(session_name(), '', time() - 42000, '/');
 }
-// セッションを破棄
 session_destroy();
-
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +19,11 @@ session_destroy();
     <title>ログアウト画面</title>
 </head>
 <body>
+    <header>
+        <h1>BOOK STORE</h1>
+    </header>
     <h1>ログアウト完了</h1>
     <h2>ログアウトしました。</h2>
-    <a href="index.php">商品一覧へ</a>
+    <a href="index.php">トップページ</a>
 </body>
 </html>

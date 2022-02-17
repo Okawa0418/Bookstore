@@ -1,13 +1,24 @@
-<!-- バリデーション実装 -->
+<!-- include.phpから送信された値のバリデーション実装 -->
 <?php
 session_start();
 
 // 空の値が送信されてきた場合
-if (empty($_POST['name']) 
-    || empty($_POST['price'])
-    || empty($_POST['category'])){
+if (empty($_POST['name'])) {
     // エラーメッセージをセッションに格納
-    $_SESSION['msg'] = '※特記事項を入力してください。';
+    $_SESSION['msg']['name'] = '※名前を入力してください。';
+} 
+
+if (empty($_POST['price'])) {
+    // エラーメッセージをセッションに格納
+    $_SESSION['msg']['price'] = '※値段を入力してください。';
+}
+
+if (empty($_POST['category'])) {
+    // エラーメッセージをセッションに格納
+    $_SESSION['msg']['category'] = '※カテゴリーを選択してください。';
+}
+
+if (isset($_SESSION['msg'])) {
     // 登録画面に戻る
     header('Location: include.php');
     exit;
@@ -51,32 +62,3 @@ if (!is_uploaded_file($tmp_path)) {
     exit;
 }
 
-if (move_uploaded_file($tmp_path, $upload_dir . $save_filename)) {
-    echo $filename . 'を' . $upload_dir . 'にアップしました';
-    $file_path = $upload_dir . $save_filename;
-    echo '<br>';
-}
-
-require_once('view.php');
-exit;
-
-
-
-    // セッション変数にエラーメッセージが格納されていた場合
-    // if (isset($_SESSION['msg'])) {
-        // 変数へ代入
-        // $msg = $_SESSION['msg'];
-        // エラーメッセージのセッション破棄
-        // unset($_SESSION['msg']);
-    // }
-    // エラーメッセージ
-    // $err=[];
-    // バリデーション
-    // if(!$value=filter_input(INPUT_POST,'name')){
-    // $err[]='名前を入力してください。';
-    // }
-    
-    // if(!$value=filter_input(INPUT_POST,'price')){
-    // $err[]='値段を入力してください';
-    // }
-?>

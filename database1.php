@@ -32,6 +32,30 @@ class Database1 {
         return $results; 
     }
 
+    // productテーブルへデータを挿入する
+    function createProduct() {
+        $dbh = $this->dbConnect();
+        try {
+            // データ挿入の為トランザクション開始
+            $dbh->beginTransaction();
+            $sql = 'INSERT INTO product (product_name, price, file_path, category) VALUES (:name, :price, :file_path, :category)';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
+            $stmt->bindValue(':price', $_POST['price'], PDO::PARAM_INT);
+            $stmt->bindValue(':file_path', $file_path, PDO::PARAM_STR);
+            $stmt->bindValue(':category', $_POST['category'], PDO::PARAM_INT);
+            // SQL実行
+            $stmt->execute();
+            // コミット
+            $dbh->commit();
+            // print 'データを' . $stmt->rowCount() . '件、挿入しました。<br>';
+        } catch (PDOException $Exception) {
+            // 処理を戻す
+            $dbh->rollBack();
+            print 'エラー:' . $Exception->getMessage();
+        }
+    }
+
     // productテーブルから1つの商品のレコードを取得する（引数：product_id、返り値：$results）
     function getProductByProductId($id) {
         $dbh = $this->dbConnect();

@@ -33,43 +33,49 @@ class Database1 {
     }
 
     // productテーブルへデータを挿入する
-    function createProduct() {
+    function createProduct($name, $price, $file_path, $category) {
         $dbh = $this->dbConnect();
         try {
             // データ挿入の為トランザクション開始
             $dbh->beginTransaction();
             $sql = 'INSERT INTO product (product_name, price, file_path, category) VALUES (:name, :price, :file_path, :category)';
             $stmt = $dbh->prepare($sql);
-            $stmt->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
-            $stmt->bindValue(':price', $_POST['price'], PDO::PARAM_INT);
+            $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+            $stmt->bindValue(':price', $price, PDO::PARAM_INT);
             $stmt->bindValue(':file_path', $file_path, PDO::PARAM_STR);
-            $stmt->bindValue(':category', $_POST['category'], PDO::PARAM_INT);
+            $stmt->bindValue(':category', $category, PDO::PARAM_INT);
             // SQL実行
             $stmt->execute();
             // コミット
             $dbh->commit();
-            // print 'データを' . $stmt->rowCount() . '件、挿入しました。<br>';
         } catch (PDOException $Exception) {
             // 処理を戻す
             $dbh->rollBack();
             print 'エラー:' . $Exception->getMessage();
+            exit;
         }
     }
 
     // productテーブルから1つの商品のレコードを取得する（引数：product_id、返り値：$results）
     function getProductByProductId($id) {
         $dbh = $this->dbConnect();
-        // SQL準備
-        $sql = 'SELECT * FROM product WHERE product_id = :id';
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        try {
+            // SQL準備
+            $sql = 'SELECT * FROM product WHERE product_id = :id';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
 
-        // SQL実行
-        $stmt->execute();
+            // SQL実行
+            $stmt->execute();
 
-        // 結果を取得
-        $results = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $results;
+            // 結果を取得
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $results;
+        } catch (PDOException $e){
+            echo 'Error:' . $e->getMessage();
+            exit;
+        }
+        
     }
 
     // productテーブルから指定したcategoryの商品のレコードを取得する（引数：ctg_id、返り値：$results）
@@ -98,23 +104,35 @@ class Database1 {
     // 購入履歴をデータベースに挿入（purchaseテーブルに挿入）
     function createPurchase($item_name, $code_product, $quantity, $user_id) {
         $dbh = $this->dbConnect();
-        // SQL準備
-        $sql  = 'INSERT INTO purchase (item_name, code_product, quantity, user_id) 
-                    VALUES(:item_name, :code_product, :quantity, :user_id)';
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':item_name', $item_name, PDO::PARAM_STR);
-        $stmt->bindValue(':code_product', $code_product, PDO::PARAM_INT);
-        $stmt->bindValue(':quantity', $quantity, PDO::PARAM_INT);
-        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-        // SQL実行（データベースに投稿内容を入れる）
-        $stmt->execute();
+        try {
+            // データ挿入の為トランザクション開始
+            $dbh->beginTransaction();
+            // SQL準備
+            $sql  = 'INSERT INTO purchase (item_name, code_product, quantity, user_id) 
+                        VALUES(:item_name, :code_product, :quantity, :user_id)';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':item_name', $item_name, PDO::PARAM_STR);
+            $stmt->bindValue(':code_product', $code_product, PDO::PARAM_INT);
+            $stmt->bindValue(':quantity', $quantity, PDO::PARAM_INT);
+            $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            // SQL実行（データベースに投稿内容を入れる）
+            $stmt->execute();
+            // 処理確定
+            $dbh->commit();
+        } catch (PDOException $e){
+            // 処理を戻す
+            $dbh->rollBack();
+            echo 'Error:' . $e->getMessage();
+            exit;
+        }
+        
     }
 
     // productテーブルからproduct_nameで検索する(引数：検索する文字列)
     function searchProduct($search) {
         $dbh = $this->dbConnect();
         // SQL準備
-        $sql = "SELECT product_name, price, file_path, category 
+        $sql = "SELECT * 
                 FROM product 
                 WHERE product_name LIKE :search ";
         $stmt = $dbh->prepare($sql);

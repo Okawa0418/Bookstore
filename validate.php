@@ -18,6 +18,7 @@ if (empty($_POST['category'])) {
     $_SESSION['msg']['category'] = '※カテゴリーを選択してください。';
 }
 
+// include.phpから送信された値でエラーが出た場合
 if (isset($_SESSION['msg'])) {
     // 登録画面に戻る
     header('Location: include.php');

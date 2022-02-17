@@ -16,7 +16,20 @@ class NewBook extends Database1
 
         // 結果を取得
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
+
+        // 一致するidがあった場合
+        if (isset($result)) {
+            return $result;
+        // なかった場合
+        } else {
+            return false;
+        }
+        
+    }
+
+    // newbookからレコードを削除する処理？？？
+    function deleteNewBook($id) {
+
     }
 
 }

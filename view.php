@@ -2,6 +2,10 @@
 require_once('database1.php');
 // 送信された値のバリデーション
 require_once('validate.php');
+// 送信された値を変数へ代入
+$name = $_POST['name'];
+$price = $_POST['price'];
+$category = $_POST['category'];
 // 画像の保存
 if (move_uploaded_file($tmp_path, $upload_dir . $save_filename)) {
     $file_path = $upload_dir . $save_filename;
@@ -9,7 +13,9 @@ if (move_uploaded_file($tmp_path, $upload_dir . $save_filename)) {
 
 $database = new Database1;
 // productテーブルにデータを挿入
-$database->createProduct();
+$database->createProduct($name, $price, $file_path, $category);
+
+// 挿入した商品のreceiveが1(連絡が必要)なら、emailに連絡する処理？？
 
 ?>
 

@@ -2,28 +2,36 @@
 session_start();
 require_once('function.php');
 
-if (!isset($_POST['searchid'])) {
-    header('Location: searchid.php');
-    exit;
-}
-
+// 検索ボタンが押されるor送信後バリデーションに引っかかる場合
 // idの検索ボタンが押された場合
-// 送信された値を変数へ代入
-$id = $_POST['id'];
-// 送信された値のidでnewbookテーブルから検索
-// 商品名を取得して変数へ代入する
-$newbook = new NewBook;
-$result = $newbook->getNameById($id);
-if ($result == false) {
-    
-} else {
-    $product_name = $result['product_name'];
-}
-
-// エラーメッセージが格納されている場合
-if (isset($_SESSION['msg'])) {
+if (isset($_POST['searchid'])) {
+    // 送信された値を変数へ代入
+    $id = $_POST['id'];
+    // 送信された値のidでnewbookテーブルから検索
+    // 商品名を取得して変数へ代入する
+    $newbook = new NewBook;
+    $result = $newbook->getNameById($id);
+    // 検索して一致するidがなかった場合
+    if ($result == false) {
+        $_SESSION['msg'] = 'idに該当する商品がありません';
+        header('Location: searchid.php');
+        exit;
+    // 該当商品があった場合
+    } else {
+        // 検索結果の商品名を変数へ代入
+        $product_name = $result['product_name'];
+    }
+// 送信後のバリデーションに引っかかった場合
+} elseif (isset($_SESSION['msg'])){
+    // 変数に代入
     $msg = $_SESSION['msg'];
+    // エラーメッセージのセッション破棄
     unset($_SESSION['msg']);
+    // $product_nameの初期化
+    $product_name = "";
+} else {
+    // $product_nameの初期化
+    $product_name = "";
 }
 
 

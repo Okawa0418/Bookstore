@@ -6,12 +6,10 @@
 
 <?php
     require_once('database1.php');
+    session_start();
     $data1=new Database1();
     $dbh = $data1->dbConnect();
-    session_start();
-?>
 
-<?php
     if(empty($_POST['mail_address'])){
         $_SESSION['msg'] = '※メールアドレスを入力してください。';
     }

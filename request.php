@@ -53,8 +53,21 @@
           </div>
         </div>
       </div>
+      <div>
+      <p class="text-left">入荷時の連絡をご希望される方はご選択ください。</p>
+        <select name="receive" id="">
+          <option hidden>選択してください</option>
+          <option value="1">必要</option>
+          <option value="2">不要</option>
+        </select>
+      </div>
       <div class="row justify-content-center">
       <button type="submit" class="btn btn-outline-primary">送信</button>
+      </div>
+    </form>
+    <form action="index.php">
+    <div class="row justify-content-center">
+      <button type="submit" class="btn btn-outline-primary">戻る</button>
       </div>
     </form>
 </body>

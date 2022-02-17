@@ -29,11 +29,12 @@ if(empty($_POST['name'])){
 }
 else{
     try{
-      $sql  = 'INSERT INTO newbook(product_name,email,name) VALUES(:book,:email,:name)';
+      $sql  = 'INSERT INTO newbook(product_name,email,name,receive) VALUES(:book,:email,:name,:receive)';
       $stmt = $dbh->prepare($sql);
       $stmt->bindParam(':book', $_POST['book'], PDO::PARAM_STR);
       $stmt->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
       $stmt->bindParam(':name', $_POST['name'], PDO::PARAM_STR);
+      $stmt->bindParam(':receive', $_POST['receive'], PDO::PARAM_STR);
       $stmt->execute();
       $link2 = '<h1><a href="index.php">トップページ</a></h1>';
       echo $link2;

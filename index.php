@@ -139,55 +139,83 @@
 
     <!-- 商品一覧の購入フォーム -->
     <form action="index2.php" method="post">
-    <div class="table-responsive">
-    <!-- tableタグで商品一覧を表示 -->
-    <table class="table align-middle">
-        <!-- 項目 -->
-        <thead>
-        <tr>
-            <th>商品画像</th>
-            <th>商品名</th>
-            <th>価格</th>
-            <th>数量</th>
-            <th><!-- 購入ボタン -->
-            <button type="submit" class="btn btn-outline-secondary">購入する</button>
-            </th>
-        </tr>
-        </thead>
-        <!-- 商品名、価格、数量選択欄の表示 -->
-        <tbody>
-        <tr>
-            <!-- for文で商品テーブルのレコードを全て表示 -->
-            <?php for ($i=0; $i < count($allProduct); $i++) : ?>
-            <tr>
-                <!-- 商品画像 -->
-                <td><img src="<?= $allProduct[$i]['file_path']; ?>"width="100" height="150"></td>
-                <!-- 商品名、価格 -->
-                <td><?= $allProduct[$i]['product_name']; ?></td>
-                <td><?= $allProduct[$i]['price']; ?></td>
-                <td>
-                <!-- 数量選択 -->
-                <select id="select" name="quantity[<?= $i; ?>]">
-                    <!-- 0~50を表示させる -->
-                    <?php for ($j = 0; $j < 51; $j++) : ?>
-                        <option><?= $j ?></option>
-                    <?php endfor ; ?>
-                </select>
-                </td>
-                <!-- product_idを送る -->
-                <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>">
-                <!-- 商品名を送る -->
-                <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>">
-                <!-- 金額送る -->
-                <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>">
-            </tr>
-            <?php endfor ; ?>
-            <!-- トークンを送る -->
-            <input type="hidden" name="token" value="<?=$token?>">  
-        </tbody>
-    </table>
-    </div>
+        <div class="table-responsive">
+            <!-- bootstrap grid  -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <!-- tableタグで商品一覧を表示 -->
+                        <table class="table align-middle">
+                            <!-- 項目 -->
+                            <thead>
+                            <tr>
+                                <th>商品画像</th>
+                                <th>商品名</th>
+                                <th>価格</th>
+                                <th>数量</th>
+                                <th><!-- 購入ボタン -->
+                                <button type="submit" class="btn btn-outline-secondary">購入する</button>
+                                </th>
+                            </tr>
+                            </thead>
+                            <!-- 商品名、価格、数量選択欄の表示 -->
+                            <tbody>
+                            <tr>
+                                <!-- for文で商品テーブルのレコードを全て表示 -->
+                                <?php for ($i=0; $i < count($allProduct); $i++) : ?>
+                                <tr>
+                                    <!-- 商品画像 -->
+                                    <td><img src="<?= $allProduct[$i]['file_path']; ?>"width="100" height="150"></td>
+                                    <!-- 商品名、価格 -->
+                                    <td><?= $allProduct[$i]['product_name']; ?></td>
+                                    <td><?= $allProduct[$i]['price']; ?></td>
+                                    <td>
+                                    <!-- 数量選択 -->
+                                    <select id="select" name="quantity[<?= $i; ?>]">
+                                        <!-- 0~50を表示させる -->
+                                        <?php for ($j = 0; $j < 51; $j++) : ?>
+                                            <option><?= $j ?></option>
+                                        <?php endfor ; ?>
+                                    </select>
+                                    </td>
+                                    <!-- product_idを送る -->
+                                    <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>">
+                                    <!-- 商品名を送る -->
+                                    <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>">
+                                    <!-- 金額送る -->
+                                    <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>">
+                                </tr>
+                                <?php endfor ; ?>
+                                <!-- トークンを送る -->
+                                <input type="hidden" name="token" value="<?=$token?>">  
+                            </tbody>
+                        </table>    
+                    <!-- bootstrap API 実装 -->
+                    </div>    
+                <div class="col-4"><div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">商品カート</span>
+                    <span class="badge bg-primary rounded-pill">3</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">商品</h6>
+                            <small class="text-muted">本の概要</small>
+                        </div>
+                        <span class="text-muted">380円</span>
+                    </li>
+                </ul>
+                <form class="card p-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Promo code">
+                    <button type="submit" class="btn btn-secondary">今すぐ購入</button>
+                    <img src="https://c.pxhere.com/photos/fe/bd/blur_close_up_handwriting_letters_old_photo_papers_photos_string-1527595.jpg!d" class="rounded mx-auto d-block" width="400" height="400" >
+                </div>
+            </div>
+        </div>
     </form>
+    </div>
     <!-- 購入フォームここまで -->
     <!-- 検索・カテゴリー別を押した場合はページネーションを表示させない -->
     <?php if (!isset($_POST['search']) && !isset($_POST['category'])) : ?>

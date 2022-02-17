@@ -53,8 +53,56 @@
           </div>
         </div>
       </div>
+      <div>
+      <p class="text-left">入荷時の連絡をご希望される方はご選択ください。</p>
+        <select name="receive" id="">
+          <option hidden>選択してください</option>
+          <option value="1">必要</option>
+          <option value="2">不要</option>
+        </select>
+      </div>
       <div class="row justify-content-center">
       <button type="submit" class="btn btn-outline-primary">送信</button>
       </div>
     </form>
+    <form action="index.php">
+    <div class="row justify-content-center">
+      <button type="submit" class="btn btn-outline-primary">戻る</button>
+      </div>
+    </form>
 </body>
+
+<?php
+    session_start();
+        if (isset($_SESSION['msg'])) {
+        $msg = $_SESSION['msg'];
+        unset($_SESSION['msg']);
+    }
+    ?>
+    <!-- エラーメッセージの表示 -->
+    <?php if (isset($msg)) : ?>
+      <?= $msg; ?>
+      <br>
+    <?php endif ; ?>
+    
+    <?php
+        if (isset($_SESSION['msg2'])) {
+        $msg2 = $_SESSION['msg2'];
+        unset($_SESSION['msg2']);
+    }
+    ?>
+    <?php if (isset($msg2)) : ?>
+      <?= $msg2; ?>
+      <br>
+    <?php endif ; ?>
+    
+    <?php
+        if (isset($_SESSION['msg3'])) {
+        $msg3 = $_SESSION['msg3'];
+        unset($_SESSION['msg3']);
+    }
+    ?>
+    <?php if (isset($msg3)) : ?>
+      <?= $msg3; ?>
+      <br>
+    <?php endif ; ?>

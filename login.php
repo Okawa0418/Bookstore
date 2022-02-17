@@ -6,12 +6,10 @@
 
 <?php
     require_once('database1.php');
+    session_start();
     $data1=new Database1();
     $dbh = $data1->dbConnect();
-    session_start();
-?>
 
-<?php
     if(empty($_POST['mail_address'])){
         $_SESSION['msg'] = '※メールアドレスを入力してください。';
     }
@@ -34,7 +32,7 @@
     $_SESSION['user_name'] = $member['user_name'];
     $msg = '<h2>ログインしました。</h2>';
     $link = '<h1><a href="confirm.php">購入画面</a></h1>';
-    $link2 = '<h1><a href="index.php">商品一覧画面</a></h1>';
+    $link2 = '<h1><a href="index.php">トップページ</a></h1>';
 
     if (!isset($_SESSION['product'])){
         echo $msg;

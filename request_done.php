@@ -1,7 +1,8 @@
 <body>
     <header>
-        <h1>リクエスト完了ページ</h1>
+        <h1>BOOK STORE</h1>
     </header>
+        <h1>リクエスト完了ページ</h1>
     <main>
         <h2>リクエストありがとうございます！</h2>
     </main>

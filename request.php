@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <header>
+        <h1>BOOK STORE</h1>
+    </header>
     <p class="text-center">
         <div class="container">
         <div class="row">

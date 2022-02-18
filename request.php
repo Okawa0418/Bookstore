@@ -40,11 +40,6 @@
     </p>
 
         <!-- エラーメッセージの表示 -->
-    <?php if (isset($msg)) : ?>
-      <?= $msg; ?>
-      <br>
-    <?php endif ; ?>
-
     <?php if (isset($msg2)) : ?>
       <?= $msg2; ?>
       <br>
@@ -52,6 +47,11 @@
 
     <?php if (isset($msg3)) : ?>
       <?= $msg3; ?>
+      <br>
+    <?php endif ; ?>
+
+    <?php if (isset($msg)) : ?>
+      <?= $msg; ?>
       <br>
     <?php endif ; ?>
       <br>

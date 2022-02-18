@@ -116,7 +116,7 @@
 </form>
 <p>既に登録済みの方は<a href="login_form.php">こちら</a></p>
 <form action="index.php">
-    <input type="submit" class="btn btn-light" value="トップページ">
+    <input type="submit" class="btn btn-secondary" value="トップページ">
 </form>
   </body>
 </html>

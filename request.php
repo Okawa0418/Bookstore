@@ -37,7 +37,6 @@
     <p class="text-center">
         <div class="container">
         <div class="row">
-        <div class="col-md-4 col-md-offset-4"></div>
     <h1>リクエストコーナー</h1>
     </p>
 
@@ -62,7 +61,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-4">
-            <p class="text-center">メールアドレス</p>
+            <p class="text-left">メールアドレス</p>
           </div>
           <div class="container">
           <div class="col-md-8">
@@ -74,7 +73,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-4">
-            <p class="text-center">名前</p>
+            <p class="text-left">名前</p>
           </div>
           <div class="container">
           <div class="col-md-8">
@@ -86,7 +85,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-4">
-            <p class="text-center">本のタイトル</p>
+            <p class="text-left">本のタイトル</p>
           </div>
           <div class="container">
           <div class="col-md-8">
@@ -107,9 +106,12 @@
       <button type="submit" class="btn btn-outline-primary">送信</button>
       </div>
     </form>
+    <br>
+    <div>
     <form action="index.php">
       <div class="row justify-content-center">
       <button type="submit" class="btn btn-outline-primary">トップページへ戻る</button>
       </div>
     </form>
+    </div>
 </body>

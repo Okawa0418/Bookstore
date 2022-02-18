@@ -71,7 +71,7 @@ session_start();
 <br>
 <p>登録がまだお済みでない方は<a href="signup.php">こちら</a></p>
 <form action="index.php">
-    <input type="submit" class="btn btn-light" value="トップページ">
+    <input type="submit" class="btn btn-secondary" value="トップページ">
 </form>
 </body>
 </html>

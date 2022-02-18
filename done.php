@@ -9,27 +9,27 @@
         exit;
     }
     
-    // 商品を選択していない場合
-    if (empty($_SESSION['product'])) {
-        echo '商品を購入してください。';
-        echo '<a href="index.php">商品一覧へ</a>';
-        exit;
+    //購入商品の情報がある場合
+    if (isset($_SESSION['product'])) {
+        // for文を使用してpurchaseテーブルへインサートしていく（購入履歴）
+        for ($i=0; $i < count($_SESSION['product']['id']); $i++) {
+            // 購入履歴のテーブルへ挿入する
+            $database = new Database1;
+            // 商品名を取得
+            $item_name = $database->getProductName($_SESSION['product']['id'][$i]);
+            // 購入テーブルへインサート
+            $database->createPurchase($item_name, $_SESSION['product']['id'][$i], $_SESSION['product']['quantity'][$i], $_SESSION['user_id']);
+        }
+
+        // 変数にメッセージを代入
+        $msg = '購入ありがとうございます';
+
+        // インサート後、商品のセッション情報を破棄する
+        unset($_SESSION['product']);
+        unset($_SESSION['total_amount']);
+
     }
-
-    // for文を使用してpurchaseテーブルへインサートしていく（購入履歴）
-    for ($i=0; $i < count($_SESSION['product']['id']); $i++) {
-        // 購入履歴のテーブルへ挿入する
-        $database = new Database1;
-        // 商品名を取得
-        $item_name = $database->getProductName($_SESSION['product']['id'][$i]);
-        // 購入テーブルへインサート
-        $database->createPurchase($item_name, $_SESSION['product']['id'][$i], $_SESSION['product']['quantity'][$i], $_SESSION['user_id']);
-    }
-
-    // 商品のセッション情報を破棄する
-    unset($_SESSION['product']);
-    unset($_SESSION['total_amount']);
-
+    
     
 ?>
 
@@ -40,10 +40,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>購入完了画面</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-    <h1>購入完了</h1>
-    <p>商品を購入しました。</p>
+    <header>
+        <h1>BOOK STORE</h1>
+    </header>
+    
+    
+    <!-- 購入商品情報がない場合 -->
+    <?php if (empty($msg)) : ?>
+        <p>商品を購入してください</p>
+    <!-- 商品購入した場合 -->
+    <?php else : ?>
+        <h2>購入完了</h2>
+        <h4><?= $msg; ?></h4>
+        <p>商品を購入しました。</p>
+    <?php endif ; ?>
+
     <a href="index.php">商品一覧へ</a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

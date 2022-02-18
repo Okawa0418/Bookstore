@@ -12,29 +12,30 @@
 require_once('database1.php');
 session_start();
 
-$book=$_POST['book'];
 $email=$_POST['email'];
 $name=$_POST['name'];
+$book=$_POST['book'];
+$receive=$_POST['receive'];
 $data1=new Database1();
 $dbh = $data1->dbConnect();
 
-if(empty($_POST['product_name'])){
-  $_SESSION['msg'] = '※ユーザー名を入力してください。';
-}
 if(empty($_POST['email'])){
-  $_SESSION['msg2'] = '※メールアドレスを入力してください。';
+  $_SESSION['msg'] = '※メールアドレスを入力してください。';
 }
 if(empty($_POST['name'])){
-  $_SESSION['msg3'] = '※名前を入力してください。';
+  $_SESSION['msg2'] = '※名前を入力してください。';
   header('Location: request.php');
+}
+if(empty($_POST['product_name'])){
+  $_SESSION['msg3'] = '※本のタイトルを入力してください。';
 }
 else{
     try{
-      $sql  = 'INSERT INTO newbook(product_name,email,name,receive) VALUES(:book,:email,:name,:receive)';
+      $sql  = 'INSERT INTO newbook(email,name,product_name,receive) VALUES(:email,:name,:book,:receive)';
       $stmt = $dbh->prepare($sql);
-      $stmt->bindParam(':book', $_POST['book'], PDO::PARAM_STR);
       $stmt->bindParam(':email', $_POST['email'], PDO::PARAM_STR);
       $stmt->bindParam(':name', $_POST['name'], PDO::PARAM_STR);
+      $stmt->bindParam(':book', $_POST['book'], PDO::PARAM_STR);
       $stmt->bindParam(':receive', $_POST['receive'], PDO::PARAM_STR);
       $stmt->execute();
       $link2 = '<h1><a href="index.php">トップページ</a></h1>';

@@ -13,7 +13,7 @@
  
 <body>
     <header>
-        <h1>BOOK STORE</h1>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     </header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,7 @@ session_start();
 <?php endif ; ?>
 
 <form action="login.php" method="post">
+<div class="container">
     <div>
         <label>メールアドレス：</label>
         <input type="text" name=mail_address placeholder="例）abc@bookstore.co.jp">
@@ -73,5 +74,6 @@ session_start();
 <form action="index.php">
     <input type="submit" class="btn btn-secondary" value="トップページ">
 </form>
+</div>
 </body>
 </html>

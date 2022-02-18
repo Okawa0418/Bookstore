@@ -15,18 +15,19 @@ session_start();
 $email=$_POST['email'];
 $name=$_POST['name'];
 $book=$_POST['book'];
+$receive=$_POST['receive'];
 $data1=new Database1();
 $dbh = $data1->dbConnect();
 
 if(empty($_POST['email'])){
-  $_SESSION['msg2'] = '※メールアドレスを入力してください。';
+  $_SESSION['msg'] = '※メールアドレスを入力してください。';
 }
 if(empty($_POST['name'])){
-  $_SESSION['msg3'] = '※名前を入力してください。';
+  $_SESSION['msg2'] = '※名前を入力してください。';
   header('Location: request.php');
 }
 if(empty($_POST['product_name'])){
-  $_SESSION['msg'] = '※本のタイトルを入力してください。';
+  $_SESSION['msg3'] = '※本のタイトルを入力してください。';
 }
 else{
     try{

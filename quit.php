@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
  
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_SESSION['user_id']) && isset($_POST['is_delete']) && $_POST['is_delete'] === '1') {
+    
     $data1=new Database1();
     $dbh = $data1->dbConnect();
  

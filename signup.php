@@ -109,12 +109,14 @@
 <br>
     <div class="row">
         <div class="col-md">
-          <input type="submit" class="btn btn-dark" value="登録完了">
+          <input type="submit" class="btn btn-success" value="登録完了">
         </div>
     </div>
 <br>
 </form>
 <p>既に登録済みの方は<a href="login_form.php">こちら</a></p>
-
+<form action="index.php">
+    <input type="submit" class="btn btn-light" value="トップページ">
+</form>
   </body>
 </html>

@@ -63,13 +63,15 @@ session_start();
     </div>
     <br>
     <div class="row">
-            <div class="col-md">
+        <div class="col-md">
           <input type="submit" class="btn btn-success" value="ログイン">
-            </div>
         </div>
     </div>
 </form>
-
+<br>
+<p>登録がまだお済みでない方は<a href="signup.php">こちら</a></p>
+<form action="index.php">
+    <input type="submit" class="btn btn-light" value="トップページ">
+</form>
 </body>
- 
 </html>

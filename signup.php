@@ -12,7 +12,8 @@
  
 <body>
     <header>
-        <h1>BOOK STORE</h1>
+      <!-- リンク装飾のリセット -->
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     </header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,6 +87,7 @@
 
     
 <form action="register.php" method="post">
+<div class="container">
     <div>
       <label>ユーザー名：</label>
       <input type="text" name="user_name" placeholder="例）山田太郎">
@@ -118,5 +120,6 @@
 <form action="index.php">
     <input type="submit" class="btn btn-secondary" value="トップページ">
 </form>
+</div>
   </body>
 </html>

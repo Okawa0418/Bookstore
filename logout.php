@@ -2,9 +2,8 @@
 session_start();
 // セッションを空にする
 $_SESSION = array();
-// セッションIDを保存する際にクッキーを使用している場合
 if (ini_get("session.use_cookies")) {
-    // 空のクッキーを送信する
+    // 空のクッキーを送信
     setcookie(session_name(), '', time() - 42000, '/');
 }
 session_destroy();

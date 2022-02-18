@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </head>
   <body>
     <header>
-        <h1>BOOK STORE</h1>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     </header>
     <h1>退会画面</h1>
     <p>退会しますか？</p>
@@ -42,6 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="hidden" name="is_delete" value="1">
       <input type="submit" value="退会する">
     </form>
-    <p><a href="/">トップに戻る</a></p>
+    <p><a href="index.php">トップに戻る</a></p>
   </body>
 </html>

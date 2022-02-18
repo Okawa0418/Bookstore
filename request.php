@@ -36,8 +36,7 @@
     </header>
     <p class="text-center">
         <div class="container">
-        <div class="row">
-    <h1>リクエストコーナー</h1>
+    <h2>リクエストコーナー</h2>
     </p>
 
         <!-- エラーメッセージの表示 -->

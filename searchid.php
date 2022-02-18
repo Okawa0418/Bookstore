@@ -19,7 +19,10 @@ if (isset($_SESSION['msg'])) {
     <title>リクエスト一覧・商品追加画面</title>
 </head>
 <body>
-    <h1>商品追加画面</h1>
+    <header>
+        <h1>BOOK STORE</h1>
+    </header>
+    <h2>商品追加ページ</h2>
     <!-- エラーメッセージ表示 -->
     <?php if (isset($msg)) : ?>
         <?= $msg; ?>

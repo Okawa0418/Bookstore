@@ -240,7 +240,9 @@
                     </div>
                 </div>
                 <li style="list-style: none;"><a href="request.php">本のリクエストはこちら</a></li>
-                <li style="list-style: none;"><a href="quit.php">退会</a></li>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                    <li style="list-style: none;"><a href="quit.php">退会</a></li>
+                <?php endif ; ?>
             </div>
             <!-- col-4ここまで -->
 

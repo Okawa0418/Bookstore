@@ -46,8 +46,11 @@ if (isset($_POST['searchid'])) {
     <title>商品追加画面</title>
 </head>
 <body>
-    <h1>商品追加画面</h1>
-    <div style="font-size:14px">新規本を追加してください</div>
+    <header>
+        <h1>BOOK STORE</h1>
+    </header>
+    <h2>商品追加ページ</h2>
+    <p>新規本を追加してください</p>
     <!-- エラーメッセージ表示 -->
     <?php if (isset($msg)) : ?>
         <?php foreach ($msg as $m) : ?>

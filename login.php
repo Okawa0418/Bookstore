@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>BOOK STORE</h1>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     </header>
 </body>
 </html>

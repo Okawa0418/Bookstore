@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>BOOK STORE</h1>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     </header>
 </body>
 </html>
@@ -42,25 +42,21 @@ session_start();
 if(empty($_POST['user_name'])){
         $_SESSION['msg'] = '※ユーザー名を入力してください。';
         header('Location: signup.php');
-        exit;
     }
     else{$_SESSION['user_name'] = $_POST['user_name'];}
 if(empty($_POST['mail_address'])){
         $_SESSION['msg2'] = '※メールアドレスを入力してください。';
         header('Location: signup.php');
-        exit;
     }
     else{$_SESSION['mail_address'] = $_POST['mail_address'];}
 if(empty($_POST['post_address'])){
         $_SESSION['msg3'] = '※住所を入力してください。';
         header('Location: signup.php');
-        exit;
     }
     else{$_SESSION['post_address'] = $_POST['post_address'];}
 if(empty($_POST['tel'])){
         $_SESSION['msg4'] = '※電話番号を入力してください。';
         header('Location: signup.php');
-        exit;
     }
     else{$_SESSION['tel'] = $_POST['tel'];}
 if(empty($_POST['password'])){

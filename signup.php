@@ -88,7 +88,7 @@
 
     <?php if (isset($msg5)) : ?>
       <?= $msg5; ?>
-      <br>
+      <br><br>
     <?php endif ; ?>
 
     <?php if (isset($msg6)) : ?>

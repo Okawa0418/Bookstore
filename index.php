@@ -198,7 +198,7 @@
                     </div>
                     <!-- tableのレスポンシブクラスここまで -->
                 </form>
-                <!-- 購入フォームここまで -->
+                <!-- 購入フォームここまで --
                 <!-- ページネーション表示ここから -->
                 <!-- 検索・カテゴリー別を押した場合はページネーションを表示させない -->
                 <?php if (!isset($_POST['search']) && !isset($_POST['category'])) : ?>
@@ -219,26 +219,21 @@
 
             <!-- bootstrap API 実装 -->
             <div class="col-4">
-                <div class="col-md-5 col-lg-4 order-md-last">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-primary">商品カート</span>
-                        <span class="badge bg-primary rounded-pill">3</span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0">商品</h6>
-                                <small class="text-muted">本の概要</small>
-                            </div>
-                            <span class="text-muted">380円</span>
-                        </li>
-                    </ul>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Promo code">
-                        <button type="submit" class="btn btn-secondary">今すぐ購入</button>
-                        <img src="https://c.pxhere.com/photos/fe/bd/blur_close_up_handwriting_letters_old_photo_papers_photos_string-1527595.jpg!d" class="rounded mx-auto d-block" width="400" height="400" >  
+            <img src="https://blog.cd-j.net/wpcore/wp-content/uploads/4011491_s.jpg" width="300" height="300">
+                    <img src="https://www.masterpeace.co.jp/wp-content/themes/masterpeace/img/common/download_img03.jpg" width="300" height="300">
+                <body class="bg-light">
+                    <!-- 範囲指定コマンドパレット　ラップ変換でdiv使用 -->
+                    <div class="container w-75">
+                        <h1 class="text-center text-info my-4">お気に入りの本を教えてね</h1>
+                        <form id="form" class="mb-4">
+                            <i class="fas fa-h4">好きな本が入荷されるかも</i>
+                            <input type="text" id="input" class="form-con" placeholder="memo" autocomplete="off">   
+                        </form>
+                        <ul class="list-group text-secondary" id="ul"></ul>
                     </div>
-                </div>
+                    <script src="index.js"></script>
+                </body>
+                <!-- API ここまで -->
                 <li style="list-style: none;"><a href="request.php">本のリクエストはこちら</a></li>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <li style="list-style: none;"><a href="quit.php">退会</a></li>

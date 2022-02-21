@@ -104,20 +104,19 @@ $total_amount = $_SESSION['product']['total_amount'];
             </div>
         </div>
     </div>
-    
     <!-- お問い合わせフォームを作成したい -->
     <h1 class="display-5 fw-bold text-white">Dark mode hero</h1>
-                    <!-- <p class="fs-5 mb-4">商品にお間違いはありませんか？再度商品確認をしてください。</p> -->
-                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <form method="post" action="index.php">
-                            <input type="submit" value="商品購入ページへ戻る" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
-                        </form>
-                        <!-- お問い合わせフォーム作成時action 先記入 -->
-                        <form method="post" action="index.php">
-                            <input type="submit" value="お問い合わせフォームへ" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
-                        </form>
-                    </div>
-                </div>
+        <!-- <p class="fs-5 mb-4">商品にお間違いはありませんか？再度商品確認をしてください。</p> -->
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <form method="post" action="index.php">
+                <input type="submit" value="商品購入ページへ戻る" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+            </form>
+            <!-- お問い合わせフォーム作成時action 先記入 -->
+            <form method="post" action="customerform.php">
+                <input type="submit" value="お問い合わせフォームへ" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+            </form>
+        </div>
+    </div>
 </footer>
 </body>
 </html>

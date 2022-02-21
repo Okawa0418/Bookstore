@@ -88,7 +88,7 @@
 
     <?php if (isset($msg5)) : ?>
       <?= $msg5; ?>
-      <br>
+      <br><br>
     <?php endif ; ?>
 
     <?php if (isset($msg6)) : ?>
@@ -114,7 +114,7 @@
     </div>
     <div>
       <label>パスワード：</label>
-      <input type="password" name="password" placeholder="例）1234abcd">
+      <input type="password" name="password" placeholder="例）abcd1234">
     </div>
 <br>
     <div class="row">

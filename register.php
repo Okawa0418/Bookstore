@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>BOOK STORE</h1>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     </header>
 </body>
 </html>
@@ -28,7 +28,7 @@ session_start();
     $post=$_POST['post_address'];
     $tel=$_POST['tel'];
 
-    $pass=password_hash($_POST['password'],PASSWORD_DEFAULT);
+    $password=password_hash($_POST['password'],PASSWORD_DEFAULT);
 
     $data1=new Database1();
     $dbh = $data1->dbConnect();
@@ -41,29 +41,36 @@ session_start();
 
 if(empty($_POST['user_name'])){
         $_SESSION['msg'] = '※ユーザー名を入力してください。';
+        header('Location: signup.php');
     }
     else{$_SESSION['user_name'] = $_POST['user_name'];}
 if(empty($_POST['mail_address'])){
         $_SESSION['msg2'] = '※メールアドレスを入力してください。';
+        header('Location: signup.php');
     }
     else{$_SESSION['mail_address'] = $_POST['mail_address'];}
 if(empty($_POST['post_address'])){
         $_SESSION['msg3'] = '※住所を入力してください。';
+        header('Location: signup.php');
     }
     else{$_SESSION['post_address'] = $_POST['post_address'];}
 if(empty($_POST['tel'])){
-    $_SESSION['msg4'] = '※電話番号を入力してください。';
+        $_SESSION['msg4'] = '※電話番号を入力してください。';
+        header('Location: signup.php');
     }
     else{$_SESSION['tel'] = $_POST['tel'];}
 if(empty($_POST['password'])){
-      $_SESSION['msg5'] = '※パスワードを入力してください。';
+        $_SESSION['msg5'] = '※パスワードを入力してください。';
+        header('Location: signup.php');
+        exit;
     }
-if (!preg_match("/\A[a-z\d]{8,100}+\z/i",$password)){
-    $_SESSION['msg6'] ='※パスワードは英数字8文字以上100文字以下にしてください。';
-    header('Location: signup.php');
-  }
+if (!empty($_POST['password'])&&!preg_match("/\A[a-z\d]{8,100}+\z/i",$_POST['password'])){
+        $_SESSION['msg6'] ='※パスワードは英数字8文字以上100文字以下にしてください。';
+        header('Location: signup.php');
+        exit;
+    }
 
-if(isset($member['mail_address'])&&$member['mail_address']===$mail){
+elseif(isset($member['mail_address'])&&$member['mail_address']===$mail){
   $msg='<h2>同じメールアドレスが存在します。</h2>';
   $link='<a href="signup.php">戻る</a>';
   echo $msg;
@@ -74,7 +81,7 @@ else{
     $stmt = $dbh->prepare($sql);
     $stmt->bindValue(':user_name', $name);
     $stmt->bindValue(':mail_address', $mail);
-    $stmt->bindValue(':password', $pass);
+    $stmt->bindValue(':password', $password);
     $stmt->bindValue(':post_address', $post);
     $stmt->bindValue(':tel', $tel);
     $stmt->execute();

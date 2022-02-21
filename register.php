@@ -57,8 +57,9 @@ if(empty($_POST['tel'])){
     else{$_SESSION['tel'] = $_POST['tel'];}
 if(empty($_POST['password'])){
       $_SESSION['msg5'] = '※パスワードを入力してください。';
+      header('Location: signup.php');
     }
-if (!preg_match("/\A[a-z\d]{8,100}+\z/i",$password)){
+if (!empty($_POST['password'])&&!preg_match("/\A[a-z\d]{8,100}+\z/i",$password)){
     $_SESSION['msg6'] ='※パスワードは英数字8文字以上100文字以下にしてください。';
     header('Location: signup.php');
   }

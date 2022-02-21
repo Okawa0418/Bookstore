@@ -16,7 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $dbh->prepare('DELETE FROM user WHERE user_id = :user_id');
     $stmt->bindValue(1, $_SESSION['user_id']);
     $stmt->execute();
- 
+
+    $stmt = $dbh->prepare('DELETE FROM purchase WHERE user_id = :user_id');
+    $stmt->bindValue(1, $_SESSION['user_id']);
+    $stmt->execute();
+
     session_destroy();
  
     header('Location: index.php');

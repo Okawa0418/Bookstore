@@ -28,6 +28,7 @@
     if(empty($_POST['mail_address'])){
         $_SESSION['msg'] = '※メールアドレスを入力してください。';
     }
+    else{$_SESSION['mail_address'] = $_POST['mail_address'];}
     if(empty($_POST['password'])){
         $_SESSION['msg1'] = '※パスワードを入力してください。';
         header('Location: login_form.php');

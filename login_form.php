@@ -59,11 +59,11 @@ session_start();
 
     <div>
         <label>メールアドレス：</label>
-        <input type="email" name=mail_address placeholder="例）abc@bookstore.co.jp">
+        <input type="email" name=mail_address placeholder="例）abc@bookstore.co.jp"  value="<?php if( !empty($_SESSION['mail_address']) ){ echo htmlspecialchars( $_SESSION['mail_address'], ENT_QUOTES, 'UTF-8'); } ?>">
     </div>
     <div>
         <label>パスワード：</label>
-        <input type="password" name="password" placeholder="例）1234abcd">
+        <input type="password" name="password" placeholder="例）abcd1234">
     </div>
     <br>
     <div class="row">

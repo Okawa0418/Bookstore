@@ -35,11 +35,6 @@ session_start();
     unset($_SESSION['msg']);
 }
 ?>
-<!-- エラーメッセージの表示 -->
-<?php if (isset($msg)) : ?>
-  <?= $msg; ?>
-  <br>
-<?php endif ; ?>
 
 <?php
     if (isset($_SESSION['msg1'])) {
@@ -47,16 +42,24 @@ session_start();
     unset($_SESSION['msg1']);
 }
 ?>
+
+<form action="login.php" method="post">
+<div class="container">
+
+<!-- エラーメッセージの表示 -->
+<?php if (isset($msg)) : ?>
+  <?= $msg; ?>
+  <br>
+<?php endif ; ?>
+
 <?php if (isset($msg1)) : ?>
   <?= $msg1; ?>
   <br><br>
 <?php endif ; ?>
 
-<form action="login.php" method="post">
-<div class="container">
     <div>
         <label>メールアドレス：</label>
-        <input type="text" name=mail_address placeholder="例）abc@bookstore.co.jp">
+        <input type="email" name=mail_address placeholder="例）abc@bookstore.co.jp">
     </div>
     <div>
         <label>パスワード：</label>

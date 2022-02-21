@@ -32,31 +32,33 @@ function add(memo) {
         li.innerText = memoText;
         li.classList.add("list-group-item");
 
-    if(memo && memo.completed ) {
-    li.classList.add("text-decoration-line-through");
-    }
+        if(memo && memo.completed ) {
+        li.classList.add("text-decoration-line-through");
+        }
 
-    // 削除機能イベントリスナー　
-    li.addEventListener("contextmenu", function
-    (event) {
-        // 右クリック時の情報遮断
-        event.preventDefault();
-        li.remove();
-        saveData();
-    });
-    li.addEventListener("click", function () {
-        li.classLiist.toggle("text-decoration-line-through");
-        saveData();
-    });
+        // 削除機能イベントリスナー　
+        li.addEventListener("contextmenu", function
+        (event) {
+            // 右クリック時の情報遮断
+            event.preventDefault();
+            li.remove();
+            saveData();
+        });
+
+        li.addEventListener("click", function () {
+            li.classList.toggle("text-decoration-line-through");
+            saveData();
+        });
 
         ul.appendChild(li);
         input.value ="";
         saveData();
-        }
+    }
 }
 
 function saveData() {
     const lists =document.querySelectorAll("li");
+    // console.log(lists);
     let memos = [];
 
     lists.forEach(list => {

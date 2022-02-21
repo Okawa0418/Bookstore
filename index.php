@@ -141,7 +141,7 @@
     <?php endif ; ?>
    
     <!-- bootstrap grid  -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-8">
                 <!-- 商品一覧の購入フォーム -->
@@ -198,7 +198,7 @@
                     </div>
                     <!-- tableのレスポンシブクラスここまで -->
                 </form>
-                <!-- 購入フォームここまで --
+                <!-- 購入フォームここまで -->
                 <!-- ページネーション表示ここから -->
                 <!-- 検索・カテゴリー別を押した場合はページネーションを表示させない -->
                 <?php if (!isset($_POST['search']) && !isset($_POST['category'])) : ?>
@@ -219,9 +219,9 @@
 
             <!-- bootstrap API 実装 -->
             <div class="col-4">
-            <img src="https://blog.cd-j.net/wpcore/wp-content/uploads/4011491_s.jpg" width="300" height="300">
-                    <img src="https://www.masterpeace.co.jp/wp-content/themes/masterpeace/img/common/download_img03.jpg" width="300" height="300">
-                <body class="bg-light">
+                <img src="https://blog.cd-j.net/wpcore/wp-content/uploads/4011491_s.jpg" width="300" height="300">
+                <img src="https://www.masterpeace.co.jp/wp-content/themes/masterpeace/img/common/download_img03.jpg" width="300" height="300">
+                <!-- <body class="bg-light"> -->
                     <!-- 範囲指定コマンドパレット　ラップ変換でdiv使用 -->
                     <div class="container w-75">
                         <h1 class="text-center text-info my-4">お気に入りの本を教えてね</h1>
@@ -232,22 +232,34 @@
                         <ul class="list-group text-secondary" id="ul"></ul>
                     </div>
                     <script src="index.js"></script>
-                </body>
+                <!-- </body> -->
                 <!-- API ここまで -->
-                <li style="list-style: none;"><a href="request.php">本のリクエストはこちら</a></li>
-                <?php if (isset($_SESSION['user_id'])) : ?>
-                    <li style="list-style: none;"><a href="quit.php">退会</a></li>
-                <?php endif ; ?>
             </div>
             <!-- col-4ここまで -->
 
 
         </div>
         <!-- rowここまで -->
+        <!-- フッターここから -->
+        <div class="row">
+            <!-- フッター表示 -->
+            <footer id="footer" class="border-top bg-light" style="height:100px;margin-top:150px;">
+                <ul>
+                    <li style="list-style: none;"><a href="request.php">本のリクエストはこちら</a></li>
+                    <li style="list-style: none;"><a href="#">お問い合わせ</a></li>
+                    <li style="list-style: none;"><a href="#">運営会社</a></li>
+                    <?php if (isset($_SESSION['user_id'])) : ?>
+                        <li style="list-style: none;"><a href="quit.php">退会</a></li>
+                    <?php endif ; ?>
+                </ul>
+            </footer>
+        </div>
+        <!-- フッターここまで -->
     </div>
-    <!-- containerここまで -->
+    <!-- container-fluidここまで -->
+
     
-    <script type="text/javascript" src="sample.js"></script>
+    <!-- <script type="text/javascript" src="sample.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

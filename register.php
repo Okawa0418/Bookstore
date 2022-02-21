@@ -42,19 +42,26 @@ session_start();
 if(empty($_POST['user_name'])){
         $_SESSION['msg'] = '※ユーザー名を入力してください。';
     }
+    else{$_SESSION['user_name'] = $_POST['user_name'];}
 if(empty($_POST['mail_address'])){
         $_SESSION['msg2'] = '※メールアドレスを入力してください。';
     }
+    else{$_SESSION['mail_address'] = $_POST['mail_address'];}
 if(empty($_POST['post_address'])){
         $_SESSION['msg3'] = '※住所を入力してください。';
-  }
+    }
+    else{$_SESSION['post_address'] = $_POST['post_address'];}
 if(empty($_POST['tel'])){
     $_SESSION['msg4'] = '※電話番号を入力してください。';
-}
+    }
+    else{$_SESSION['tel'] = $_POST['tel'];}
 if(empty($_POST['password'])){
       $_SESSION['msg5'] = '※パスワードを入力してください。';
-      header('Location: signup.php');
-}
+    }
+if (!preg_match("/\A[a-z\d]{8,100}+\z/i",$password)){
+    $_SESSION['msg6'] ='※パスワードは英数字8文字以上100文字以下にしてください。';
+    header('Location: signup.php');
+  }
 
 if(isset($member['mail_address'])&&$member['mail_address']===$mail){
   $msg='<h2>同じメールアドレスが存在します。</h2>';

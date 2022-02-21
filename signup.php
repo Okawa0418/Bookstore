@@ -56,9 +56,9 @@
     }
     ?>
     <?php
-    if (isset($_SESSION['msg6'])) {
-    $msg6 = $_SESSION['msg6'];
-    unset($_SESSION['msg6']);
+        if (isset($_SESSION['msg6'])) {
+        $msg6 = $_SESSION['msg6'];
+        unset($_SESSION['msg6']);
     }
     ?>
     

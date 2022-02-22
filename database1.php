@@ -2,7 +2,7 @@
 
 class Database1 {
 
-    // データベースに接続する
+    // bookstoreデータベースに接続する
     function dbConnect() {
         $dsn = 'mysql:dbname=bookstore;host=localhost;charset=utf8';
         $user = 'root';

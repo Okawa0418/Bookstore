@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form method ="POST" action="customerformdone.php">
+    <!-- <form method ="POST" action="customerformcheck.php">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">メールアドレス</label>
         <input type="email" name ="email" class="form-control" value="" aria-describedby="emailHelp">
@@ -21,18 +21,22 @@
         <textarea name="content" class="form-control" value=""></textarea> 
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </form> -->
 
 
 <!-- 実装ができない場合こちらを使う -->
-<!-- <form method ="POST" action="">
+お問い合わせフォーム<br />
+<br />
+<form method ="post" action="customerformcheck.php">
 連絡先メールアドレス<br />
-<input type="text" name="mail_address" value="" /><br /><br />
+<input type="text" name="email" value="" /><br /><br />
 webネーム<br />
-<input type="text" name="user_name" value="" /><br /><br />
+<input type="text" name="name" value="" /><br /><br />
 お問い合わせ内容<br />
-<textarea name="" ></textarea><br /><br />
+<input type="textarea" name="content" value="" /><br /><br />
+<!-- <textarea name="" name="content" value="" ></textarea><br /><br /> -->
+<input type="button" onclick="history.back()" value="戻る">
 <input type="submit" value="問い合わせる" />
 </form>
 </body>
-</html> -->
+</html>

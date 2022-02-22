@@ -94,10 +94,10 @@ $total_amount = $_SESSION['product']['total_amount'];
             <div class="col-6">
                 <div class="card" style="width: 40rem;">
                     <div class="card-body">
-                    <h5 class="card-title">アンケートシート</h5>
+                    <h5 class="card-title">リクエストシート</h5>
                     <h6 class="card-subtitle mb-2 text-muted">あなたの好きな本が次回購入できるかも</h6>
                     <p class="card-text">好きな本を記入して次回来店時にあなたの好きな本を購入しましょう</p>
-                    <a href="#" class="card-link">アンケートへ</a>
+                    <a href="request.php" class="card-link">リクエストシートへ</a>
                     <!-- 必要な際 -->
                     <!-- <a href="#" class="card-link">お問い合わせフォーム</a> -->
                 </div>
@@ -112,7 +112,7 @@ $total_amount = $_SESSION['product']['total_amount'];
                 <input type="submit" value="商品購入ページへ戻る" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
             </form>
             <!-- お問い合わせフォーム作成時action 先記入 -->
-            <form method="post" action="customerform.php">
+            <form method="post" action="customerformadd.php">
                 <input type="submit" value="お問い合わせフォームへ" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
             </form>
         </div>

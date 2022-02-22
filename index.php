@@ -38,6 +38,14 @@
         unset($_SESSION['msg']);
     }
 
+    // 数量選択後にindexへ戻ってきた場合
+    // if (isset($_SESSION['save_quantity'])) {
+    //     // 変数に選択していた数量の配列を代入
+    //     $save_quantity = $_SESSION['save_quantity'];
+    //     // セッションに入れていた選択していた数量の配列を初期化
+    //     unset($_SESSION['save_quantity']);
+    // }
+
     // 検索欄に値が入って送信された場合
     if (isset($_POST['search'])) {
         $search = $_POST['search'];
@@ -146,6 +154,9 @@
             <div class="col-8">
                 <!-- 商品一覧の購入フォーム -->
                 <form action="index2.php" method="post">
+                <div align="right">
+                     <button type="submit" class="btn btn-outline-danger" style="width:100px;">購入する</button>
+                </div>
                     <!-- tableのレスポンシブクラスここから -->
                     <div class="table-responsive">
                         <!-- tableタグで商品一覧を表示 -->
@@ -157,9 +168,6 @@
                                 <th>商品名</th>
                                 <th>価格</th>
                                 <th>数量</th>
-                                <th><!-- 購入ボタン -->
-                                <button type="submit" class="btn btn-outline-secondary">購入する</button>
-                                </th>
                             </tr>
                             </thead>
                             <!-- 商品名、価格、数量選択欄の表示 -->
@@ -175,11 +183,11 @@
                                     <td><?= $allProduct[$i]['price']; ?></td>
                                     <td>
                                     <!-- 数量選択 -->
-                                    <select id="select" name="quantity[<?= $i; ?>]">
+                                    <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
                                         <!-- 0~50を表示させる -->
                                         <?php for ($j = 0; $j < 51; $j++) : ?>
-                                            <option><?= $j ?></option>
-                                        <?php endfor ; ?>
+                                            <option value="<?= $j; ?>"><?= $j ?></option>
+                                        <?php endfor ; ?>                       
                                     </select>
                                     </td>
                                     <!-- product_idを送る -->
@@ -245,11 +253,11 @@
             <!-- フッター表示 -->
             <footer id="footer" class="border-top bg-light" style="height:100px;margin-top:150px;">
                 <ul>
-                    <li style="list-style: none;" class="link-dark"><a href="request.php">本のリクエストはこちら</a></li>
-                    <li style="list-style: none;" class="link-dark"><a href="#">お問い合わせ</a></li>
-                    <li style="list-style: none;" class="link-dark"><a href="#">運営会社</a></li>
+                    <li style="list-style: none;"><a class="link-dark" href="request.php">本のリクエストはこちら</a></li>
+                    <li style="list-style: none;"><a class="link-dark" href="#">お問い合わせ</a></li>
+                    <li style="list-style: none;"><a class="link-dark" href="#">運営会社</a></li>
                     <?php if (isset($_SESSION['user_id'])) : ?>
-                        <li style="list-style: none;" class="link-dark"><a href="quit.php">退会</a></li>
+                        <li style="list-style: none;"><a class="link-dark" href="quit.php">退会</a></li>
                     <?php endif ; ?>
                 </ul>
             </footer>
@@ -258,8 +266,9 @@
     </div>
     <!-- container-fluidここまで -->
 
-    
-    <!-- <script type="text/javascript" src="sample.js"></script> -->
+    <?php $countElement = count($allProduct); ?>
+    <script type="text/javascript">var countElement = "<?= $countElement ?>";</script>
+    <script type="text/javascript" src="sample.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

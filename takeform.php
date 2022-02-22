@@ -59,21 +59,30 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="container-fluid">    
         <table class="table table-warning" >
         <!-- table分け名前列を分離 -->
+            <!-- table項目 -->
             <thead>
                 <tr>
                     <th scope="col" class="text-light bg-dark">商品ID</th>
                     <th scope="col" class="text-light bg-dark">商品名</th>
                     <th scope="col" class="text-light bg-dark">email</th>
                     <th scope="col" class="text-light bg-dark">名前</th>
+                    <th scope="col" class="text-light bg-dark"></th>
                 </tr>
-            </thead>    
+            </thead>
+            <!-- id、商品名、email、名前を表示 -->
             <tbody>
                 <?php for ($i=0; $i< count($results); $i++) : ?>
                     <tr>
-                        <th><?php echo  $results[$i]['product_id']; ?></th>
-                        <td><?php echo  $results[$i]['product_name']; ?></td>
-                        <td><?php echo  $results[$i]['email']; ?></td>
-                        <td><?php echo  $results[$i]['name']; ?></td>
+                        <th><?=  $results[$i]['product_id']; ?></th>
+                        <td><?=  $results[$i]['product_name']; ?></td>
+                        <td><?=  $results[$i]['email']; ?></td>
+                        <td><?=  $results[$i]['name']; ?></td>
+                        <td>
+                            <form action="delete_newbook.php" method="post">
+                                <input type="hidden" name="product_id" value="<?=  $results[$i]['product_id']; ?>">
+                                <button type="submit" name="delete">削除</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endfor; ?>
             </tbody>   

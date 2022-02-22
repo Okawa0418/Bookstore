@@ -191,11 +191,11 @@
                                     </select>
                                     </td>
                                     <!-- product_idを送る -->
-                                    <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>">
+                                    <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>" id="productId_<?= $i; ?>">
                                     <!-- 商品名を送る -->
-                                    <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>">
+                                    <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>" id="productName_<?= $i; ?>">
                                     <!-- 金額送る -->
-                                    <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>">
+                                    <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>" id="productPrice_<?= $i; ?>">
                                 </tr>
                                 <?php endfor ; ?>
                                 <!-- トークンを送る -->

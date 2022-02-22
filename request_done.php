@@ -1,23 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>リクエスト完了ページ</title>
+</head>
+
 <body>
     <header>
-        <h1>BOOK STORE</h1>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     </header>
         <h1>リクエスト完了ページ</h1>
     <main>
         <h2>リクエストありがとうございます！</h2>
     </main>
 </body>
+</html>
 
 <?php
 require_once('database1.php');
+$data1=new Database1();
+$dbh = $data1->dbConnect();
+
 session_start();
 
 $email=$_POST['email'];
 $name=$_POST['name'];
 $book=$_POST['book'];
 $receive=$_POST['receive'];
-$data1=new Database1();
-$dbh = $data1->dbConnect();
 
 if(empty($_POST['email'])){
   $_SESSION['msg'] = '※メールアドレスを入力してください。';
@@ -29,7 +41,6 @@ if(empty($_POST['name'])){
 if(empty($_POST['product_name'])){
   $_SESSION['msg3'] = '※本のタイトルを入力してください。';
 }
-else{
     try{
       $sql  = 'INSERT INTO newbook(email,name,product_name,receive) VALUES(:email,:name,:book,:receive)';
       $stmt = $dbh->prepare($sql);
@@ -44,5 +55,4 @@ else{
     } catch (PDOException $e) {
         echo 'データベースにアクセスできません！'.$e->getMessage();
     }
-  }
 ?>

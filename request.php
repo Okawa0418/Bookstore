@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -32,29 +32,26 @@
 
 <body>
     <header>
-    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
+      <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     </header>
+
     <p class="text-center">
-        <div class="container">
-    <h2>リクエストコーナー</h2>
+    <div class="container">
+      <h2>リクエストコーナー</h2>
     </p>
 
         <!-- エラーメッセージの表示 -->
     <?php if (isset($msg)) : ?>
-      <?= $msg; ?>
-      <br>
+      <?= $msg; ?><br>
     <?php endif ; ?>
 
     <?php if (isset($msg2)) : ?>
-      <?= $msg2; ?>
-      <br>
+      <?= $msg2; ?><br>
     <?php endif ; ?>
 
     <?php if (isset($msg3)) : ?>
-      <?= $msg3; ?>
-      <br>
-    <?php endif ; ?>
-      <br>
+      <?= $msg3; ?><br>
+    <?php endif ; ?><br>
 
 <form method="post" action="request_done.php">
       <div class="form-group">

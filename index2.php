@@ -14,6 +14,8 @@ if (isset($_POST["token"])
     session_write_close();
     // セッションの再開
     session_start();
+
+    // $_SESSION['save_quantity'] = $_POST['quantity'];
     
     // 数量の合計
     $sum = array_sum($_POST['quantity']);

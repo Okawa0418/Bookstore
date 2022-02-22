@@ -87,7 +87,6 @@ if (isset($_SESSION['msg'])) {
                     <tr>
                         <th scope="col" class="text-light bg-dark">商品ID</th>
                         <th scope="col" class="text-light bg-dark">商品名</th>
-                        <th scope="col" class="text-light bg-dark"></th>
                     </tr>
                 </thead>
                 <?php for ($i = 0; $i < count($results); $i++) : ?>    
@@ -95,12 +94,6 @@ if (isset($_SESSION['msg'])) {
                         <tr>
                             <th><?php echo  $results[$i]['product_id']; ?></th>
                             <td><?php echo  $results[$i]['product_name']; ?></th>
-                            <td>
-                                <form action="delete_newbook.php" method="post">
-                                    <input type="hidden" name="product_id" value="<?= $results[$i]['product_id']; ?>">
-                                    <button type="submit">削除</button>
-                                </form>
-                            </td>
                         </tr>
                     </tbody>
                 <?php endfor; ?>

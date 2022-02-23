@@ -1,48 +1,30 @@
 <?php
-
-try
-{
-    $staff_email=$_POST['email'];
-    $staff_name=$_POST['name'];
-    $staff_content=$_POST['content'];
-
-    
-
-    $staff_email=htmlspecialchars($staff_email,ENT_QUOTES,'UTF-8');
-    $staff_name=htmlspecialchars($staff_name,ENT_QUOTES,'UTF-8');
-    $staff_content=htmlspecialchars($staff_content,ENT_QUOTES,'UTF-8');
-    
+    //  customerformcheckのSESSION postの値がフォルダを移動すると値がNULL状態
+    $staff_email= $_POST['email'];
+    $staff_name = $_POST['name'];
+    $staff_content = $_POST['content'];    
     // database 接続
     $dsn ='mysql:dbname=bookstore;host=localhost;charset=utf8';
     $user ='root';
-    $password ='';
+    $password ='Rilakkuma1231';
     $dbh =new PDO($dsn,$user,$password);
     $dbh ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    // テーブルから全レコードを取得（引数：データベースのテーブル名、戻り値：全レコード）
-    
-        $sql = 'INSERT INTO customer(email,name,content) VALUES(?,?)';
-        // 準備実行
-        // $stmt = $dbh->query($sql);
-        $stmt =$dbh->prepare($sql);
-        $data[] =$staff_email;
-        $data[] =$staff_name;
-        $data[] =$staff_content;
-        $stmt->execute($data);
-
-        $dbh =null;        
-     
-        print $customer_name;
-        print'さん投稿完了しました <br />';
-    }
-    catch(Exception $e)
-    {
-        print'ただいま障害により大変ご迷惑をお掛けしております';
-        exit();
-    }
+    // VALUESの文字をデータに反映させたい
+    $sql = "INSERT INTO customer(email,name,content) VALUES(:email,:name,:content)";
+    $stmt=$dbh->prepare($sql);
+    $data[]=$staff_email;
+    $data[]=$staff_name;
+    $data[]= $staff_content;
+    // SQL実行
+    $stmt->execute($data);
+    // data 切断
+    $dbh=null;
+    // 投稿された場合nameから投稿完了
+    print $staff_name;
+    print'さん投稿完了しました。<br />';       
 ?>
 <a href ="index.php">トップに戻る</a>      
-
-<!-- 予備コード -->
+<!-- ショートカットコード -->
 <!-- require_once('database1.php');
 // 送信された値のバリデーション
 

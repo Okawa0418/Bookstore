@@ -221,23 +221,8 @@
             <div class="col-4">
                 <img src="https://blog.cd-j.net/wpcore/wp-content/uploads/4011491_s.jpg" width="300" height="300">
                 <img src="https://www.masterpeace.co.jp/wp-content/themes/masterpeace/img/common/download_img03.jpg" width="300" height="300">
-                <!-- <body class="bg-light"> -->
-                    <!-- 範囲指定コマンドパレット　ラップ変換でdiv使用 -->
-                    <div class="container w-75">
-                        <h1 class="text-center text-info my-4">お気に入りの本を教えてね</h1>
-                        <form id="form" class="mb-4">
-                            <i class="fas fa-h4">好きな本が入荷されるかも</i>
-                            <input type="text" id="input" class="form-con" placeholder="memo" autocomplete="off">   
-                        </form>
-                        <ul class="list-group text-secondary" id="ul"></ul>
-                    </div>
-                    <script src="index.js"></script>
-                <!-- </body> -->
-                <!-- API ここまで -->
             </div>
             <!-- col-4ここまで -->
-
-
         </div>
         <!-- rowここまで -->
         <!-- フッターここから -->

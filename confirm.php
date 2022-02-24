@@ -26,7 +26,7 @@ $total_amount = $_SESSION['product']['total_amount'];
 </head>
 <body>
 <header>
-    <h1>BOOK STORE</h1>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
 </header>
 <h2>商品確認</h2>
 <table class="table table-warning" >

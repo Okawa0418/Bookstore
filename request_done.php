@@ -53,8 +53,15 @@
         $stmt->bindParam(':book', $_POST['book'], PDO::PARAM_STR);
         $stmt->bindParam(':receive', $_POST['receive'], PDO::PARAM_STR);
         $stmt->execute();
-        $link2 = '<h1><a href="index.php">トップページ</a></h1>';
-        echo $link2;
+
+        $msg = '<h2 style="color:white;">ログインしました。</h2>';
+
+        if (!isset($_SESSION['product'])){
+          echo $msg;
+          echo '<h1><a href="index.php">トップページ</a></h1>';
+      } else{ echo $msg;
+              echo '<h1><a href="confirm.php">購入画面</a></h1>';
+      }
         exit();
       } catch (PDOException $e) {
           echo 'データベースにアクセスできません！'.$e->getMessage();

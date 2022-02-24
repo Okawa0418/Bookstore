@@ -39,10 +39,10 @@
 }
 
 .modal-contents {
-    background: blue;
+    background: #faf09a;
     border-radius: 6px;
     padding: 12px;
     font-size: 18px;
     /* modalの文字が見にくいため色変更 */
-    color: #fff;
+    color: rgb(3, 9, 10);
 }

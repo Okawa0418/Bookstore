@@ -84,12 +84,26 @@ $total_amount = $_SESSION['product']['total_amount'];
             <div class="col-6">          
                 <div class="card" style="width: 40rem;">
                     <div class="card-body">
-                        <h5 class="card-title">新規商品</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">あつまれどうぶつの森完全攻略</h6>
-                        <p class="card-text">新コンテンツ アイテム どうぶつ イベント 施設 情報満載</p>
-                        <a href="index.php" class="card-link">購入画面一覧へ</a>
+                        <h5 class="card-title">商品購入 機能</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">基本的な操作だよ</h6>
+                        <p class="card-text">商品履歴、検索覧をチェックしてみてくださいね。</p>
+                        <!-- <a href="index.php" class="card-link">購入画面一覧へ</a> -->
                         <!-- 新規商品一覧の枠を作成したい -->
-                        <a href="" class="card-link">新規商品一覧へ</a>
+                        <!-- <a href="" class="card-link">新規商品一覧へ</a> -->
+                        <!-- ボタンの実装 -->
+                        <button type="button" id="js-btn">詳細を見る </button>
+                        <div class="modal" id="js-modal">
+                            <div class="modal-inner">
+                                <!-- closeボタン -->
+                                <div class="modal-close" id="js-close-btn"></div>
+                                <!-- id -->
+                                <div class="modal-contents" id="js-modal-content">
+                                    （1）購入後に購入履歴にてお客様が購入した商品を確認する事ができます。（2)ワード検索が可能です。（3）商品一覧の商品はお客様がリクエストした商品も反映されます。（リクエストの詳細はこちらのページにて確認できます)
+                                    <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
+                                    <img src="confirm.png" width="450" height="450">
+                                </div>
+                            </div>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -110,7 +124,7 @@ $total_amount = $_SESSION['product']['total_amount'];
                                     リクエストシートとわ
                                     お客様が購入したい本を記入していただくリクエストコーナーです。1）メールアドレス、名前を記入した後本のタイトルを記入してください。2）入荷時の連絡を希望される方は選択覧に必要ボタンを押してください。以下の情報がお間違いのないよう確認した後送信ボタンを押してください。
                                     <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
-                                    <img src="">
+                                    <img src="question.png" width="400" height="400">
                                 </div>
                             </div>
                         </div> 
@@ -125,12 +139,9 @@ $total_amount = $_SESSION['product']['total_amount'];
     <h1 class="display-5 fw-bold text-white">Dark mode hero</h1>
         <!-- <p class="fs-5 mb-4">商品にお間違いはありませんか？再度商品確認をしてください。</p> -->
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <form method="post" action="index.php">
-                <input type="submit" value="商品購入ページへ戻る" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
-            </form>
             <!-- お問い合わせフォーム作成時action 先記入 -->
             <form method="post" action="customerformadd.php">
-                <input type="submit" value="お問い合わせフォームへ" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+                <input type="submit" value="お問い合わせ" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
             </form>
         </div>
     </div>

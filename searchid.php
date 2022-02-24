@@ -70,12 +70,20 @@ if (isset($_SESSION['msg'])) {
             <?php endif ; ?>
             <!-- フォームで追加商品情報をvalidate.phpへ送信 -->
             <form action="include.php" method="post">
-                <label>
+                <div class="mb-3">
+                    <label for="InputId" class="form-label">商品ID</label>
+                    <input type="number" class="form-control" id="InputId" name="id" value="" aria-describedby="nameHelp">
+                    <div id="nameHelp" class="form-text">追加したい商品IDを入力してください</div>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" name="searchid" class="btn btn-primary">追加する</button>
+                </div>
+                <!-- <label>
                     追加したい商品ID:
                     <input type="number" name="id" value="">
                 </label>
                 <br>
-                <input type="submit" name="searchid" value="検索">
+                <input type="submit" name="searchid" value="追加する"> -->
             </form>
         </div>
         <div class="row">

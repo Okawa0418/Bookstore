@@ -34,10 +34,10 @@
     <div class="container-fluid">
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="">商品リスト</a>
+                <a href="productList.php">商品リスト</a>
             </li>
             <li class="list-group-item">
-                <a href="">顧客リスト</a>
+                <a href="userList.php">顧客リスト</a>
             </li>
             <li class="list-group-item">
                 <a href="takeform.php">リクエスト一覧</a>

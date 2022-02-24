@@ -1,12 +1,18 @@
 <!-- include.phpから送信された値のバリデーション実装 -->
 <?php
 session_start();
+require_once('database1.php');
 
 // 空の値が送信されてきた場合
 if (empty($_POST['name'])) {
     // エラーメッセージをセッションに格納
     $_SESSION['msg']['name'] = '※商品名を入力してください。';
-} 
+} else {
+    // 商品名が71文字以上だった場合
+    if (70 < mb_strlen($_POST['name'], 'UTF-8')) {
+        $_SESSION['msg']['name'] = '※商品名は70文字以下にしてください';
+    }
+}
 
 if (empty($_POST['price'])) {
     // エラーメッセージをセッションに格納
@@ -17,6 +23,7 @@ if (empty($_POST['category'])) {
     // エラーメッセージをセッションに格納
     $_SESSION['msg']['category'] = '※カテゴリーを選択してください。';
 }
+
 
 // ファイル情報を変数で取得
 $file = $_FILES['img'];
@@ -69,3 +76,16 @@ if (isset($_SESSION['msg'])) {
 }
 
 
+// バリデーション通過後
+// 送信された値を変数へ代入
+$name = $_POST['name'];
+$price = $_POST['price'];
+$category = $_POST['category'];
+// 画像の保存
+if (move_uploaded_file($tmp_path, $upload_dir . $save_filename)) {
+    $file_path = $upload_dir . $save_filename;
+}
+
+$database = new Database1;
+// productテーブルにデータを挿入
+$database->createProduct($name, $price, $file_path, $category);

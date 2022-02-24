@@ -48,6 +48,8 @@ class Database1 {
             $stmt->execute();
             // コミット
             $dbh->commit();
+            // 商品追加完了画面へリダイレクト
+            header('Location: view.html');
         } catch (PDOException $Exception) {
             // 処理を戻す
             $dbh->rollBack();

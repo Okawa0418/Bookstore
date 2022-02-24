@@ -96,7 +96,7 @@ if (isset($_POST['searchid'])) {
         
 
         <!-- フォームで追加商品情報をvalidate.phpへ送信 -->
-        <form enctype="multipart/form-data" action="view.php" method="post">
+        <form enctype="multipart/form-data" action="validate.php" method="post">
             <div class="mb-3">
                 <label for="InputName" class="form-label">商品名</label>
                 <!-- 商品名記入し追加ボタンを押してバリデーションに引っかかった場合・

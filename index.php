@@ -2,7 +2,6 @@
     session_start();
     require_once('database1.php');
 
-    
     $database = new Database1;
 
     // 1ページに5件表示させる
@@ -23,10 +22,6 @@
     // 必要ページ数の取得
     $pages = $database->numberOfPages();
 
-
-    // productテーブルから全ての商品を取得
-    // $allProduct = $database->getAllRecord('product');
-
     // categoryテーブルから全レコード取得
     $allCategory = $database->getAllRecord('category');
     
@@ -37,14 +32,6 @@
         // エラーメッセージのセッション破棄
         unset($_SESSION['msg']);
     }
-
-    // 数量選択後にindexへ戻ってきた場合
-    // if (isset($_SESSION['save_quantity'])) {
-    //     // 変数に選択していた数量の配列を代入
-    //     $save_quantity = $_SESSION['save_quantity'];
-    //     // セッションに入れていた選択していた数量の配列を初期化
-    //     unset($_SESSION['save_quantity']);
-    // }
 
     // 検索欄に値が入って送信された場合
     if (isset($_POST['search'])) {
@@ -67,6 +54,10 @@
     $token = bin2hex($toke_byte);
     // 生成したトークンをセッションに保存
     $_SESSION['token'] = $token;
+
+    function h($s) {
+        return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+    }
   
 ?>
 
@@ -79,6 +70,7 @@
     <title>商品一覧画面</title>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="img.css">
 </head>
 <body>
     <header>
@@ -135,7 +127,7 @@
             <!-- 検索フォーム -->
             <form class="d-flex" action="index.php" method="post">
                 <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-success" type="submit">Search</button>
             </form>
             <!-- 検索フォームここまで -->
             </div>
@@ -155,7 +147,7 @@
                 <!-- 商品一覧の購入フォーム -->
                 <form action="index2.php" method="post">
                 <div align="right">
-                     <button type="submit" class="btn btn-outline-danger" style="width:100px;">購入する</button>
+                     <button type="submit" class="btn btn-danger" style="width:100px;">購入する</button>
                 </div>
                     <!-- tableのレスポンシブクラスここから -->
                     <div class="table-responsive">
@@ -179,7 +171,7 @@
                                     <!-- 商品画像 -->
                                     <td><img src="<?= $allProduct[$i]['file_path']; ?>"width="100" height="150"></td>
                                     <!-- 商品名、価格 -->
-                                    <td><?= $allProduct[$i]['product_name']; ?></td>
+                                    <td><?= h($allProduct[$i]['product_name']); ?></td>
                                     <td><?= $allProduct[$i]['price']; ?></td>
                                     <td>
                                     <!-- 数量選択 -->
@@ -251,14 +243,43 @@
         <!-- フッターここから -->
         <div class="row">
             <!-- フッター表示 -->
-            <footer id="footer" class="border-top bg-light" style="height:100px;margin-top:150px;">
+            <footer id="footer" class="border-top bg-light" style="height:130px;margin-top:120px;">
                 <ul>
-                    <li style="list-style: none;"><a class="link-dark" href="request.php">本のリクエストはこちら</a></li>
-                    <li style="list-style: none;"><a class="link-dark" href="#">お問い合わせ</a></li>
-                    <li style="list-style: none;"><a class="link-dark" href="#">運営会社</a></li>
-                    <?php if (isset($_SESSION['user_id'])) : ?>
-                        <li style="list-style: none;"><a class="link-dark" href="quit.php">退会</a></li>
-                    <?php endif ; ?>
+                    <div class="mb-2">
+                        <li style="list-style: none;"><a class="link-dark" href="request.php">本のリクエストはこちら</a>
+                        <button type="button" id="js-btn">詳細</button>
+                        <!-- ボタンの実装 -->
+                        <div class="modal" id="js-modal">
+                            <div class="modal-inner">
+                                <!-- closeボタン -->
+                                <div class="modal-close" id="js-close-btn">✖</div>
+                                <!-- id -->
+                                <div class="modal-contents" id="js-modal-content">
+                                    <p>
+                                        リクエストシートとは<br>
+                                        お客様が購入したい本を記入していただくリクエストコーナーです。<br>
+                                        1）メールアドレス、名前を記入した後本のタイトルを記入してください。<br>
+                                        2）入荷時の連絡を希望される方は「必要」を選択ください。<br>
+                                        3）記入された情報がお間違いのないよう確認した後送信ボタンを押してください。
+                                    </p>
+                                    <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
+                                    <img src="">
+                                </div>
+                            </div>
+                        </div> 
+                        </li>
+                    </div>
+                    <div class="mb-2">
+                        <li style="list-style: none;"><a class="link-dark" href="customerformadd.php">お問い合わせ</a></li>
+                    </div>   
+                    <div class="mb-2"> 
+                        <li style="list-style: none;"><a class="link-dark" href="management_login.php">管理画面</a></li>
+                    </div>
+                    <div class="mb-2">
+                        <?php if (isset($_SESSION['user_id'])) : ?>
+                            <li style="list-style: none;"><a class="link-dark" href="quit.php">退会する</a></li>
+                        <?php endif ; ?>
+                    </div>
                 </ul>
             </footer>
         </div>
@@ -266,9 +287,11 @@
     </div>
     <!-- container-fluidここまで -->
 
-    <?php $countElement = count($allProduct); ?>
+
+    <script src="img.js"></script>
+    <!-- <?php $countElement = count($allProduct); ?>
     <script type="text/javascript">var countElement = "<?= $countElement ?>";</script>
-    <script type="text/javascript" src="sample.js"></script>
+    <script type="text/javascript" src="sample.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

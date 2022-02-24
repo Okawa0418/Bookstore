@@ -4,6 +4,9 @@
     $database = new Database1;
     $results = $database->getAllRecord('product');
     
+    function h($s) {
+        return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+    }
 ?>
 
 <!-- productテーブルの表示画面 -->
@@ -65,7 +68,7 @@
                 <?php for ($i = 0; $i < count($results); $i++) : ?>
                     <tr>
                         <th scope="row"><?= $results[$i]['product_id'];?></th>
-                        <td><?= $results[$i]['product_name'];?></td>
+                        <td><?= h($results[$i]['product_name']);?></td>
                         <td><?= $results[$i]['price'];?></td>
                         <td>
                             <?php if ($results[$i]['category'] == 1) : ?>

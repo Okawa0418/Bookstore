@@ -4,6 +4,10 @@
 
     $database = new Database1;
     $results = $database->getAllRecord('user');
+
+    function h($s) {
+        return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+    }
     
 ?>
 
@@ -67,10 +71,10 @@
                 <?php for ($i = 0; $i < count($results); $i++) : ?>
                     <tr>
                         <th scope="row"><?= $results[$i]['user_id'];?></th>
-                        <td><?= $results[$i]['user_name'];?></td>
-                        <td><?= $results[$i]['mail_address'];?></td>
-                        <td><?= $results[$i]['post_address'];?></td>
-                        <td><?= $results[$i]['tel'];?></td>
+                        <td><?= h($results[$i]['user_name']);?></td>
+                        <td><?= h($results[$i]['mail_address']);?></td>
+                        <td><?= h($results[$i]['post_address']);?></td>
+                        <td><?= h($results[$i]['tel']);?></td>
                     </tr>
                 <?php endfor ; ?>
             </tbody>

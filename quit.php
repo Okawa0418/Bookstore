@@ -18,6 +18,7 @@
         </button>
     <h2><font color="white">退会画面</font></h2>
     </nav>
+
     <div class="container">
       <p>本当に退会しますか？</p>
         <form action="./quit.php" method="POST">
@@ -35,6 +36,9 @@
 
 <?php
   require_once('database1.php');
+  $data1=new Database1();
+  $dbh = $data1->dbConnect();
+  
   session_start();
  
     if (!isset($_SESSION['user_id'])) {
@@ -42,24 +46,22 @@
       exit;
     }
  
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (isset($_SESSION['user_id']) && isset($_POST['is_delete']) && $_POST['is_delete'] === '1') {
-    
-    $data1=new Database1();
-    $dbh = $data1->dbConnect();
- 
-    $stmt = $dbh->prepare('DELETE FROM user WHERE user_id = :user_id');
-    $stmt->bindValue(1, $_SESSION['user_id']);
-    $stmt->execute();
-
-    $stmt = $dbh->prepare('DELETE FROM purchase WHERE user_id = :user_id');
-    $stmt->bindValue(1, $_SESSION['user_id']);
-    $stmt->execute();
-
-    session_destroy();
- 
-    header('Location: index.php');
-    exit;
-  }
-}
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      // ログイン状態で退会ボタンを押下
+      if (isset($_SESSION['user_id']) && isset($_POST['is_delete']) && $_POST['is_delete'] === '1') {
+      
+        $stmt = $dbh->prepare('DELETE FROM user WHERE user_id = :user_id');
+        $stmt->bindValue(1, $_SESSION['user_id']);
+        $stmt->execute();
+      
+        $stmt = $dbh->prepare('DELETE FROM purchase WHERE user_id = :user_id');
+        $stmt->bindValue(1, $_SESSION['user_id']);
+        $stmt->execute();
+      
+        session_destroy();
+      
+        header('Location: index.php');
+        exit;
+      }
+    }
 ?>

@@ -37,7 +37,7 @@
             header('Location: login_form.php');
         }
 
-        // データベース内のメールアドレスと入力したメールアドレスが一致するメールアドレスを検索
+        // 入力したメールアドレスと一致するデータベース内のメールアドレスを検索
         $mail = $_POST['mail_address'];
         $stmt = $dbh->prepare("SELECT * FROM user WHERE mail_address = :mail_address");
         $stmt->bindValue(':mail_address', $mail);

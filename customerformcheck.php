@@ -17,14 +17,15 @@
         $dsn = "$db_type:host=$db_host;dbname=$db_name;charset=utf8";
 
         try{
-            $pdo = new PDO($dsn,$do_user,$db_pass);
+            $pdo = new PDO($dsn,$db_user,$db_pass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
             $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
             print"投稿完了しました <br>";
         }   catch(PDOException $Exception) {
-                die('エラー:' .$Exception->getMessage());
+                die('エラー:'. $Exception->getMessage());
+       
         }
-        
+        try{
             $pdo->beginTransaction();
             $sql ="INSERT INTO customer (email,name,content)VALUES (:email,:name,:content)";
             $stmh =$pdo->prepare($sql);
@@ -38,63 +39,32 @@
             $pdo->commit();
             print"データを".$stmh->rowCount()."投稿を完了しました <br>";
 
-        // }catch (PDOEception $Exception) {
-            // $pdo->rollBack();
-        //     print"エラー:". $Exception->getMessage();
-        // }
+        }catch (PDOException $Exception) {
+            $pdo->rollBack();
+        
+
+            print"エラー:". $Exception->getMessage();
+        }
     ?>   
 </body>
 </html>
-<!-- <body>
-// このページまでがpostに値が挿入されている
-$staff_email=$_POST['email'];
-$staff_name=$_POST['name'];
-$staff_content=$_POST['content'];
-var_dump($staff_content);
+<?php
+    session_start();
 
+    if(empty($_POST['email'])){
+        $_SESSION['msg'] = '※メールアドレスを入力してください。';
+        header('Location: customerformadd.php');
+    } else{$_SESSION['email'] = $_POST['email'];
+    }
 
-$staff_email=htmlspecialchars($staff_email,ENT_QUOTES,'UTF-8');
-$staff_name=htmlspecialchars($staff_name,ENT_QUOTES,'UTF-8');
-$staff_content=htmlspecialchars($staff_content,ENT_QUOTES,'UTF-8');
+    if(empty($_POST['name'])){
+        $_SESSION['msg1'] = '※名前を入力してください。';
+        header('Location: customerformadd.php');
+    }
 
-if($staff_email=='')
-{
-    print'emailが登録されていません <br />';
-}
-if ($staff_name=='')
-{
-    print'名前が入力されていません <br />';  
-}
-else
-{
-    print'Webネーム:';
-    print $staff_name;
-    print'<br />';
-}
+    if(empty($_POST['content'])){
+        $_SESSION['msg2'] = '※内容を入力してください。';
+        header('Location: customerformadd.php');
+    }
 
-if($staff_content=='')
-{
-    print'内容が入力されていません <br />';
-}
-// もしも入力に問題があった場合戻るボタン
-if($staff_email=='' || $staff_name==''|| $staff_content='')
-{
-    print'<form>';
-    print'<input type="button" onclick="history.back()" value="戻る">';
-    print'</form>';
-}
-// もし入力に問題がない場合
-else
-{
-    //　値の移動をさせるためセッションで繋げる
-   
-    print'<form method="post" action="customerformdone.php">';
-    $_SESSION=['$staff_email'];
-    $_SESSION=['$staff_name'];
-    $_SESSION=['$staff_content'];
-    print'<input type="button" onclick="history.back()" value="戻る">';
-    print'<input type="submit" value="ok">';
-    print'</form>';
-}
-
-?> -->
+?>

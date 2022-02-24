@@ -8,6 +8,7 @@
 
 .modal {
     display: none;
+    /* 背景を透明にさせる */
     background: rgba(0,0,0, .5);
     position: fixed;
     top:0;
@@ -21,6 +22,7 @@
     position: relative;
     z-index: 1;
     width: 500px;
+    /* modalインナー位置 */
     margin: 50px auto 0;
 }
 
@@ -38,8 +40,9 @@
 
 .modal-contents {
     background: blue;
-    border-radius: 60px;
+    border-radius: 6px;
     padding: 12px;
     font-size: 18px;
+    /* modalの文字が見にくいため色変更 */
     color: #fff;
 }

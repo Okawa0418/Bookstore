@@ -44,7 +44,7 @@ Licensed under MIT
 <br>
 <br>
 <center>
-<strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">KeenThemes</a></strong>
+<strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">くすりの窓口</a></strong>
 </center>
 <br>
 <br>

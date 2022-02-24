@@ -21,6 +21,8 @@ $total_amount = $_SESSION['product']['total_amount'];
 <head>
     <!-- bootstrap ｃｓｓ -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
+    <!-- モーダル -->
+    <link rel="stylesheet" href="img.css">
 </head>
 <body>
 <header>
@@ -97,6 +99,21 @@ $total_amount = $_SESSION['product']['total_amount'];
                     <h5 class="card-title">リクエストシート</h5>
                     <h6 class="card-subtitle mb-2 text-muted">あなたの好きな本が次回購入できるかも</h6>
                     <p class="card-text">好きな本を記入して次回来店時にあなたの好きな本を購入しましょう</p>
+                    <button type="button" id="js-btn">詳細を見る </button>
+                        <!-- ボタンの実装 -->
+                        <div class="modal" id="js-modal">
+                            <div class="modal-inner">
+                                <!-- closeボタン -->
+                                <div class="modal-close" id="js-close-btn"></div>
+                                <!-- id -->
+                                <div class="modal-contents" id="js-modal-content">
+                                    リクエストシートとわ
+                                    お客様が購入したい本を記入していただくリクエストコーナーです。1）メールアドレス、名前を記入した後本のタイトルを記入してください。2）入荷時の連絡を希望される方は選択覧に必要ボタンを押してください。以下の情報がお間違いのないよう確認した後送信ボタンを押してください。
+                                    <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
+                                    <img src="">
+                                </div>
+                            </div>
+                        </div> 
                     <a href="request.php" class="card-link">リクエストシートへ</a>
                     <!-- 必要な際 -->
                     <!-- <a href="#" class="card-link">お問い合わせフォーム</a> -->
@@ -117,6 +134,8 @@ $total_amount = $_SESSION['product']['total_amount'];
             </form>
         </div>
     </div>
+    <!-- モーダル -->
+    <script src="img.js"></script>
 </footer>
 </body>
 </html>

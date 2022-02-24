@@ -23,7 +23,16 @@ if (isset($_POST['searchid'])) {
     }
 // 送信後のバリデーションに引っかかった場合
 } elseif (isset($_SESSION['msg'])){
-    // 変数に代入
+    // 名前・価格は変数に代入してセッション破棄
+    if (isset($_SESSION['p_name'])) {
+        $name = $_SESSION['p_name'];
+        unset($_SESSION['p_name']);
+    }
+    if (isset($_SESSION['p_price'])) {
+        $price = $_SESSION['p_price'];
+        unset($_SESSION['p_price']);
+    }
+    // エラーメッセージも変数に代入
     $msg = $_SESSION['msg'];
     // エラーメッセージのセッション破棄
     unset($_SESSION['msg']);
@@ -68,7 +77,7 @@ if (isset($_POST['searchid'])) {
                         <a class="nav-link active" aria-current="page" href="manager_index.php">管理者Top</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="searchid.php">商品ID検索</a>
+                        <a class="nav-link active" aria-current="page" href="productList.php">商品リスト</a>
                     </li>
                 </ul>
             </div>
@@ -81,17 +90,36 @@ if (isset($_POST['searchid'])) {
                 <p><?= $m; ?></p>
             <?php endforeach ; ?>
         <?php endif ; ?>
+        <form action="searchid.php">
+            <button type="submit" class="btn btn-outline-secondary">リクエスト一覧を参照する</button>
+        </form>
+        
 
         <!-- フォームで追加商品情報をvalidate.phpへ送信 -->
         <form enctype="multipart/form-data" action="view.php" method="post">
             <div class="mb-3">
                 <label for="InputName" class="form-label">商品名</label>
-                <input type="text" class="form-control" id="InputName" name="name" value="<?= $product_name; ?>" aria-describedby="nameHelp">
+                <!-- 商品名記入し追加ボタンを押してバリデーションに引っかかった場合・
+                リクエスト一覧を参照し商品ID記入後に追加フォームへ遷移してきた場合と分けて初期値を表示 -->
+                <input type="text" class="form-control" id="InputName" name="name"
+                    <?php if (isset($name)) : ?>
+                        value="<?= $name ?>"
+                    <?php else : ?>
+                        value="<?= $product_name; ?>"
+                    <?php endif ;?>
+                aria-describedby="nameHelp">
                 <div id="nameHelp" class="form-text">追加したい商品の名前を入力してください</div>
             </div>
             <div class="mb-3">
                 <label for="InputPrice" class="form-label">価格（円）</label>
-                <input type="number" class="form-control" id="InputPrice" name="price" min="0" max="100000" value="" aria-describedby="priceHelp">
+                <!-- 価格を記入後、バリデーションに引っかかった場合は記入していた価格を表示させる -->
+                <input type="number" class="form-control" id="InputPrice" name="price" min="0" max="100000"
+                    <?php if (isset($price)) :?>
+                        value="<?= $price; ?>"
+                    <?php else : ?>
+                        value=""
+                    <?php endif ; ?>
+                aria-describedby="priceHelp">
                 <div id="priceHelp" class="form-text">追加したい商品の単価を数字で入力してください</div>
             </div>
             <div class="mb-3">
@@ -114,8 +142,7 @@ if (isset($_POST['searchid'])) {
 
             <button type="submit" name="submit" class="btn btn-primary">追加する</button>
         </form>
-        <a href="searchid.php">商品ID検索画面へ戻る</a>
-    <div class="container-fluid">
+    </div>
 </body>
 </html>
  

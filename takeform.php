@@ -47,9 +47,18 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a class="navbar-brand" href="#"><h2>商品リクエスト一覧</h2></a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="manager_index.php">管理者Top</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="manager_index.php">管理者Top</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="productList.php">商品リスト</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="userList.php">顧客リスト</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="include.php">商品追加フォーム</a>
+                        </li>
                     </ul>
                 </div>
             </nav>    

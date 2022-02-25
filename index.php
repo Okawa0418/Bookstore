@@ -3,24 +3,26 @@
     require_once('database1.php');
 
     $database = new Database1;
+    $allProduct = $database->getAllProductDesc();
 
-    // 1ページに5件表示させる
-    define('max_view',5);
 
-    //現在いるページのページ番号を取得
-    if(!isset($_GET['page_id'])){
-        // page_idに値がない場合（初めてこのページを開く場合）
-        $now = 1;
-    }else{
-        // page_idに値が入っている場合
-        $now = $_GET['page_id'];
-    }
+    // // 1ページに5件表示させる
+    // define('max_view',5);
 
-    // 表示必要な商品レコードを取得
-    $allProduct = $database->getProductByPages($now);
+    // //現在いるページのページ番号を取得
+    // if(!isset($_GET['page_id'])){
+    //     // page_idに値がない場合（初めてこのページを開く場合）
+    //     $now = 1;
+    // }else{
+    //     // page_idに値が入っている場合
+    //     $now = $_GET['page_id'];
+    // }
 
-    // 必要ページ数の取得
-    $pages = $database->numberOfPages();
+    // // 表示必要な商品レコードを取得
+    // $allProduct = $database->getProductByPages($now);
+
+    // // 必要ページ数の取得
+    // $pages = $database->numberOfPages();
 
     // categoryテーブルから全レコード取得
     $allCategory = $database->getAllRecord('category');
@@ -73,204 +75,231 @@
     <link rel="stylesheet" href="img.css">
 </head>
 <body>
-    <header>
-        <h1>BOOK STORE</h1>
-    </header>
-    <!-- navbarここから -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- ヘッダー・ナビゲーションバーの固定 -->
+    <div class='fixed-top'>
+        <!-- ヘッダーとナビバーのコンテナここから -->
         <div class="container-fluid">
-            <a class="navbar-brand"><h2>商品一覧</h2></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php">ホーム</a>
-                </li>
-                <!-- ログイン情報がセッションで保持されている場合 -->
-                <?php if (isset($_SESSION['user_id'])) : ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">ログアウト</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pur_history.php">購入履歴</a>
-                    </li>
-                <!-- ログイン情報がない場合 -->
-                <?php else : ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login_form.php">ログイン</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="signup.php">新規会員登録</a>
-                    </li>
-                <?php endif ; ?>
-                
-                <!-- カテゴリーのドロップダウンメニュー -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        カテゴリー
-                    </a>
-                    <!-- ドロップダウンの中身 -->
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <!-- カテゴリーをfor文で表示していく -->
-                    <?php for ($i=0; $i<count($allCategory); $i++) : ?>
-                        <!-- カテゴリー別にフォームを送信する -->
-                        <form action="index.php" method="post">
-                            <input type="hidden" name="category" value="<?=$allCategory[$i]['ctg_id']?>">
-                            <li><button class="dropdown-item" type="submit"><?=$allCategory[$i]['variation']?></li>
-                        </form>
-                    <?php endfor ; ?>
-                    </ul>
-                </li>
-            </ul>
-            <!-- 検索フォーム -->
-            <form class="d-flex" action="index.php" method="post">
-                <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success" type="submit">Search</button>
-            </form>
-            <!-- 検索フォームここまで -->
+            <div class="row">
+                <header style="background-color: white;">            
+                    <h1>BOOK STORE</h1>
+                </header>
             </div>
-        </div>
-    </nav>
-    <!-- navbarここまで -->
-
-    <!-- エラーメッセージの表示 -->
-    <?php if (isset($msg)) : ?>
-        <p>&#x26a0;<?= $msg; ?></p>
-    <?php endif ; ?>
-   
-    <!-- bootstrap grid  -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-8">
-                <!-- 商品一覧の購入フォーム -->
-                <form action="index2.php" method="post">
-                <div align="right">
-                     <button type="submit" class="btn btn-danger" style="width:100px;">購入する</button>
-                </div>
-                    <!-- tableのレスポンシブクラスここから -->
-                    <div class="table-responsive">
-                        <!-- tableタグで商品一覧を表示 -->
-                        <table class="table align-middle">
-                            <!-- 項目 -->
-                            <thead>
-                            <tr>
-                                <th>商品画像</th>
-                                <th>商品名</th>
-                                <th>価格</th>
-                                <th>数量</th>
-                            </tr>
-                            </thead>
-                            <!-- 商品名、価格、数量選択欄の表示 -->
-                            <tbody>
-                            <tr>
-                                <!-- for文で商品テーブルのレコードを全て表示 -->
-                                <?php for ($i=0; $i < count($allProduct); $i++) : ?>
-                                <tr>
-                                    <!-- 商品画像 -->
-                                    <td><img src="<?= $allProduct[$i]['file_path']; ?>"width="100" height="150"></td>
-                                    <!-- 商品名、価格 -->
-                                    <td><?= h($allProduct[$i]['product_name']); ?></td>
-                                    <td><?= $allProduct[$i]['price']; ?></td>
-                                    <td>
-                                    <!-- 数量選択 -->
-                                    <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
-                                        <!-- 0~50を表示させる -->
-                                        <?php for ($j = 0; $j < 51; $j++) : ?>
-                                            <option value="<?= $j; ?>"><?= $j ?></option>
-                                        <?php endfor ; ?>                       
-                                    </select>
-                                    </td>
-                                    <!-- product_idを送る -->
-                                    <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>" id="productId_<?= $i; ?>">
-                                    <!-- 商品名を送る -->
-                                    <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>" id="productName_<?= $i; ?>">
-                                    <!-- 金額送る -->
-                                    <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>" id="productPrice_<?= $i; ?>">
-                                </tr>
+            
+            <div class="row">
+                <!-- navbarここから -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">               
+                    <a class="navbar-brand"><h2>商品一覧</h2></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="index.php">ホーム</a>
+                            </li>
+                            <!-- ログイン情報がセッションで保持されている場合 -->
+                            <?php if (isset($_SESSION['user_id'])) : ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="logout.php">ログアウト</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pur_history.php">購入履歴</a>
+                                </li>
+                            <!-- ログイン情報がない場合 -->
+                            <?php else : ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="login_form.php">ログイン</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="signup.php">新規会員登録</a>
+                                </li>
+                            <?php endif ; ?>
+                            
+                            <!-- カテゴリーのドロップダウンメニュー -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    カテゴリー
+                                </a>
+                                <!-- ドロップダウンの中身 -->
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <!-- カテゴリーをfor文で表示していく -->
+                                <?php for ($i=0; $i<count($allCategory); $i++) : ?>
+                                    <!-- カテゴリー別にフォームを送信する -->
+                                    <form action="index.php" method="post">
+                                        <input type="hidden" name="category" value="<?=$allCategory[$i]['ctg_id']?>">
+                                        <li><button class="dropdown-item" type="submit"><?=$allCategory[$i]['variation']?></li>
+                                    </form>
                                 <?php endfor ; ?>
-                                <!-- トークンを送る -->
-                                <input type="hidden" name="token" value="<?=$token?>">  
-                            </tbody>
-                        </table>
-                        <!-- 商品一覧tableここまで -->
-                    </div>
-                    <!-- tableのレスポンシブクラスここまで -->
-                </form>
-                <!-- 購入フォームここまで -->
-                <!-- ページネーション表示ここから -->
-                <!-- 検索・カテゴリー別を押した場合はページネーションを表示させない -->
-                <?php if (!isset($_POST['search']) && !isset($_POST['category'])) : ?>
-                    <!-- ページネーションを表示 -->
-                    <?php for ($i=1; $i <= $pages; $i++) : ?>
-                        <?php if ($i == $now) : ?>
-                            <span style='padding: 5px;'><?= $now; ?></span>
-                        <?php else : ?>
-                            <a href="index.php?page_id=<?= $i; ?>" style="padding: 5px;"><?= $i; ?></a>
-                        <?php endif ; ?>
-                    <?php endfor ; ?>
-                <?php endif ; ?>
-                <!-- ページネーション表示ここまで -->
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- 検索フォーム -->
+                        <form class="d-flex" action="index.php" method="post">
+                            <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </form>
+                        <!-- 検索フォームここまで -->
+                    </div>                  
+                </nav>
+                <!-- navbarここまで -->
             </div>
-            <!-- col-8ここまで -->
-
-
-
-            <!-- bootstrap API 実装 -->
-            <div class="col-4">
-                <img src="https://blog.cd-j.net/wpcore/wp-content/uploads/4011491_s.jpg" width="300" height="300">
-                <img src="https://www.masterpeace.co.jp/wp-content/themes/masterpeace/img/common/download_img03.jpg" width="300" height="300">
-            </div>
-            <!-- col-4ここまで -->
+            <!-- navbarのrowここまで -->
         </div>
-        <!-- rowここまで -->
-        <!-- フッターここから -->
-        <div class="row">
-            <!-- フッター表示 -->
-            <footer id="footer" class="border-top bg-light" style="height:130px;margin-top:120px;">
-                <ul>
-                    <div class="mb-2">
-                        <li style="list-style: none;"><a class="link-dark" href="request.php">本のリクエストはこちら</a>
-                        <button type="button" id="js-btn">詳細</button>
-                        <!-- ボタンの実装 -->
-                        <div class="modal" id="js-modal">
-                            <div class="modal-inner">
-                                <!-- closeボタン -->
-                                <div class="modal-close" id="js-close-btn">✖</div>
-                                <!-- id -->
-                                <div class="modal-contents" id="js-modal-content">
-                                    <p>
-                                        リクエストシートとは<br>
-                                        お客様が購入したい本を記入していただくリクエストコーナーです。<br>
-                                        1）メールアドレス、名前を記入した後本のタイトルを記入してください。<br>
-                                        2）入荷時の連絡を希望される方は「必要」を選択ください。<br>
-                                        3）記入された情報がお間違いのないよう確認した後送信ボタンを押してください。
-                                    </p>
-                                    <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
-                                    <img src="">
-                                </div>
-                            </div>
-                        </div> 
-                        </li>
-                    </div>
-                    <div class="mb-2">
-                        <li style="list-style: none;"><a class="link-dark" href="customerformadd.php">お問い合わせ</a></li>
-                    </div>   
-                    <div class="mb-2"> 
-                        <li style="list-style: none;"><a class="link-dark" href="management_login.php">管理画面</a></li>
-                    </div>
-                    <div class="mb-2">
-                        <?php if (isset($_SESSION['user_id'])) : ?>
-                            <li style="list-style: none;"><a class="link-dark" href="quit.php">退会する</a></li>
-                        <?php endif ; ?>
-                    </div>
-                </ul>
-            </footer>
-        </div>
-        <!-- フッターここまで -->
+        <!-- ヘッダーとナビバーのコンテナここまで -->
     </div>
-    <!-- container-fluidここまで -->
+    <!-- ヘッダー・ナビゲーションバーの固定ここまで -->
+
+    <!-- ヘッダーとナビバーが重ならないようにmargin-topの指定 -->
+    <div style="margin-top: 120px;">
+
+        <!-- エラーメッセージの表示 -->
+        <?php if (isset($msg)) : ?>
+            <p>&#x26a0;<?= $msg; ?></p>
+        <?php endif ; ?>
+    
+        <!-- bootstrap grid  -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-8">
+                    <!-- 商品一覧の購入フォーム -->
+                    <form action="index2.php" method="post">
+                    <div align="right" class="sticky-top" style="top: 127px">
+                        <button type="submit" class="btn btn-danger" style="width:100px;">購入する</button>
+                    </div>
+                        <!-- tableのレスポンシブクラスここから -->
+                        <div class="overflow-auto" style="width:800px; height:1000px;">
+                        <div class="table-responsive">
+                            <!-- tableタグで商品一覧を表示 -->
+                            <table class="table align-middle">
+                                <!-- 項目 -->
+                                <thead>
+                                   
+                                        <tr>
+                                            <th>商品画像</th>
+                                            <th>商品名</th>
+                                            <th>価格</th>
+                                            <th>数量</th>
+                                        </tr>
+                                   
+                                    
+                                </thead>
+                               
+                               
+                                <!-- 商品名、価格、数量選択欄の表示 -->
+                                <tbody>
+                                    <!-- for文で商品テーブルのレコードを全て表示 -->
+                                    <?php for ($i=0; $i < count($allProduct); $i++) : ?>
+                                    <tr>
+                                        <!-- 商品画像 -->
+                                        <td><img src="<?= $allProduct[$i]['file_path']; ?>"width="100" height="150"></td>
+                                        <!-- 商品名、価格 -->
+                                        <td><?= h($allProduct[$i]['product_name']); ?></td>
+                                        <td><?= $allProduct[$i]['price']; ?></td>
+                                        <td>
+                                        <!-- 数量選択 -->
+                                        <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
+                                            <!-- 0~50を表示させる -->
+                                            <?php for ($j = 0; $j < 51; $j++) : ?>
+                                                <option value="<?= $j; ?>"><?= $j ?></option>
+                                            <?php endfor ; ?>                       
+                                        </select>
+                                        </td>
+                                        <!-- product_idを送る -->
+                                        <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>" id="productId_<?= $i; ?>">
+                                        <!-- 商品名を送る -->
+                                        <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>" id="productName_<?= $i; ?>">
+                                        <!-- 金額送る -->
+                                        <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>" id="productPrice_<?= $i; ?>">
+                                    </tr>
+                                    <?php endfor ; ?>
+                                    <!-- トークンを送る -->
+                                    <input type="hidden" name="token" value="<?=$token?>">  
+                                </tbody>
+                            </table>
+                            <!-- 商品一覧tableここまで -->
+                        </div>
+                        <!-- tableのレスポンシブクラスここまで -->
+                        </div>
+                    </form>
+                    <!-- 購入フォームここまで -->
+                    <!-- ページネーション表示ここから -->
+                    <!-- 検索・カテゴリー別を押した場合はページネーションを表示させない -->
+                    <!-- <?php if (!isset($_POST['search']) && !isset($_POST['category'])) : ?> -->
+                        <!-- ページネーションを表示 -->
+                        <!-- <?php for ($i=1; $i <= $pages; $i++) : ?> -->
+                            <!-- <?php if ($i == $now) : ?> -->
+                                <!-- <span style='padding: 5px;'>
+                                    <!-- <?= $now; ?> -->
+                                </span> -->
+                            <!-- <?php else : ?> -->
+                                <!-- <a href="index.php?page_id=
+                                <!-- <?= $i; ?> -->
+                                " style="padding: 5px;"><?= $i; ?></a> -->
+                            <!-- <?php endif ; ?> -->
+                        <!-- <?php endfor ; ?> -->
+                    <!-- <?php endif ; ?> -->
+                    <!-- ページネーション表示ここまで -->
+                </div>
+                <!-- col-8ここまで -->
+
+
+
+                <!-- bootstrap API 実装 -->
+                <div class="col-4">
+                    <img src="https://blog.cd-j.net/wpcore/wp-content/uploads/4011491_s.jpg" width="300" height="300">
+                    <img src="https://www.masterpeace.co.jp/wp-content/themes/masterpeace/img/common/download_img03.jpg" width="300" height="300">
+                </div>
+                <!-- col-4ここまで -->
+            </div>
+            <!-- rowここまで -->
+            <!-- フッターここから -->
+            <div class="row">
+                <!-- フッター表示 -->
+                <footer id="footer" class="border-top bg-light" style="height:130px;margin-top:100px;">
+                    <ul>
+                        <div class="mb-2">
+                            <li style="list-style: none;"><a class="link-dark" href="request.php">本のリクエストはこちら</a>
+                            <button type="button" id="js-btn">詳細</button>
+                            <!-- ボタンの実装 -->
+                            <div class="modal" id="js-modal">
+                                <div class="modal-inner">
+                                    <!-- closeボタン -->
+                                    <div class="modal-close" id="js-close-btn">✖</div>
+                                    <!-- id -->
+                                    <div class="modal-contents" id="js-modal-content">
+                                        <p>
+                                            リクエストシートとは<br>
+                                            お客様が購入したい本を記入していただくリクエストコーナーです。<br>
+                                            1）メールアドレス、名前を記入した後本のタイトルを記入してください。<br>
+                                            2）入荷時の連絡を希望される方は「必要」を選択ください。<br>
+                                            3）記入された情報がお間違いのないよう確認した後送信ボタンを押してください。
+                                        </p>
+                                        <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
+                                        <img src="">
+                                    </div>
+                                </div>
+                            </div> 
+                            </li>
+                        </div>
+                        <div class="mb-2">
+                            <li style="list-style: none;"><a class="link-dark" href="customerformadd.php">お問い合わせ</a></li>
+                        </div>   
+                        <div class="mb-2"> 
+                            <li style="list-style: none;"><a class="link-dark" href="manager_login.php">管理画面</a></li>
+                        </div>
+                        <div class="mb-2">
+                            <?php if (isset($_SESSION['user_id'])) : ?>
+                                <li style="list-style: none;"><a class="link-dark" href="quit.php">退会する</a></li>
+                            <?php endif ; ?>
+                        </div>
+                    </ul>
+                </footer>
+            </div>
+            <!-- フッターここまで -->
+        </div>
+        <!-- container-fluidここまで -->
+    </div>
+    <!-- margin-topの指定ここまで -->
 
 
     <script src="img.js"></script>

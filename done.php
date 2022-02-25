@@ -65,8 +65,10 @@
 </div>
 <div class="container-fluid">    
     <h4>ご利用ありがとうございます。</h4>
-    <p>商品を購入しました。</p> 
-    <a href="index.php">商品一覧へ</a>
+    <p>商品を購入しました。</p>
+    <form action="index.php">
+        <button type="submit" class="btn btn-secondary">商品一覧へ</button>
+    </form>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

@@ -32,6 +32,18 @@ class Database1 {
         return $results; 
     }
 
+    // productテーブルから全レコードを降順に取得（引数：なし、戻り値：降順で全レコード）
+    function getAllProductDesc() {
+        $dbh = $this->dbConnect();
+        // SQL準備
+        $sql = 'SELECT * FROM product ORDER BY product_id DESC';
+        // SQL実行
+        $stmt = $dbh->query($sql);
+        // SQLの結果を受け取る
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results; 
+    }
+
     // productテーブルへデータを挿入する
     function createProduct($name, $price, $file_path, $category) {
         $dbh = $this->dbConnect();

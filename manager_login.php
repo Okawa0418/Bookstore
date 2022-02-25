@@ -17,13 +17,13 @@
 
     session_start();
 
-	if(empty($_POST['password'])){
-		$_SESSION['msg'] = '※パスワードを入力してください。';
-		header('Location:');
-	}
 	if (isset($_SESSION['msg'])) {
 		$msg = $_SESSION['msg'];
 		unset($_SESSION['msg']);
+		} 
+	if (isset($_SESSION['msg2'])) {
+		$msg2 = $_SESSION['msg2'];
+		unset($_SESSION['msg2']);
 		} 
 ?>
 
@@ -31,22 +31,27 @@
 <div class="container">
 	<div class="page-lock">
         <div class="page-logo">
-    		<a class="brand" href="index.php">
+    		<a class="brand" href="manager_index.php">
     		<img src="BOOK STORE.jfif" alt="logo"/>
     		</a>
     	</div>
-		<?php if (isset($msg)) : ?>
-          <?= $msg; ?><br>
-        <?php endif ; ?>
     	<div class="page-body">
     		<div class="lock-head">
     			 Locked
     		</div>
     		<div class="lock-body">
-    			<form class="lock-form pull-left" action="manager_index.php" method="post">
-    				<h4>管理者パスワードをご入力ください</h4>
+    			<form class="lock-form pull-left" action="manager_login_done.php" method="post">
+						<?php if (isset($msg)) : ?>
+							<font color="white"><?= $msg; ?></font><br>
+       					<?php endif ; ?>
+						<?php if (isset($msg2)) : ?>
+							<font color="white"><?= $msg2; ?></font><br>
+        				<?php endif ; ?>
+					<div class="form-group">
+    					<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="name" name="name"/>
+    				</div>
     				<div class="form-group">
-    					<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
+    					<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="password" name="password"/>
     				</div>
     				<div class="form-actions">
     					<button type="submit" class="btn btn-success uppercase">Login</button>
@@ -54,12 +59,11 @@
     			</form>
     		</div>
     		<div class="lock-bottom">
-    			<a href="index.php">戻る</a>
+			<font color="white"><p>登録がまだお済みでない方は<a href="manager_signup.php">こちら</a></p></font>
     		</div>
     	</div>
     </div>
 </div>
-
 <br><br>
 <center>
 <strong>Powered by くすりの窓口</strong>
@@ -67,23 +71,3 @@
 <br><br>
 </body>
 </html>
-
-<?php
-        // 入力したメールアドレスと一致するデータベース内のメールアドレスを検索
-        $pass = $_POST['password'];
-        $stmt = $dbh->prepare("SELECT * FROM manager WHERE password = :password");
-        $stmt->bindValue(':password', $pass);
-        $stmt->execute();
-        $member = $stmt->fetch();
-
-        //指定したハッシュが入力したパスワードにマッチしているかチェック
-        if (password_verify($_POST['password'], $member['password'])) {
-            //データベースのユーザー情報をセッションに保存
-            $_SESSION['user_id'] = $member['user_id'];
-            $_SESSION['user_name'] = $member['user_name'];
-
-		} else {
-            echo '<h2>メールアドレスもしくはパスワードが間違っています。<h2>';
-            echo '<a href="login_form.php">戻る</a>';
-        }
-?>

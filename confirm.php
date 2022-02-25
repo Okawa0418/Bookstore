@@ -15,6 +15,13 @@ $product_name = $_SESSION['product']['name'];
 $amount_quantity = $_SESSION['product']['quantity'];
 $price= $_SESSION['product']['price'];
 $total_amount = $_SESSION['product']['total_amount'];
+
+
+function h($s) {
+
+    return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -45,9 +52,9 @@ $total_amount = $_SESSION['product']['total_amount'];
         <thead>
             <tbody>
                 <tr>
-                    <th><?php echo $product_name[$i]; ?></th>
-                    <th><?php echo $amount_quantity[$i]; ?></th>
-                    <th><?php echo $price[$i]; ?></th>
+                    <th><?php echo h($product_name[$i]); ?></th>
+                    <th><?php echo h($amount_quantity[$i]);  ?></th>
+                    <th><?php echo h($price[$i]);?></th>
                 </tr>
             </tbody>
         </thead>

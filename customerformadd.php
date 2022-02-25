@@ -6,6 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
+
 <?php
 // 変数値確認
 session_start();
@@ -48,14 +49,14 @@ session_start();
         <br>
         <?php endif ; ?>
     連絡先メールアドレス<br>
-    <input type="text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> 
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="<?php if( !empty($_SESSION['email']) ){ echo htmlspecialchars( $_SESSION['email'], ENT_QUOTES, 'UTF-8'); } ?>">
     <br>
     <div class="mb-3">
     webネーム<br>
     <input type="text" name="name" class="form-control" id="exampleInputPassword1">
     <br>
     お問い合わせ内容<br>
-    <textarea name="content" class="form-control" id="exampleInputPassword1"></textarea>
+    <textarea name="content" class="form-control" id="exampleInputPassword1" >
     <br>
     <input type="submit" class="btn btn-warning" value="問い合わせる" />
 </form>

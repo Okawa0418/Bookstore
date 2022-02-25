@@ -66,8 +66,8 @@
     </div><br>
   </form>
 
-  <p>既に登録済みの方は<a href="login_form.php">こちら</a></p>
-  <form action="index.php">
+  <p>既に登録済みの方は<a href="manager_login.php">こちら</a></p>
+  <form action="manager_index.php">
       <input type="submit" class="btn btn-secondary" value="トップページ">
   </form>
 </body>

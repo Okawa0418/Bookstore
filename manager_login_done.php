@@ -4,9 +4,7 @@
     $dbh = $data1->dbConnect();
 
     session_start();
-?>
-
-<?php
+    
         if(empty($_POST['name'])){
             $_SESSION['msg'] = '※管理者名を入力してください。';
             header('Location: manager_login.php');
@@ -30,7 +28,7 @@
             header('Location: manager_index.php');
 
 		} else {
-            echo '<h2>メールアドレスもしくはパスワードが間違っています。<h2>';
-            echo '<a href="manager_login.php">戻る</a>';
+            echo '<font face="Yu Gothic Medium"><h2>メールアドレスもしくはパスワードが間違っています。<h2></font>';
+            echo '<font face="Yu Gothic Medium"><a href="manager_login.php">戻る</a></font>';
         }
 ?>

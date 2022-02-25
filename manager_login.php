@@ -42,10 +42,10 @@
     		<div class="lock-body">
     			<form class="lock-form pull-left" action="manager_login_done.php" method="post">
 						<?php if (isset($msg)) : ?>
-							<font color="white"><?= $msg; ?></font><br>
+							<font color="white" face="Yu Gothic Medium"><?= $msg; ?></font><br>
        					<?php endif ; ?>
 						<?php if (isset($msg2)) : ?>
-							<font color="white"><?= $msg2; ?></font><br>
+							<font color="white" face="Yu Gothic Medium"><?= $msg2; ?></font><br>
         				<?php endif ; ?>
 					<div class="form-group">
     					<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="name" name="name"/>
@@ -59,7 +59,7 @@
     			</form>
     		</div>
     		<div class="lock-bottom">
-			<font color="white"><p>登録がまだお済みでない方は<a href="manager_signup.php">こちら</a></p></font>
+			<font color="white" face="Yu Gothic Medium"><p>登録がまだお済みでない方は<a href="manager_signup.php">こちら</a></p></font>
     		</div>
     	</div>
     </div>

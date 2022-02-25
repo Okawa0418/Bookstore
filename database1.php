@@ -92,11 +92,11 @@ class Database1 {
         
     }
 
-    // productテーブルから指定したcategoryの商品のレコードを取得する（引数：ctg_id、返り値：$results）
+    // productテーブルから指定したcategoryの商品のレコードを降順で取得する（引数：ctg_id、返り値：$results）
     function getProductByCtgId($ctg_id) {
         $dbh = $this->dbConnect();
         // SQL準備
-        $sql = 'SELECT * FROM product WHERE category = :ctg_id';
+        $sql = 'SELECT * FROM product WHERE category = :ctg_id ORDER BY product_id DESC';
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':ctg_id', (int)$ctg_id, PDO::PARAM_INT);
 
@@ -148,7 +148,8 @@ class Database1 {
         // SQL準備
         $sql = "SELECT * 
                 FROM product 
-                WHERE product_name LIKE :search ";
+                WHERE product_name LIKE :search 
+                ORDER BY product_id DESC";
         $stmt = $dbh->prepare($sql);
         // ワイルドカードを前後に使用し変数に再代入
         $search = '%' . $search . '%';
@@ -163,6 +164,7 @@ class Database1 {
         return $results;
     }
 
+    
     // ページングで使用する↓
 
     // productテーブルのレコード数を数える

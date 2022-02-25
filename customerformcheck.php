@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <h1>BOOK STORE</h1>
 </head>
 <body>
+<a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     <?php
         $db_user ="root";
         $db_pass ="Rilakkuma1231";
@@ -52,19 +52,22 @@
     session_start();
 
     if(empty($_POST['email'])){
-        $_SESSION['msg'] = '※メールアドレスを入力してください。';
+        $_SESSION['msg1'] = '※メールアドレスを入力してください。';
         header('Location: customerformadd.php');
     } else{$_SESSION['email'] = $_POST['email'];
     }
 
     if(empty($_POST['name'])){
-        $_SESSION['msg1'] = '※名前を入力してください。';
+        $_SESSION['msg2'] = '※名前を入力してください。';
         header('Location: customerformadd.php');
+    } else{$_SESSION['name'] = $_POST['name'];
     }
+    
 
     if(empty($_POST['content'])){
-        $_SESSION['msg2'] = '※内容を入力してください。';
+        $_SESSION['msg3'] = '※内容を入力してください。';
         header('Location: customerformadd.php');
+    } else{$_SESSION['content'] = $_POST['content'];
     }
 ?>
 <!DOCTYPE html>

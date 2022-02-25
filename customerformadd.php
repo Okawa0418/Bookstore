@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <h1>BOOK STORE</h1>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-
 <?php
 // 変数値確認
 session_start();
-    if (isset($_SESSION['msg'])) {
-    $msg = $_SESSION['msg'];
-    unset($_SESSION['msg']);
+    if (isset($_SESSION['msg1'])) {
+    $msg = $_SESSION['msg1'];
+    unset($_SESSION['msg1']);
 }
 ?>
 <?php
@@ -20,6 +19,7 @@ session_start();
     $msg2 = $_SESSION['msg2'];
     unset($_SESSION['msg2']);
 }
+
 ?>
 <?php
     if (isset($_SESSION['msg3'])) {
@@ -33,7 +33,7 @@ session_start();
     <!--bootstrap  -->
     <div class="mb-3">
     <!-- message　エラー表示 -->
-    <?php if (isset($msg)) : ?>
+    <?php if (isset($msg1)) : ?>
         <?= $msg; ?>
         <br>
     <?php endif ; ?>
@@ -55,7 +55,7 @@ session_start();
     <input type="text" name="name" class="form-control" id="exampleInputPassword1">
     <br>
     お問い合わせ内容<br>
-    <input type="text" name="content" class="form-control" id="exampleInputPassword1">
+    <textarea name="content" class="form-control" id="exampleInputPassword1"></textarea>
     <br>
     <input type="submit" class="btn btn-warning" value="問い合わせる" />
 </form>

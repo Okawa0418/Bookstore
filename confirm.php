@@ -26,7 +26,7 @@ $total_amount = $_SESSION['product']['total_amount'];
 </head>
 <body>
 <header>
-    <h1>BOOK STORE</h1>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
 </header>
 <h2>商品確認</h2>
 <table class="table table-warning" >
@@ -82,16 +82,17 @@ $total_amount = $_SESSION['product']['total_amount'];
     <div class="container">
         <div class="row">
             <div class="col-6">          
-                <div class="card" style="width: 40rem;">
+                <div class="card alert alert-warning" style="width: 40rem;">
                     <div class="card-body">
                         <h5 class="card-title">商品購入 機能</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">基本的な操作だよ</h6>
+                        <h6 class="card-subtitle mb-2 text">基本的な操作だよ</h6>
                         <p class="card-text">商品履歴、検索覧をチェックしてみてくださいね。</p>
                         <!-- <a href="index.php" class="card-link">購入画面一覧へ</a> -->
                         <!-- 新規商品一覧の枠を作成したい -->
                         <!-- <a href="" class="card-link">新規商品一覧へ</a> -->
                         <!-- ボタンの実装 -->
-                        <button type="button" id="js-btn">詳細を見る </button>
+                        <button type="button" class="btn btn-dark" id="js-btn">詳細を見る </button>
+                        <a href="index.php" class="link-info">商品購入ページへ戻る</a>
                         <div class="modal" id="js-modal">
                             <div class="modal-inner">
                                 <!-- closeボタン -->
@@ -108,12 +109,12 @@ $total_amount = $_SESSION['product']['total_amount'];
                 </div>
             </div>
             <div class="col-6">
-                <div class="card" style="width: 40rem;">
+                <div class="card alert alert-warning" style="width: 40rem;">
                     <div class="card-body">
                     <h5 class="card-title">リクエストシート</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">あなたの好きな本が次回購入できるかも</h6>
+                    <h6 class="card-subtitle mb-2 text">あなたの好きな本が次回購入できるかも</h6>
                     <p class="card-text">好きな本を記入して次回来店時にあなたの好きな本を購入しましょう</p>
-                    <button type="button" id="js-btn">詳細を見る </button>
+                    <button type="button" class="btn btn btn-dark" id="js-btn">詳細を見る </button>
                         <!-- ボタンの実装 -->
                         <div class="modal" id="js-modal">
                             <div class="modal-inner">
@@ -128,7 +129,7 @@ $total_amount = $_SESSION['product']['total_amount'];
                                 </div>
                             </div>
                         </div> 
-                    <a href="request.php" class="card-link">リクエストシートへ</a>
+                    <a href="request.php" class="link-info">リクエストシートへ</a>
                     <!-- 必要な際 -->
                     <!-- <a href="#" class="card-link">お問い合わせフォーム</a> -->
                 </div>

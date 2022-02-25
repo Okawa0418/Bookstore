@@ -92,7 +92,7 @@
 
     <div>
       <label>ユーザー名：</label>
-      <input type="text" name="user_name" placeholder="例）山田太郎" value="<?php if( !empty($_SESSION['user_name']) ){ echo htmlspecialchars( $_SESSION['user_name'], ENT_QUOTES, 'UTF-8'); } ?>">
+      <input type="text" name="user_name" maxlength="50" placeholder="例）山田太郎" value="<?php if( !empty($_SESSION['user_name']) ){ echo htmlspecialchars( $_SESSION['user_name'], ENT_QUOTES, 'UTF-8'); } ?>">
     </div>
     <div>
       <label>メールアドレス：</label>
@@ -104,7 +104,7 @@
     </div>
     <div>
       <label>電話番号：</label>
-      <input type="tel" name="tel" placeholder="例）090-0000-0000" value="<?php if( !empty($_SESSION['tel']) ){ echo htmlspecialchars( $_SESSION['tel'], ENT_QUOTES, 'UTF-8'); } ?>">
+      <input type="number" name="tel" placeholder="例）090-0000-0000" value="<?php if( !empty($_SESSION['tel']) ){ echo htmlspecialchars( $_SESSION['tel'], ENT_QUOTES, 'UTF-8'); } ?>">
     </div>
     <div>
       <label>パスワード：</label>

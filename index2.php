@@ -15,7 +15,7 @@ if (isset($_POST["token"])
     // セッションの再開
     session_start();
 
-    // $_SESSION['save_quantity'] = $_POST['quantity'];
+    $_SESSION['save_quantity'] = $_POST['quantity'];
     
     // 数量の合計
     $sum = array_sum($_POST['quantity']);
@@ -69,6 +69,7 @@ if (isset($_POST["token"])
     $_SESSION['product']['name'] = array_values($_POST['product_name']);
     // 合計金額
     $_SESSION['product']['total_amount'] = $total_amount;
+
 
     // ログイン情報がセッションで保持されている場合
     if (isset($_SESSION['user_id'])) {

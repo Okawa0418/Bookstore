@@ -3,26 +3,8 @@
     require_once('database1.php');
 
     $database = new Database1;
+    // productテーブルから降順にデータを取得する
     $allProduct = $database->getAllProductDesc();
-
-
-    // // 1ページに5件表示させる
-    // define('max_view',5);
-
-    // //現在いるページのページ番号を取得
-    // if(!isset($_GET['page_id'])){
-    //     // page_idに値がない場合（初めてこのページを開く場合）
-    //     $now = 1;
-    // }else{
-    //     // page_idに値が入っている場合
-    //     $now = $_GET['page_id'];
-    // }
-
-    // // 表示必要な商品レコードを取得
-    // $allProduct = $database->getProductByPages($now);
-
-    // // 必要ページ数の取得
-    // $pages = $database->numberOfPages();
 
     // categoryテーブルから全レコード取得
     $allCategory = $database->getAllRecord('category');
@@ -35,11 +17,46 @@
         unset($_SESSION['msg']);
     }
 
+    // 検索した言葉がセッション変数に入っている場合
+    if (isset($_SESSION['search_word'])) {
+        $search = $_SESSION['search_word'];
+        // 検索結果の配列
+        $allProduct = $database->searchProduct($search);
+        unset($_SESSION['search_word']);
+    }
+
+    // categoryセッションに値が入っていた場合の画面表示
+    if (isset($_SESSION['category1'])) {
+        // productテーブルからcategoryが1であるものを取得する
+        $allProduct = $database->getProductByCtgId(1);
+        unset($_SESSION['category1']);
+    }
+
+    if (isset($_SESSION['category2'])) {
+        // productテーブルからcategoryが2であるものを取得する
+        $allProduct = $database->getProductByCtgId(2);
+        unset($_SESSION['category2']);
+    }
+
+    if (isset($_SESSION['category3'])) {
+        // productテーブルからcategoryが3であるものを取得する
+        $allProduct = $database->getProductByCtgId(3);
+        unset($_SESSION['category3']);
+    }
+
+    if (isset($_SESSION['category4'])) {
+        // productテーブルからcategoryが4であるものを取得する
+        $allProduct = $database->getProductByCtgId(4);
+        unset($_SESSION['category4']);
+    }
+
     // 検索欄に値が入って送信された場合
     if (isset($_POST['search'])) {
         $search = $_POST['search'];
-        // 検索結果の配列array(2) { [0]=> array(2) { ["product_name"]=> string(18) "星の王子さま" ["price"]=> int(528) } [1]=> array(2) { ["product_name"]=> string(150) "あつまれ どうぶつの森 & ハッピーホームパラダイス・大型アップデート全対応 最終完全攻略本+究極超カタログ" ["price"]=> int(1980) } }
+        // 検索結果の配列
         $allProduct = $database->searchProduct($search);
+        // 検索した言葉をセッションで保持
+        $_SESSION['search_word'] = $search;
     }
 
     // カテゴリー別を押したときの処理
@@ -48,6 +65,24 @@
         $ctg_id = $_POST['category'];
         // productテーブルからcategoryが$ctg_idであるものを取得する
         $allProduct = $database->getProductByCtgId($ctg_id);
+        // カテゴリー別表示させた場合各categoryセッションに入れる
+        if ($ctg_id == 1) {
+            $_SESSION['category1'] = $ctg_id;
+        } elseif ($ctg_id == 2) {
+            $_SESSION['category2'] = $ctg_id;
+        } elseif ($ctg_id == 3) {
+            $_SESSION['category3'] = $ctg_id;
+        } else {
+            $_SESSION['category4'] = $ctg_id;
+        }
+    }
+
+    // 数量選択して購入画面へ遷移後、また商品選択へ戻ってきた場合
+    if (isset($_SESSION['save_quantity'])) {
+        // 数量のセッションを変数へ代入
+        $save_quantity = $_SESSION['save_quantity'];
+        // 数量セッションを破棄
+        unset($_SESSION['save_quantity']);
     }
 
     // 疑似ランダムなバイト文字列を生成
@@ -84,7 +119,7 @@
                     <h1>BOOK STORE</h1>
                 </header>
             </div>
-            
+            <!-- navbarのrowここから -->
             <div class="row">
                 <!-- navbarここから -->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">               
@@ -151,7 +186,6 @@
 
     <!-- ヘッダーとナビバーが重ならないようにmargin-topの指定 -->
     <div style="margin-top: 120px;">
-
         <!-- エラーメッセージの表示 -->
         <?php if (isset($msg)) : ?>
             <p>&#x26a0;<?= $msg; ?></p>
@@ -172,19 +206,14 @@
                             <!-- tableタグで商品一覧を表示 -->
                             <table class="table align-middle">
                                 <!-- 項目 -->
-                                <thead>
-                                   
-                                        <tr>
-                                            <th>商品画像</th>
-                                            <th>商品名</th>
-                                            <th>価格</th>
-                                            <th>数量</th>
-                                        </tr>
-                                   
-                                    
-                                </thead>
-                               
-                               
+                                <thead>                                 
+                                    <tr>
+                                        <th>商品画像</th>
+                                        <th>商品名</th>
+                                        <th>価格</th>
+                                        <th>数量</th>
+                                    </tr>
+                                </thead>                          
                                 <!-- 商品名、価格、数量選択欄の表示 -->
                                 <tbody>
                                     <!-- for文で商品テーブルのレコードを全て表示 -->
@@ -196,13 +225,41 @@
                                         <td><?= h($allProduct[$i]['product_name']); ?></td>
                                         <td><?= $allProduct[$i]['price']; ?></td>
                                         <td>
-                                        <!-- 数量選択 -->
-                                        <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
-                                            <!-- 0~50を表示させる -->
-                                            <?php for ($j = 0; $j < 51; $j++) : ?>
-                                                <option value="<?= $j; ?>"><?= $j ?></option>
-                                            <?php endfor ; ?>                       
-                                        </select>
+                                        <!-- $save_quantityに値が入っている場合 -->
+                                        <?php if (isset($save_quantity)) : ?>
+                                            <!-- $save_quantity[$i]が1以上だった場合 -->
+                                            <?php if (1 <= $save_quantity[$i]) : ?>
+                                                <!-- 数量選択 -->
+                                                <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
+                                                    <!-- 0~50を表示させる -->
+                                                    <?php for ($j = 0; $j < 51; $j++) : ?>
+                                                        <!-- ループする数字と値がマッチするか判定 -->
+                                                        <?php if ($j != $save_quantity[$i]) : ?>
+                                                            <option value="<?= $j; ?>"><?= $j ?></option>
+                                                        <?php else : ?>
+                                                            <option value="<?= $j; ?>" selected><?= $j ?></option>
+                                                        <?php endif ; ?>
+                                                    <?php endfor ; ?>                       
+                                                </select>
+                                            <?php else : ?>
+                                                <!-- 数量選択 -->
+                                                <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
+                                                    <!-- 0~50を表示させる -->
+                                                    <?php for ($j = 0; $j < 51; $j++) : ?>
+                                                        <option value="<?= $j; ?>"><?= $j ?></option>
+                                                    <?php endfor ; ?>                       
+                                                </select>
+                                            <?php endif ; ?>
+                                        <!-- $save_quantityに値が入らない場合 -->
+                                        <?php else : ?>
+                                            <!-- 数量選択 -->
+                                            <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
+                                                <!-- 0~50を表示させる -->
+                                                <?php for ($j = 0; $j < 51; $j++) : ?>
+                                                    <option value="<?= $j; ?>"><?= $j ?></option>
+                                                <?php endfor ; ?>                       
+                                            </select>
+                                        <?php endif ; ?>
                                         </td>
                                         <!-- product_idを送る -->
                                         <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>" id="productId_<?= $i; ?>">
@@ -222,27 +279,8 @@
                         </div>
                     </form>
                     <!-- 購入フォームここまで -->
-                    <!-- ページネーション表示ここから -->
-                    <!-- 検索・カテゴリー別を押した場合はページネーションを表示させない -->
-                    <!-- <?php if (!isset($_POST['search']) && !isset($_POST['category'])) : ?> -->
-                        <!-- ページネーションを表示 -->
-                        <!-- <?php for ($i=1; $i <= $pages; $i++) : ?> -->
-                            <!-- <?php if ($i == $now) : ?> -->
-                                <!-- <span style='padding: 5px;'>
-                                    <!-- <?= $now; ?> -->
-                                </span> -->
-                            <!-- <?php else : ?> -->
-                                <!-- <a href="index.php?page_id=
-                                <!-- <?= $i; ?> -->
-                                " style="padding: 5px;"><?= $i; ?></a> -->
-                            <!-- <?php endif ; ?> -->
-                        <!-- <?php endfor ; ?> -->
-                    <!-- <?php endif ; ?> -->
-                    <!-- ページネーション表示ここまで -->
                 </div>
                 <!-- col-8ここまで -->
-
-
 
                 <!-- bootstrap API 実装 -->
                 <div class="col-4">
@@ -284,9 +322,7 @@
                         <div class="mb-2">
                             <li style="list-style: none;"><a class="link-dark" href="customerformadd.php">お問い合わせ</a></li>
                         </div>   
-                        <div class="mb-2"> 
-                            <li style="list-style: none;"><a class="link-dark" href="manager_login.php">管理画面</a></li>
-                        </div>
+                        
                         <div class="mb-2">
                             <?php if (isset($_SESSION['user_id'])) : ?>
                                 <li style="list-style: none;"><a class="link-dark" href="quit.php">退会する</a></li>

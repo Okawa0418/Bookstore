@@ -2,6 +2,11 @@
     session_start();
     require_once('database1.php');
 
+    unset($_SESSION['category1']);
+    unset($_SESSION['category2']);
+    unset($_SESSION['category3']);
+    unset($_SESSION['category4']);
+
     // ログイン情報を持っていない場合
     if (empty($_SESSION['user_id'])) {
         // 商品一覧画面へリダイレクト

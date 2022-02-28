@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     <?php
         $db_user ="root";
         $db_pass ="Rilakkuma1231";
@@ -20,7 +11,7 @@
             $pdo = new PDO($dsn,$db_user,$db_pass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
             $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
-            print"投稿完了しました <br>";
+            // print"投稿完了しました ";
         }   catch(PDOException $Exception) {
                 die('エラー:'. $Exception->getMessage());
        
@@ -37,7 +28,7 @@
                 $_POST['content'],PDO::PARAM_STR);
             $stmh->execute();
             $pdo->commit();
-            print"データを".$stmh->rowCount()."投稿を完了しました <br>";
+            // print"お問合せ内容".$stmh->rowCount()."投稿完了しました ";
 
         }catch (PDOException $Exception) {
             $pdo->rollBack();
@@ -71,22 +62,42 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>投稿完了画面</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">新規本リクエスト受付完了</h5>
-    <p class="card-text">またのご利用を心からお待ちしております。</p>
-    <a href="index.php" class="btn btn-primary">購入画面へ戻る</a>
-  </div>
+<div class="container-fluid">
+    <header>
+        <a href="index.php"  style="color:inherit;text-decoration: none;">
+        <h1>BOOK STORE</h1></a>
+    </header>
 </div>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#"><h2>購入完了</h2></a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+            </div>
+        </nav>
+    </div>    
+</div>
+<div class="container-fluid">    
+    <h4>ご利用ありがとうございます。</h4>
+    <p>返信には時間が掛かる恐れがあるためご了承ください。</p>
+    <form action="index.php">
+        <button type="submit" class="btn btn-secondary">商品一覧へ</button>
+    </form>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

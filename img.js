@@ -16,11 +16,12 @@
     }); 
     // 黒いオーバーレイをクリックした時にモーダルが閉じる
     $modal.addEventListener('click', () => {
-        $modal.style.display = 'nene';
+        $modal.style.display = 'none';
     });
     // クリックした時閉じない　callback関数
     $modalContents.addEventListener('click',(event) => {
         // 下のレイヤーから上のレイヤーに伝達される指示を止める
         event.stopPropagation();
     });
+
 })();

@@ -11,6 +11,10 @@ if ($results == false) {
     $msg = '履歴なし';
 }
 
+function h($s) {
+    return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+}
+
 
 ?>
 
@@ -61,7 +65,7 @@ if ($results == false) {
             <?php for ($i=0; $i<count($results); $i++) : ?>
                 <tr>
                     <td><?= $results[$i]['pur_time']; ?></td>
-                    <td><?=$results[$i]['item_name'];?></td>
+                    <td><?=h($results[$i]['item_name']);?></td>
                     <td><?=$results[$i]['quantity'];?></td>
                 </tr>
             <?php endfor ; ?>

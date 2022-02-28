@@ -52,11 +52,11 @@
 
             $msg = '<h2 style="color:white;">ログインしました。</h2>';
 
-            if (!isset($_SESSION['product'])){
+            if (!isset($_SESSION['cart'])){
                 echo $msg;
                 echo '<h1><a href="index.php">トップページ</a></h1>';
             } else{ echo $msg;
-                    echo '<h1><a href="confirm.php">購入画面</a></h1>';
+                    echo '<h1><a href="add_cart.php">購入画面</a></h1>';
             }
 
         } else {

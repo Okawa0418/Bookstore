@@ -1,21 +1,36 @@
 <?php
+require_once('cart_db.php');
 session_start();
 
-// 購入商品情報がない場合
-if (empty($_SESSION['product'])) {
+
+// ログインしてない場合
+if (empty($_SESSION['user_id'])) {
     // エラーメッセージをセッションへ格納
-    $_SESSION['msg'] = '商品を選択してください';
-    // index.phpへリダイレクトする
-    header('Location: index.php');
+    $_SESSION['msg'] = 'ログインしてください';
+    // signup.phpへリダイレクトする
+    header('Location: signup.php');
     exit;
 }
 
-// index.phpの各セッションに連結
-$product_name = $_SESSION['product']['name'];
-$amount_quantity = $_SESSION['product']['quantity'];
-$price= $_SESSION['product']['price'];
-$total_amount = $_SESSION['product']['total_amount'];
+// ログインしている場合
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $cart = new Cart;
+    // ログインしている人のカート情報を取得
+    $results = $cart->getCartByUserId($user_id);
+    // カート内が空であった場合
+    if (empty($results)) {
+        echo 'カートが空です';
+        exit;
+    }
+}
 
+$total_amount = 0;
+
+// 合計金額の計算
+for ($i=0; $i<count($results); $i++) {
+    $total_amount += $results[$i]['price'] * $results[$i]['quantity'];
+}
 
 function h($s) {
 
@@ -42,19 +57,19 @@ function h($s) {
     <thead>
         <tr>
             <th scope="col" class="text-light bg-dark">商品名</th>
-            <th scope="col" class="text-light bg-dark">個数</th>
+            <th scope="col" class="text-light bg-dark">数量</th>
             <th scope="col" class="text-light bg-dark">値段</th>
         </tr>
     </thead>
     <!-- ループ各セッションの値を呼び出す -->
     <!-- <table class="table table-warning" > -->
-    <?php for ($i=0; $i<count ($product_name); $i++) : ?>
+    <?php for ($i=0; $i<count($results); $i++) : ?>
         <thead>
             <tbody>
                 <tr>
-                    <th><?php echo h($product_name[$i]); ?></th>
-                    <th><?php echo h($amount_quantity[$i]);  ?></th>
-                    <th><?php echo h($price[$i]);?></th>
+                    <th><?php echo h($results[$i]['product_name']); ?></th>
+                    <th><?php echo h($results[$i]['quantity']);  ?></th>
+                    <th><?php echo h($results[$i]['price']);?></th>
                 </tr>
             </tbody>
         </thead>
@@ -68,15 +83,11 @@ function h($s) {
             <th scope="col" class="text-light bg-dark">合計金額</th>
         </tr>
     </thead>
-<?php for ($i=0; $i< 1; $i++) : ?>
-        <thead>
-            <tbody>
-                <tr>
-                    <th><?php echo $total_amount; ?></th>
-                </tr>
-            </tbody>
-        </thead>
-<?php endfor; ?>
+    <tbody>
+        <tr>
+            <th><?php echo $total_amount; ?>円</th>
+        </tr>
+    </tbody>
 </table>
 
 <!--アクションで完了画面へ -->

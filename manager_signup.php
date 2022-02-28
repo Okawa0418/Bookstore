@@ -23,6 +23,12 @@
         unset($_SESSION['msg2']);
     }
     ?>
+	<?php
+        if (isset($_SESSION['msg3'])) {
+        $msg3 = $_SESSION['msg3'];
+        unset($_SESSION['msg3']);
+    }
+    ?>
 
 <body>
 <div class="container">
@@ -43,6 +49,9 @@
        					<?php endif ; ?>
 						<?php if (isset($msg2)) : ?>
 							<font color="white" face="Yu Gothic Medium"><?= $msg2; ?></font><br>
+        				<?php endif ; ?>
+						<?php if (isset($msg3)) : ?>
+							<font color="white" face="Yu Gothic Medium"><?= $msg3; ?></font><br>
         				<?php endif ; ?>
 					<div class="form-group">
     					<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="name" name="name"/>

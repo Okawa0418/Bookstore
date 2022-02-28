@@ -39,7 +39,7 @@ session_start();
             exit;
         }
     if (!empty($_POST['password'])&&!preg_match("/\A[a-z\d]{8,100}+\z/i",$_POST['password'])){
-            $_SESSION['msg6'] ='※パスワードは英数字8文字以上100文字以下にしてください。';
+            $_SESSION['msg3'] ='※パスワードは英数字8文字以上100文字以下にしてください。';
             header('Location: manager_signup.php');
             exit;
         }
@@ -51,9 +51,9 @@ session_start();
     }
 
     else{
-        $sql = "INSERT INTO manager(user_name,password) VALUES (:user_name, :password)";
+        $sql = "INSERT INTO manager(name,password) VALUES (:name, :password)";
         $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':user_name', $name);
+        $stmt->bindValue(':name', $name);
         $stmt->bindValue(':password', $password);
         $stmt->execute();
         header('Location: manager_login.php');

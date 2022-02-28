@@ -26,14 +26,14 @@
 		unset($_SESSION['msg2']);
 		} 
 	
-	$_SESSION['page-logo']='ロゴです';
+	// $_SESSION['page-logo']=1;
 ?>
 
 <body>
 <div class="container">
 	<div class="page-lock">
         <div class="page-logo">
-    		<a class="brand" href="manager_index.php">
+    		<a class="brand">
     		<img src="BOOK STORE.jfif" alt="logo"/>
     		</a>
     	</div>
@@ -50,7 +50,7 @@
 							<font color="white" face="Yu Gothic Medium"><?= $msg2; ?></font><br>
         				<?php endif ; ?>
 					<div class="form-group">
-    					<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="name" name="name"/>
+    					<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="name" name="name"/ value="<?php if( !empty($_SESSION['name']) ){ echo htmlspecialchars( $_SESSION['name'], ENT_QUOTES, 'UTF-8'); } ?>">
     				</div>
     				<div class="form-group">
     					<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="password" name="password"/>

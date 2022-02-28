@@ -29,7 +29,7 @@ function h($s) {
     <!-- bootstrap ｃｓｓ -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
     <!-- モーダル -->
-    <link rel="stylesheet" href="img.css">
+    <link rel="stylesheet" href="modal2.css">
 </head>
 <body>
 <header>
@@ -89,7 +89,7 @@ function h($s) {
     <div class="container">
         <div class="row">
             <div class="col-6">          
-                <div class="card alert alert-warning" style="width: 40rem;">
+                <div class="card alert alert-warning" style="width: 35rem;">
                     <div class="card-body">
                         <h5 class="card-title">商品購入 機能</h5>
                         <h6 class="card-subtitle mb-2 text">基本的な操作だよ</h6>
@@ -98,51 +98,72 @@ function h($s) {
                         <!-- 新規商品一覧の枠を作成したい -->
                         <!-- <a href="" class="card-link">新規商品一覧へ</a> -->
                         <!-- ボタンの実装 -->
-                        <button type="button" class="btn btn-dark" id="js-btn">詳細を見る </button>
-                        <a href="index.php" class="link-info">商品購入ページへ戻る</a>
-                        <div class="modal" id="js-modal">
-                            <div class="modal-inner">
-                                <!-- closeボタン -->
-                                <div class="modal-close" id="js-close-btn"></div>
-                                <!-- id -->
-                                <div class="modal-contents" id="js-modal-content">
-                                    （1）購入後に購入履歴にてお客様が購入した商品を確認する事ができます。（2)ワード検索が可能です。（3）商品一覧の商品はお客様がリクエストした商品も反映されます。（リクエストの詳細はこちらのページにて確認できます)
-                                    <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
-                                    <img src="confirm.png" width="450" height="450">
+                        <ul class="works_list">
+                            <li class="works_item">
+                                <div class="works_image">
+                                    <div class="works_modal_open" data-modal-open="modal-1">
+                                        <p>商品を購入の流れ</p>
+                                        <div class="works_image_mask">
+                                            <div class="mask_text">クリックで拡大</div>
+                                        </div>
+                                        <div class="works_modal_wrapper" data-modal="modal-1">
+                                            <div class="works_modal_mask"></div>
+                                                <div class="works_modal_window">
+                                                    <div class="works_modal_content">
+                                                        <h1>基本操作</h1>
+                                                        <img src="list.png" width="700" height="200">
+                                                        <p>1</p>
+                                                        <img src="show.png" width="700" height="200">
+                                                        <p>1</p>
+                                                    </div>
+                                                    <div class="works_modal_close">✖</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </div>
+                            </li> 
+                        </ul>    
+                    </div> 
+                </div> 
             <div class="col-6">
-                <div class="card alert alert-warning" style="width: 40rem;">
+                <div class="card alert alert-warning" style="width: 35rem;">
                     <div class="card-body">
-                    <h5 class="card-title">リクエストシート</h5>
-                    <h6 class="card-subtitle mb-2 text">あなたの好きな本が次回購入できるかも</h6>
-                    <p class="card-text">好きな本を記入して次回来店時にあなたの好きな本を購入しましょう</p>
-                    <button type="button" class="btn btn btn-dark" id="js-btn">詳細を見る </button>
-                        <!-- ボタンの実装 -->
-                        <div class="modal" id="js-modal">
-                            <div class="modal-inner">
-                                <!-- closeボタン -->
-                                <div class="modal-close" id="js-close-btn"></div>
-                                <!-- id -->
-                                <div class="modal-contents" id="js-modal-content">
-                                    リクエストシートとわ
-                                    お客様が購入したい本を記入していただくリクエストコーナーです。1）メールアドレス、名前を記入した後本のタイトルを記入してください。2）入荷時の連絡を希望される方は選択覧に必要ボタンを押してください。以下の情報がお間違いのないよう確認した後送信ボタンを押してください。
-                                    <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
-                                    <img src="question.png" width="400" height="400">
+                    <h5 class="card-title">購入後リクエストシート</h5>
+                    <h6 class="card-subtitle mb-2 text">商品購入後にリクエストシートへ行こう</h6>
+                    <p class="card-text">好きな本を記入して次回来店時にあなたの好きな本を購入できますよ</p>
+                    <!-- ボタンの実装 -->
+                    <li class="works_item">
+                        <div class="works_image">
+                            <div class="works_modal_open" data-modal-open="modal-2">
+                                <p>リクエストシートとわ？</p>
+                                <div class="works_image_mask">
+                                    <div class="mask_text">クリックで拡大</div>
+                                </div>
+                            </div>
+                            <div class="works_modal_wrapper" data-modal="modal-2">
+                                <div class="works_modal_mask"></div>
+                                    <div class="works_modal_window">
+                                        <div class="works_modal_content">
+                                            <h1>リクエストシート</h1>
+                                            <img src="question.png" width="800" height="200">
+                                            <p>あ</p>
+                                            <img src="confirm.png" width="700" height="200">
+                                            <p></p>
+                                        </div>
+                                        <div class="works_modal_close">✖</div>
+                                    </div>
                                 </div>
                             </div>
                         </div> 
-                    <a href="request.php" class="link-info">リクエストシートへ</a>
-                    <!-- 必要な際 -->
-                    <!-- <a href="#" class="card-link">お問い合わせフォーム</a> -->
+                    </li>
                 </div>
             </div>
-        </div>
+        </div>         
     </div>
+    <!-- <a href="request.php" class="link-info">リクエストシートへ</a> -->
+    <!-- 必要な際 -->
+    <!-- <a href="#" class="card-link">お問い合わせフォーム</a> -->
     <!-- お問い合わせフォームを作成したい -->
     <h1 class="display-5 fw-bold text-white">Dark mode hero</h1>
         <!-- <p class="fs-5 mb-4">商品にお間違いはありませんか？再度商品確認をしてください。</p> -->
@@ -154,7 +175,7 @@ function h($s) {
         </div>
     </div>
     <!-- モーダル -->
-    <script src="img.js"></script>
+    <script src="modal2.js"></script>
 </footer>
 </body>
 </html>

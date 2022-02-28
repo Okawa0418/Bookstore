@@ -25,6 +25,8 @@
 		$msg2 = $_SESSION['msg2'];
 		unset($_SESSION['msg2']);
 		} 
+	
+	$_SESSION['page-logo']='ロゴです';
 ?>
 
 <body>

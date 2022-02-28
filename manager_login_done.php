@@ -23,8 +23,8 @@
         $member = $stmt->fetch();
 
         if (isset($member['name'])&&$_POST['password']==$member['password']) {
+            $_SESSION['user_id'] = $member['user_id'];
             $_SESSION['name'] = $member['name'];
-            $_SESSION['password'] = $member['password'];
             header('Location: manager_index.php');
 
 		} else {

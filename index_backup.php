@@ -185,8 +185,8 @@
     <!-- ヘッダー・ナビゲーションバーの固定ここまで -->
 
     <!-- ヘッダーとナビバーが重ならないようにmargin-topの指定 -->
-    <div style="margin-top: 130px;">
-        <!-- 商品選択しない場合、エラーメッセージの表示 -->
+    <div style="margin-top: 120px;">
+        <!-- エラーメッセージの表示 -->
         <?php if (isset($msg)) : ?>
             <p>&#x26a0;<?= $msg; ?></p>
         <?php endif ; ?>
@@ -195,23 +195,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-8">
-                    
-                    <!-- cardのbootstrapここから -->
-                    <div class="row row-cols-1 row-cols-md-5 g-4">
-                        <!-- for文で商品テーブルのレコードを全て表示 -->
-                        <?php for ($i=0; $i < count($allProduct); $i++) : ?>
-                            <div class="col">
-                                <a href="show.php?product_id=<?=$allProduct[$i]['product_id'];?>" class="card h-100">               
-                                    <img src="<?= $allProduct[$i]['file_path']; ?>" class="card-img-top">
-                                    <div class="card-body">
-                                        <p class="card-text"><?= h($allProduct[$i]['product_name']); ?></p>                       
-                                    </div>                           
-                                </a>  
-                            </div>
-                        <?php endfor ; ?>                 
-                    </div>
-                    <!-- cardのbootstrapここまで -->
-
                     <!-- 商品一覧の購入フォーム -->
                     <form action="index2.php" method="post">
                     <div align="right" class="sticky-top" style="top: 127px">

@@ -71,13 +71,13 @@ class Database1 {
     }
 
     // productテーブルから1つの商品のレコードを取得する（引数：product_id、返り値：$results）
-    function getProductByProductId($id) {
+    function getProductByProductId($product_id) {
         $dbh = $this->dbConnect();
         try {
             // SQL準備
-            $sql = 'SELECT * FROM product WHERE product_id = :id';
+            $sql = 'SELECT * FROM product WHERE product_id = :product_id';
             $stmt = $dbh->prepare($sql);
-            $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+            $stmt->bindValue(':product_id', (int)$product_id, PDO::PARAM_INT);
 
             // SQL実行
             $stmt->execute();

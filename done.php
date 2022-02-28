@@ -14,7 +14,18 @@
         exit;
     }
     
-    //購入商品の情報がある場合
+    // ログインしている場合
+    // user_idを変数へ代入
+    $user_id = $_SESSION['user_id'];
+    $cart = new Cart;
+    // ログインしている人のカート情報を取得
+    $results = $cart->getCartByUserId($user_id);
+    // カート内が空であった場合
+    if (empty($results)) {
+        echo 'カートが空です';
+        exit;
+    }
+    
     if (isset($_SESSION['product'])) {
         // for文を使用してpurchaseテーブルへインサートしていく（購入履歴）
         for ($i=0; $i < count($_SESSION['product']['id']); $i++) {

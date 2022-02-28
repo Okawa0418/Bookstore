@@ -22,8 +22,8 @@
         $stmt->execute();
         $member = $stmt->fetch();
 
-        if (isset($member['name'])&&$_POST['password']==$member['password']) {
-            $_SESSION['user_id'] = $member['user_id'];
+        if (isset($member['name'])&&password_verify($_POST['password'], $member['password'])) {
+            $_SESSION['manager_id'] = $member['manager_id'];
             $_SESSION['name'] = $member['name'];
             header('Location: manager_index.php');
 

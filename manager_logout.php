@@ -11,5 +11,5 @@ $_SESSION = array();
     
 session_destroy();
 
-header('Location: manager_index.php');
+header('Location: manager_login.php');
 ?>		

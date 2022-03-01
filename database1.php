@@ -139,6 +139,58 @@ class Database1 {
         return $results;
     }
 
+    // 商品を削除する
+    function deleteProductById($product_id) {
+        $dbh = $this->dbConnect();
+        // データを削除する為、トランザクション使用
+        $dbh->beginTransaction();
+        try {
+            // SQL準備
+            $sql = 'DELETE FROM product WHERE product_id = :product_id';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':product_id', $product_id, PDO::PARAM_INT);
+            // SQL実行
+            $stmt->execute();
+            // 処理完了
+            $dbh->commit(); 
+        } catch (PDOEexeption $e) {
+            // 処理を戻す
+            $dbh->rollBack();
+            echo 'データベースにアクセスできません！'.$e->getMessage();
+            exit;
+        }
+    }
+
+    // 編集内容をデータベースに反映させる
+    function updateProduct($product_id, $product_name, $price, $file_path, $category) {
+        // データベース接続
+        $dbh = $this->dbConnect();
+        // データを更新する為、トランザクション使用
+        $dbh->beginTransaction();
+        try {
+            // SQL準備
+            $sql = 'UPDATE product SET 
+                product_name = :product_name,
+                price = :price,
+                file_path = :file_path,
+                category = :category
+                WHERE product_id = :product_id';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':product_name', $product_name, PDO::PARAM_STR);
+            $stmt->bindValue(':price', $price, PDO::PARAM_INT);
+            $stmt->bindValue(':file_path', $file_path, PDO::PARAM_STR);
+            $stmt->bindValue(':category', $category, PDO::PARAM_INT);
+            $stmt->bindValue(':product_id', $product_id, PDO::PARAM_STR);
+            // SQL実行
+            $stmt->execute();
+            $dbh->commit();
+        } catch (PDOException $e) {
+            $dbh->rollBack();
+            echo 'データベースにアクセスできません！'.$e->getMessage();
+            exit;
+        }
+    }
+
     
     // ページングで使用する↓
 

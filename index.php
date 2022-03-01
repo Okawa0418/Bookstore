@@ -140,6 +140,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="pur_history.php">購入履歴</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="confirm.php">カートを見る</a>
+                                </li>
                             <!-- ログイン情報がない場合 -->
                             <?php else : ?>
                                 <li class="nav-item">

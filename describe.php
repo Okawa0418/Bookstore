@@ -5,34 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- modal -->
     <link rel="stylesheet" href="modal2.css">
+    <!-- 位置、画像 -->
+    <link rel="stylesheet" href="describe.css">
 </head>
 <body>
     <!-- As a link -->
 <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
+    <div class="container-fluid bg-warning mb-3">
         <a class="navbar-brand" href="describe.jpg">BOOKSTORE</a>
     </div>
     </nav>
     <!-- As a heading -->
     <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
+    <div class="container-fluid bg-danger mb-3">
         <span class="navbar-brand mb-0 h1">ご利用方法</span>
     </div>
 </nav>
 <!--ジャンボトロン  -->
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <div style ="text-aligh:center">
-            <img src ="describe.jpg" width="600" height="400">
-        </div>
-        <h1 class="display-4 fw-normal">ようこそ!たくさんの本があなたを待っている!</h1>
-        <p class="lead fw-normal">簡単、便利、使いやすさを重視したBOOKSTOREが登場。</p>
-        <a class="btn btn-outline-secondary" href="">Coming soon</a>
+<div class="h-100 p-5 text-white bg-dark rounded-3">
+    <div class="box">
+        <img src ="describe.jpg" width="600" height="400">
+        <h2>BOOKSTOREへようこそ</h2>
     </div>
-    <div class="product-device shadow-sm d-none d-md-block"></div>
-    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+    <p>便利、使いやすい ブックストアで本を購入しましょう。本の世界へLet's go </p>
 </div>
 <!--ジャンボトロンEND  -->
 <!-- カード -->
@@ -40,7 +39,7 @@
   <div class="row">
         <div class="col">
         <!-- 1 of 2 -->
-            <div class="card">
+            <div class="card border-secondary mb-3">
                 <h5 class="card-header">商品ページ基本操作</h5>
                 <div class="card-body">
                     <h5 class="card-title">商品選択から購入まで</h5>
@@ -75,11 +74,11 @@
         </div>
     <!-- 2 of 2 -->
     <div class="col">
-        <div class="card">
+        <div class="card border-secondary mb-3">
         <h5 class="card-header">豊富な品揃え</h5>
             <div class="card-body">
                 <h5 class="card-title">くすりの窓口最大級の在庫</h5>
-                <p class="card-text">予約リストであなたの好きな本を購入できます</p>
+                <p class="card-text">予約リストであなたの好きな本を購入できます。あなたの好きな本が購入でききますよ。予約リストでお好きな本のタイトルを記入しましょう。</p>
                 </div>
                 <li class="works_item">
                     <div class="works_image">
@@ -113,31 +112,40 @@
 <!-- 1 of 3 -->
 <div class="row">
     <div class="col">
-        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
         <div class="card-header">新規登録はこちら</div>
             <div class="card-body">
                 <h5 class="card-title">BOOKSTOREを使ってみよう</h5>
                 <p class="card-text">最短5分で簡単登録人気NO1のBOOKSTORE。</p>
+                <form method="post" action="signup.php">
+                    <input type="submit" value="クリック" name="index" class="btn btn-outline-dark">
+                </form>
             </div>
         </div>
     </div>
         <!-- 1 of 3 -->
     <div class="col">
-        <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
+        <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
             <div class="card-header">商品画面</div>
             <div class="card-body">
                 <h5 class="card-title">さー始めよう</h5>
                 <p class="card-text">幅広いジャンルの本があります幅広いジャンルの本があります</p>
+                <form method="post" action="index.php">
+                    <input type="submit" value="クリック" name="index" class="btn btn-outline-dark">
+                </form>
             </div>
         </div>
     </div>
     <!-- 1 of 3 -->
     <div class="col">
-        <div class="card text-dark bg-info mb-3" style="max-width: 18rem;">
-        <div class="card-header">商品画面</div>
+        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+        <div class="card-header">リクエストシート</div>
             <div class="card-body">
-                <h5 class="card-title">さー始めよう</h5>
-                <p class="card-text">さー始めよう幅広いジャンルの本があります。さーはじめよう世界はあなたを</p>
+                <h5 class="card-title">あなたの好きな本は何ですか？</h5>
+                <p class="card-text">予約リクエストを記入してあなたの好きな本を購入しましょう。</p>
+                <form method="post" action="request.php">
+                    <input type="submit" value="クリック" name="index" class="btn btn-outline-dark">
+                </form>
             </div>
         </div>
     </div>
@@ -147,7 +155,7 @@
 <footer>
     <div class="px-4 py-5 my-5 text-center">
         <img class="d-block mx-auto mb-4" src="describetwoguys.jpg"  width="800" height="400">
-        <h1 class="display-5 fw-bold">Centered hero</h1>
+        <h1 class="display-5 fw-bold">BOOKSTORE</h1>
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">1)お支払い方法、注文内容の確認・変更・キャンセルについて2)会員登録・ログイン・退会について3)よくある質問</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">

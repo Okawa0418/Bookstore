@@ -42,39 +42,64 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#"><h2>管理者Top</h2></a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                </ul>
-            </div>
-        </nav>
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#"><h2>管理者Top</h2></a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    </ul>
+                </div>
+            </nav>
         </div>    
     </div>
     <div class="container-fluid">
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="productList.php">商品リスト</a>
+                <a href="productList.php"class="link-success">商品リスト</a>
             </li>
             <li class="list-group-item">
-                <a href="userList.php">顧客リスト</a>
+                <a href="userList.php"class="link-warning">顧客リスト</a>
             </li>
             <li class="list-group-item">
-                <a href="takeform.php">リクエスト一覧</a>
+                <a href="takeform.php"class="link-info">リクエスト一覧</a>
             </li>
             <li class="list-group-item">
-                <a href="include.php">商品追加フォーム</a>
+                <a href="include.php"class="link-primary">商品追加フォーム</a>
             </li>
             <li class="list-group-item">
-                <a href="inquiry.php">お問合せリスト</a>
+                <a href="inquiry.php"class="link-secondary">お問合せリスト</a>
             </li>
             <li class="list-group-item">
-                <a href="manager_logout.php">ログアウト</a>
+                <a href="manager_logout.php"class="link-danger">ログアウト</a>
             </li>
         </ul>
     </div>
+    <!--デザイン１  -->
+    <footer>
+        <div class="px-4 py-5 my-5 text-center">
+            <img class="d-block mx-auto mb-4" src="describe2.png"  width="800" height="400">
+            <h1 class="display-5 fw-bold">BOOKSTORE</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4 bg-warning bm-3">3時間超過労働している方へ）しっかり休憩を取り体を休ませてください。3分間体を伸ばしリラックスしましょう。上から順番にストレッチをしていきましょう。1)ゆっくりで大丈夫です2)1項目一分間を目安に取り組みましょう。今日もお疲れ様です。</p>
+            </div>
+        </div>
+        <!-- card -->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <img src="workout1.png">
+                </div>
+                <div class="col">
+                    <img src="workout2.png">
+                </div>
+                <div class="col">
+                    <img src="workout3.png">
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>

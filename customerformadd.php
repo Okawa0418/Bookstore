@@ -60,5 +60,19 @@ session_start();
     <br>
     <input type="submit" class="btn btn-warning" value="問い合わせる" />
 </form>
+<footer>
+    <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src="describe2.png"  width="800" height="400">
+        <h1 class="display-5 fw-bold">BOOKSTORE</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">お問合せありがとうございました。またのご利用お待ちしております。</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <form method="post" action="index.php">
+                    <input type="submit" value="商品画面へ" name="index" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+                </form>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

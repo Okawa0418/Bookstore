@@ -23,7 +23,7 @@
 				</p>
 				<p>誠にご面倒をおかけしますが、管理者ログインページから入力をお願い致します</p>
 				<p>
-					<a href="manager_login.php"><strong>『管理者ログインページ』はこちら</strong></a>
+					<a href="manager_login.php"><strong>管理者ログインページはこちら</strong></a>
 				</p>
 			</div><!--div center-->
 		';

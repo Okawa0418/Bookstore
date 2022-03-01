@@ -1,4 +1,5 @@
 <?php
+require_once('database1.php');
 require_once('purchase_db.php');
 session_start();
 // 購入履歴をデータベースから取得する

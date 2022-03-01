@@ -1,6 +1,4 @@
 <?php
-require_once('database1.php');
-
 class Cart extends Database1
 {
     // cartテーブルへデータを挿入する
@@ -45,7 +43,52 @@ class Cart extends Database1
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $results;
 
-    } 
+    }
+    
+    // レコードを削除する（引数：ユーザーID）
+    public function deleteCartByUserId($user_id) {
+        $dbh = $this->dbConnect();
+        // データを削除する為、トランザクション使用
+        $dbh->beginTransaction();
+        try {
+            // SQL準備
+            $sql = 'DELETE FROM cart WHERE user_id = :user_id';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            // SQL実行
+            $stmt->execute();
+            // 処理完了
+            $dbh->commit(); 
+        } catch (PDOEexeption $e) {
+            // 処理を戻す
+            $dbh->rollBack();
+            echo 'データベースにアクセスできません！'.$e->getMessage();
+            exit;
+        }
+
+    }
+
+    // １つのレコードを削除する（引数：id）
+    public function cancelCart($id) {
+        $dbh = $this->dbConnect();
+        // データを削除する為、トランザクション使用
+        $dbh->beginTransaction();
+        try {
+            // SQL準備
+            $sql = 'DELETE FROM cart WHERE id = :id';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            // SQL実行
+            $stmt->execute();
+            // 処理完了
+            $dbh->commit(); 
+        } catch (PDOEexeption $e) {
+            // 処理を戻す
+            $dbh->rollBack();
+            echo 'データベースにアクセスできません！'.$e->getMessage();
+            exit;
+        }
+    }
 
 
 }

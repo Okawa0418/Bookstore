@@ -167,7 +167,39 @@
                                 <?php endfor ; ?>
                                 </ul>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="describe.php">ご利用方法</a>
+                            </li>
+                            <li class="nav-item">
+                            <!-- 本のリクエストページへ遷移するボタン -->
+                                <form action="request.php" method="get">
+                                    <button type="submit" class="btn btn-info" style="width:170px;">本のリクエストはこちら</button>
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" id="js-btn" class="btn btn-secondary" style="width: 50px;">詳細</button>
+                                <!-- 詳細ボタン押した後の表示内容 -->
+                                <div class="modal" id="js-modal">
+                                    <div class="modal-inner">
+                                        <!-- closeボタン -->
+                                        <div class="modal-close" id="js-close-btn">✖</div>
+                                        <!-- id -->
+                                        <div class="modal-contents" id="js-modal-content">
+                                            <p>
+                                                リクエストシートとは<br>
+                                                お客様が購入したい本を記入していただくリクエストコーナーです。<br>
+                                                1）メールアドレス、名前を記入した後本のタイトルを記入してください。<br>
+                                                2）入荷時の連絡を希望される方は「必要」を選択ください。<br>
+                                                3）記入された情報がお間違いのないよう確認した後送信ボタンを押してください。
+                                            </p>
+                                            <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
+                                            <img src="">
+                                        </div>
+                                    </div>
+                                </div> 
+                            </li>
                         </ul>
+                        
                         <!-- 検索フォーム -->
                         <form class="d-flex" action="index.php" method="post">
                             <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
@@ -193,156 +225,30 @@
     
         <!-- bootstrap grid  -->
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-8">
-                    
-                    <!-- cardのbootstrapここから -->
-                    <div class="row row-cols-1 row-cols-md-5 g-4">
-                        <!-- for文で商品テーブルのレコードを全て表示 -->
-                        <?php for ($i=0; $i < count($allProduct); $i++) : ?>
-                            <div class="col">
-                                <a href="show.php?product_id=<?=$allProduct[$i]['product_id'];?>" class="card h-100">               
-                                    <img src="<?= $allProduct[$i]['file_path']; ?>" class="card-img-top">
-                                    <div class="card-body">
-                                        <p class="card-text"><?= h($allProduct[$i]['product_name']); ?></p>                       
-                                    </div>                           
-                                </a>  
-                            </div>
-                        <?php endfor ; ?>                 
-                    </div>
-                    <!-- cardのbootstrapここまで -->
-
-                    <!-- 商品一覧の購入フォーム -->
-                    <form action="index2.php" method="post">
-                    <div align="right" class="sticky-top" style="top: 127px">
-                        <button type="submit" class="btn btn-danger" style="width:100px;">購入する</button>
-                    </div>
-                        <!-- tableのレスポンシブクラスここから -->
-                        <div class="overflow-auto" style="width:800px; height:1000px;">
-                        <div class="table-responsive">
-                            <!-- tableタグで商品一覧を表示 -->
-                            <table class="table align-middle">
-                                <!-- 項目 -->
-                                <thead>                                 
-                                    <tr>
-                                        <th>商品画像</th>
-                                        <th>商品名</th>
-                                        <th>価格</th>
-                                        <th>数量</th>
-                                    </tr>
-                                </thead>                          
-                                <!-- 商品名、価格、数量選択欄の表示 -->
-                                <tbody>
-                                    <!-- for文で商品テーブルのレコードを全て表示 -->
-                                    <?php for ($i=0; $i < count($allProduct); $i++) : ?>
-                                    <tr>
-                                        <!-- 商品画像 -->
-                                        <td><img src="<?= $allProduct[$i]['file_path']; ?>"width="100" height="150"></td>
-                                        <!-- 商品名、価格 -->
-                                        <td><?= h($allProduct[$i]['product_name']); ?></td>
-                                        <td><?= $allProduct[$i]['price']; ?></td>
-                                        <td>
-                                        <!-- $save_quantityに値が入っている場合 -->
-                                        <?php if (isset($save_quantity)) : ?>
-                                            <!-- $save_quantity[$i]が1以上だった場合 -->
-                                            <?php if (1 <= $save_quantity[$i]) : ?>
-                                                <!-- 数量選択 -->
-                                                <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
-                                                    <!-- 0~50を表示させる -->
-                                                    <?php for ($j = 0; $j < 51; $j++) : ?>
-                                                        <!-- ループする数字と値がマッチするか判定 -->
-                                                        <?php if ($j != $save_quantity[$i]) : ?>
-                                                            <option value="<?= $j; ?>"><?= $j ?></option>
-                                                        <?php else : ?>
-                                                            <option value="<?= $j; ?>" selected><?= $j ?></option>
-                                                        <?php endif ; ?>
-                                                    <?php endfor ; ?>                       
-                                                </select>
-                                            <?php else : ?>
-                                                <!-- 数量選択 -->
-                                                <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
-                                                    <!-- 0~50を表示させる -->
-                                                    <?php for ($j = 0; $j < 51; $j++) : ?>
-                                                        <option value="<?= $j; ?>"><?= $j ?></option>
-                                                    <?php endfor ; ?>                       
-                                                </select>
-                                            <?php endif ; ?>
-                                        <!-- $save_quantityに値が入らない場合 -->
-                                        <?php else : ?>
-                                            <!-- 数量選択 -->
-                                            <select id="select_<?= $i; ?>" name="quantity[<?= $i; ?>]">
-                                                <!-- 0~50を表示させる -->
-                                                <?php for ($j = 0; $j < 51; $j++) : ?>
-                                                    <option value="<?= $j; ?>"><?= $j ?></option>
-                                                <?php endfor ; ?>                       
-                                            </select>
-                                        <?php endif ; ?>
-                                        </td>
-                                        <!-- product_idを送る -->
-                                        <input type="hidden" name="product_id[<?= $i; ?>]" value="<?=$allProduct[$i]['product_id'];?>" id="productId_<?= $i; ?>">
-                                        <!-- 商品名を送る -->
-                                        <input type="hidden" name="product_name[<?= $i; ?>]" value="<?=$allProduct[$i]['product_name'];?>" id="productName_<?= $i; ?>">
-                                        <!-- 金額送る -->
-                                        <input type="hidden" name="price[<?= $i; ?>]" value="<?=$allProduct[$i]['price'];?>" id="productPrice_<?= $i; ?>">
-                                    </tr>
-                                    <?php endfor ; ?>
-                                    <!-- トークンを送る -->
-                                    <input type="hidden" name="token" value="<?=$token?>">  
-                                </tbody>
-                            </table>
-                            <!-- 商品一覧tableここまで -->
+            <div class="row">              
+                <!-- cardのbootstrapここから -->
+                <div class="row row-cols-1 row-cols-md-6 g-4">
+                    <!-- for文でカードを繰り返し表示 -->
+                    <?php for ($i=0; $i < count($allProduct); $i++) : ?>
+                        <div class="col">
+                            <a href="show.php?product_id=<?=$allProduct[$i]['product_id'];?>" class="card h-100">               
+                                <img src="<?= $allProduct[$i]['file_path']; ?>" class="card-img-top">
+                                <div class="card-body">
+                                    <p class="card-text"><?= h($allProduct[$i]['product_name']); ?></p>                       
+                                </div>                           
+                            </a>  
                         </div>
-                        <!-- tableのレスポンシブクラスここまで -->
-                        </div>
-                    </form>
-                    <!-- 購入フォームここまで -->
+                    <?php endfor ; ?>                 
                 </div>
-                <!-- col-8ここまで -->
-
-                <!-- 本のリクエストボタン・画像を配置 -->
-                <div class="col-4">
-                    <div class="mb-2">
-                        <!-- 本のリクエストページへ遷移するボタン -->
-                        <form action="request.php" method="get">
-                            <button type="submit" class="btn btn-info" style="width:170px;">本のリクエストはこちら</button>
-                        </form>
-                    </div>
-                    <!-- 画像 -->
-                    <img src="https://blog.cd-j.net/wpcore/wp-content/uploads/4011491_s.jpg" width="300" height="300">
-                    <img src="https://www.masterpeace.co.jp/wp-content/themes/masterpeace/img/common/download_img03.jpg" width="300" height="300">
-                </div>
-                <!-- col-4ここまで -->
+                <!-- cardのbootstrapここまで -->
             </div>
             <!-- rowここまで -->
-            <!-- フッターここから -->
+
+            <!-- フッターrowここから -->
             <div class="row">
                 <!-- フッター表示 -->
-                <footer id="footer" class="border-top bg-light" style="height:130px;margin-top:100px;">
+                <footer id="footer" class="border-top bg-light" style="height:90px;margin-top:100px;">
                     <ul>
-                        <div class="mb-2">
-                            <li style="list-style: none;"><a class="link-dark" href="request.php">本のリクエストはこちら</a>
-                            <button type="button" id="js-btn">詳細</button>
-                            <!-- ボタンの実装 -->
-                            <div class="modal" id="js-modal">
-                                <div class="modal-inner">
-                                    <!-- closeボタン -->
-                                    <div class="modal-close" id="js-close-btn">✖</div>
-                                    <!-- id -->
-                                    <div class="modal-contents" id="js-modal-content">
-                                        <p>
-                                            リクエストシートとは<br>
-                                            お客様が購入したい本を記入していただくリクエストコーナーです。<br>
-                                            1）メールアドレス、名前を記入した後本のタイトルを記入してください。<br>
-                                            2）入荷時の連絡を希望される方は「必要」を選択ください。<br>
-                                            3）記入された情報がお間違いのないよう確認した後送信ボタンを押してください。
-                                        </p>
-                                        <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
-                                        <img src="">
-                                    </div>
-                                </div>
-                            </div> 
-                            </li>
-                        </div>
                         <div class="mb-2">
                             <li style="list-style: none;"><a class="link-dark" href="customerformadd.php">お問い合わせ</a></li>
                         </div>   
@@ -360,12 +266,7 @@
         <!-- container-fluidここまで -->
     </div>
     <!-- margin-topの指定ここまで -->
-
-
     <script src="img.js"></script>
-    <!-- <?php $countElement = count($allProduct); ?>
-    <script type="text/javascript">var countElement = "<?= $countElement ?>";</script>
-    <script type="text/javascript" src="sample.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

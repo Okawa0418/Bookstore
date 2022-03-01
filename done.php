@@ -1,13 +1,15 @@
 <?php
     session_start();
     require_once('database1.php');
+    require_once('cart_db.php');
+    require_once('purchase_db.php');
 
     unset($_SESSION['category1']);
     unset($_SESSION['category2']);
     unset($_SESSION['category3']);
     unset($_SESSION['category4']);
 
-    // ログイン情報を持っていない場合
+    // ログインしていない場合
     if (empty($_SESSION['user_id'])) {
         // 商品一覧画面へリダイレクト
         header('Location: index.php');
@@ -25,26 +27,34 @@
         echo 'カートが空です';
         exit;
     }
-    
-    if (isset($_SESSION['product'])) {
-        // for文を使用してpurchaseテーブルへインサートしていく（購入履歴）
-        for ($i=0; $i < count($_SESSION['product']['id']); $i++) {
-            // 購入履歴のテーブルへ挿入する
-            $database = new Database1;
-            // 商品名を取得
-            $item_name = $database->getProductName($_SESSION['product']['id'][$i]);
-            // 購入テーブルへインサート
-            $database->createPurchase($item_name, $_SESSION['product']['id'][$i], $_SESSION['product']['quantity'][$i], $_SESSION['user_id']);
-        }
 
-        // 変数にメッセージを代入
-        $msg = '購入ありがとうございます';
 
-        // インサート後、商品のセッション情報を破棄する
-        unset($_SESSION['product']);
-        unset($_SESSION['total_amount']);
-
+    // カート内に商品が入っていた場合
+    $purchase = new Purchase;
+    // for文を使用してpurchaseテーブルへインサートしていく（購入履歴）
+    for ($i=0; $i < count($results); $i++) {
+        // 変数へ代入
+        $product_name = $results[$i]['product_name'];
+        $product_id = $results[$i]['product_id'];
+        $quantity = $results[$i]['quantity'];
+        // 購入テーブルへインサート
+        $purchase->createPurchase($product_name, $product_id, $quantity, $user_id);
     }
+
+    // カート内を削除する処理
+    // ログインしているユーザーidに該当するレコードを削除
+    $cart = new Cart;
+    $cart->deleteCartByUserId($user_id);
+
+
+    // 変数にメッセージを代入
+    $msg = '購入ありがとうございます';
+
+    // インサート後、商品のセッション情報を破棄する
+    unset($_SESSION['product']);
+    unset($_SESSION['total_amount']);
+
+    
     
     
 ?>

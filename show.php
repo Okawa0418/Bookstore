@@ -69,7 +69,7 @@ if (isset($_SESSION['msg'])) {
     <div class="card mb-3">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="<?=$file_path?>">
+                <img src="<?=$file_path?>" style="width: 320px; height: 500px;" >
             </div>
             <div class="col-md-8">
                 <div class="card-body">
@@ -98,7 +98,7 @@ if (isset($_SESSION['msg'])) {
                         <!-- トークンを送る -->
                         <input type="hidden" name="token" value="<?= $token; ?>">
                         <!-- カートに追加ボタンでadd_cart.phpへ送信 -->
-                        <button type="submit" class="btn btn-danger">カートに追加</button> 
+                        <button type="submit" class="btn btn-outline-danger">カートに追加</button> 
                     </form>
                     <!-- 数量選択フォーム終了 -->
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -106,7 +106,10 @@ if (isset($_SESSION['msg'])) {
             </div>
         </div>
     </div>
-    <!-- 数量選択、カートに入れるボタン-->
+    <!-- 戻るボタン -->
+    <form action="index.php" type="get">
+        <button type="submit" class="btn btn-primary">戻る</button> 
+    </form>
 </div>
 </body>
 </html>

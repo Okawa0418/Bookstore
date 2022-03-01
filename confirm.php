@@ -1,4 +1,5 @@
 <?php
+require_once('database1.php');
 require_once('cart_db.php');
 session_start();
 
@@ -20,11 +21,11 @@ if (isset($_SESSION['user_id'])) {
     $results = $cart->getCartByUserId($user_id);
     // カート内が空であった場合
     if (empty($results)) {
-        echo 'カートが空です';
-        exit;
+        $msg = 'カート内は空です';
     }
 }
 
+// 合計金額の初期化
 $total_amount = 0;
 
 // 合計金額の計算
@@ -51,49 +52,67 @@ function h($s) {
     <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
 </header>
 <h2>商品確認</h2>
-<table class="table table-warning" >
-<!-- <table class="table"> -->
-    <!-- table分け名前列を分離 -->
-    <thead>
-        <tr>
-            <th scope="col" class="text-light bg-dark">商品名</th>
-            <th scope="col" class="text-light bg-dark">数量</th>
-            <th scope="col" class="text-light bg-dark">値段</th>
-        </tr>
-    </thead>
-    <!-- ループ各セッションの値を呼び出す -->
-    <!-- <table class="table table-warning" > -->
-    <?php for ($i=0; $i<count($results); $i++) : ?>
+<!-- カート内に商品がある（「空です」メッセージが入っていない）場合はtableを表示させる -->
+<?php if (empty($msg)) : ?>
+    <table class="table table-warning" >
+    <!-- <table class="table"> -->
+        <!-- table分け名前列を分離 -->
         <thead>
+            <tr>
+                <th scope="col" class="text-light bg-dark">商品名</th>
+                <th scope="col" class="text-light bg-dark">数量</th>
+                <th scope="col" class="text-light bg-dark">値段</th>
+                <th scope="col" class="text-light bg-dark"></th>
+            </tr>
+        </thead>
+        <!-- ループ各セッションの値を呼び出す -->
+        <!-- <table class="table table-warning" > -->
+        <?php for ($i=0; $i<count($results); $i++) : ?>
             <tbody>
                 <tr>
                     <th><?php echo h($results[$i]['product_name']); ?></th>
                     <th><?php echo h($results[$i]['quantity']);  ?></th>
                     <th><?php echo h($results[$i]['price']);?></th>
+                    <!-- 取り消しボタンで該当するカートの商品を削除 -->
+                    <th>
+                        <form action="cancel.php" method="post">
+                            <input type="hidden" name="cart_id" value="<?=$results[$i]['id'];?>">
+                            <button type="submit" name="cancel" class="btn btn-secondary">取消</button>
+                        </form>
+                    </th>
                 </tr>
             </tbody>
+        <?php endfor; ?>
+    </table>
+    <table class="table table-warning" >
+    <!-- <table class="table"> -->
+        <!-- table分け名前列を分離 -->
+        <thead>
+            <tr>
+                <th scope="col" class="text-light bg-dark">合計金額</th>
+            </tr>
         </thead>
-<?php endfor; ?>
-</table>
-<table class="table table-warning" >
-<!-- <table class="table"> -->
-    <!-- table分け名前列を分離 -->
-    <thead>
-        <tr>
-            <th scope="col" class="text-light bg-dark">合計金額</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th><?php echo $total_amount; ?>円</th>
-        </tr>
-    </tbody>
-</table>
+        <tbody>
+            <tr>
+                <th><?php echo $total_amount; ?>円</th>
+            </tr>
+        </tbody>
+    </table>
+<!-- カート内が空である（「空です」メッセージが入っている）場合 -->
+<?php else : ?>
+    <!-- tableでなくメッセージを表示 -->
+    <h3><?= $msg; ?></h3>
+<?php endif ; ?>
 
 <!--アクションで完了画面へ -->
 <form name ="form1" method="post" action="done.php">
     <span class="text-light bg-dark">商品購入ボタンを押してください</span><br>
     <input type="submit" value="購入する" name="confirm" class="btn btn-outline-danger">
+</form>
+<!--アクションで完了画面へ -->
+<form name ="form1" method="post" action="index.php">
+    <span class="text-light bg-dark">他の商品も購入したい方はこちら</span><br>
+    <input type="submit" value="買い物を続ける" name="continue" class="btn btn-outline-primary">
 </form>
 <!-- 商品購入覧へ戻る -->
 <footer>

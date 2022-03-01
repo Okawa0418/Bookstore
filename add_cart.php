@@ -1,6 +1,7 @@
 <!-- cartテーブルへインサートする -->
 <!-- インサートしたらconfirm.php画面で表示させる -->
 <?php
+require_once('database1.php');
 require_once('cart_db.php');
 session_start();
 

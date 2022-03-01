@@ -69,6 +69,9 @@
                 <a href="include.php">商品追加フォーム</a>
             </li>
             <li class="list-group-item">
+                <a href="inquiry.php">お問合せリスト</a>
+            </li>
+            <li class="list-group-item">
                 <a href="manager_logout.php">ログアウト</a>
             </li>
         </ul>

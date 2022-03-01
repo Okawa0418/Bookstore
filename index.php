@@ -253,6 +253,9 @@
                 <footer id="footer" class="border-top bg-light" style="height:90px;margin-top:100px;">
                     <ul>
                         <div class="mb-2">
+                            <li style="list-style: none;"><a class="link-dark" href="trouble.php">質問ボット</a></li>
+                        </div>   
+                        <div class="mb-2">
                             <li style="list-style: none;"><a class="link-dark" href="customerformadd.php">お問い合わせ</a></li>
                         </div>   
                         

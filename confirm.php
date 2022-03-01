@@ -206,8 +206,8 @@ function h($s) {
         <!-- <p class="fs-5 mb-4">商品にお間違いはありませんか？再度商品確認をしてください。</p> -->
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <!-- お問い合わせフォーム作成時action 先記入 -->
-            <form method="post" action="customerformadd.php">
-                <input type="submit" value="お問い合わせ" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+            <form method="post" action="trouble.php">
+                <input type="submit" value="質問ボット" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
             </form>
         </div>
     </div>

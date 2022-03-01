@@ -98,22 +98,29 @@ function h($s) {
             </tr>
         </tbody>
     </table>
+    <!--アクションで完了画面へ -->
+    <form name ="form1" method="post" action="done.php">
+        <span class="text-light bg-dark">商品購入ボタンを押してください</span><br>
+        <input type="submit" value="購入する" name="confirm" class="btn btn-outline-danger">
+    </form>
+    <!--アクションでTop画面へ -->
+    <form name ="form1" method="post" action="index.php">
+        <span class="text-light bg-dark">他の商品も購入したい方はこちら</span><br>
+        <input type="submit" value="買い物を続ける" name="continue" class="btn btn-outline-primary">
+    </form>
 <!-- カート内が空である（「空です」メッセージが入っている）場合 -->
 <?php else : ?>
     <!-- tableでなくメッセージを表示 -->
     <h3><?= $msg; ?></h3>
+    <!--アクションでTop画面へ -->
+    <form name ="form1" method="post" action="index.php">
+        <span class="text-light bg-dark">商品を購入したい方はこちら</span><br>
+        <input type="submit" value="買い物を続ける" name="continue" class="btn btn-outline-primary">
+    </form>
 <?php endif ; ?>
 
-<!--アクションで完了画面へ -->
-<form name ="form1" method="post" action="done.php">
-    <span class="text-light bg-dark">商品購入ボタンを押してください</span><br>
-    <input type="submit" value="購入する" name="confirm" class="btn btn-outline-danger">
-</form>
-<!--アクションで完了画面へ -->
-<form name ="form1" method="post" action="index.php">
-    <span class="text-light bg-dark">他の商品も購入したい方はこちら</span><br>
-    <input type="submit" value="買い物を続ける" name="continue" class="btn btn-outline-primary">
-</form>
+
+
 <!-- 商品購入覧へ戻る -->
 <footer>
     <div class="container">

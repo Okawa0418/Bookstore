@@ -1,8 +1,17 @@
 <?php
+    session_start();
     require_once('database1.php');
 
     $database = new Database1;
     $results = $database->getAllRecord('product');
+
+    // 商品削除後のメッセージが入っている場合
+    if (isset($_SESSION['msg'])) {
+        // 変数へ代入
+        $msg = $_SESSION['msg'];
+        // セッション初期化
+        unset($_SESSION['msg']);
+    }
     
     function h($s) {
         return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
@@ -55,6 +64,10 @@
         </div>    
     </div>
     <div class="container-fluid">
+        <!-- 削除後のメッセージが入っている場合 -->
+        <?php if (isset($msg)) : ?>
+            <p><?=$msg?></p>
+        <?php endif ; ?>
         <table class="table table-success table-striped">
             <thead>
                 <tr>
@@ -62,6 +75,7 @@
                     <th scope="col">商品名</th>
                     <th scope="col">価格</th>
                     <th scope="col">カテゴリー</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -80,6 +94,12 @@
                             <?php else : ?>
                                 教育・資格
                             <?php endif ; ?>
+                        </td>
+                        <td>
+                            <form action="proList_show.php" method="post">
+                                <input type="hidden" name="product_id" value="<?=$results[$i]['product_id']?>">
+                                <button type="submit" class="btn btn-secondary">詳細</button>
+                            </form>                           
                         </td>
                     </tr>
                 <?php endfor ; ?>

@@ -66,6 +66,7 @@ if (isset($_POST['searchid'])) {
         </header>
     </div>
     <div class="container-fluid">
+        <div class="row">
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -81,7 +82,8 @@ if (isset($_POST['searchid'])) {
                     </li>
                 </ul>
             </div>
-        </nav>    
+        </nav>  
+        </div>       
     </div>
     <div class="container-fluid">
         <!-- エラーメッセージ表示 -->

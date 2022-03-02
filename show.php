@@ -2,6 +2,7 @@
 <?php
 session_start();
 require_once('database1.php');
+require_once('favorite_db.php');
 
 // 送信された商品idを受け取る
 if (isset($_GET['product_id'])) {
@@ -17,7 +18,7 @@ $database = new Database1;
 $product = $database->getProductByProductId($product_id);
 
 // 取得した商品名・価格・画像パスを各変数に代入
-$name = $product['product_name'];
+$product_name = $product['product_name'];
 $price = $product['price'];
 $file_path =$product['file_path'];
 
@@ -39,6 +40,17 @@ if (isset($_SESSION['msg'])) {
     // エラーメッセージのセッション破棄
     unset($_SESSION['msg']);
 }
+
+// ログインしている場合はお気に入りテーブルから該当する商品があるか判定
+// ログインIDと商品IDが一致するものがあるかどうか
+// なければ$resultにfalseをいれる
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $favorite = new Favorite;
+    $result = $favorite->judgeFavorite($user_id, $product_id);
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +74,7 @@ if (isset($_SESSION['msg'])) {
 
     <!-- エラーメッセージの表示 -->
     <?php if (isset($msg)) : ?>
-        <p>&#x26a0;<?= $msg; ?></p>
+        <p><?= $msg; ?></p>
     <?php endif ; ?>
 
     <!-- 商品情報 -->
@@ -74,7 +86,7 @@ if (isset($_SESSION['msg'])) {
             <div class="col-md-8">
                 <div class="card-body">
                     <!-- 商品名 -->
-                    <h5 class="card-title"><?= h($name); ?></h5>
+                    <h5 class="card-title"><?= h($product_name); ?></h5>
                     <!-- 価格 -->
                     <p class="card-text">価格：<?= $price; ?>円</p>
                     <!-- 数量選択フォーム開始 -->
@@ -92,7 +104,7 @@ if (isset($_SESSION['msg'])) {
                         <!-- 商品idを送信 -->
                         <input type="hidden" name="product_id" value="<?= $product_id; ?>">
                         <!-- 商品名を送信 -->
-                        <input type="hidden" name="product_name" value="<?= $name; ?>">
+                        <input type="hidden" name="product_name" value="<?= $product_name; ?>">
                         <!-- 商品価格を送信 -->
                         <input type="hidden" name="price" value="<?= $price; ?>">
                         <!-- トークンを送る -->
@@ -101,6 +113,36 @@ if (isset($_SESSION['msg'])) {
                         <button type="submit" class="btn btn-outline-danger">カートに追加</button> 
                     </form>
                     <!-- 数量選択フォーム終了 -->
+
+                    <!-- お気に入りボタン開始（ボタンは場合分け） -->
+                    <p class="card-text">
+                        <!--ログインしていない場合 -->
+                        <?php if (empty($_SESSION['user_id'])) : ?>
+                            <!-- ボタンを押したらログイン画面へ遷移させ、ログイン後戻ってくる -->
+                            <form action="login_form.php" method="post">
+                                <input type="hidden" name="product_id" value="<?=$product_id?>">
+                                <button type="submit" name="favorite" class="btn btn-outline-success">お気に入りに追加する</button>
+                            </form>
+                        <!--  ログイン状態でお気に入りに入っていない場合 -->
+                        <?php elseif ($result == false) : ?>
+                            <form action="favorite.php" method="post">
+                                <!-- トークンを送る -->
+                                <input type="hidden" name="token" value="<?= $token; ?>">
+                                <input type="hidden" name="product_id" value="<?=$product_id?>">
+                                <button type="submit" name="add_favorite"class="btn btn-outline-success">お気に入りに追加</button>
+                            </form>
+                        <!-- ログイン状態でお気に入りに入っている場合 -->
+                        <?php else : ?>
+                            <form action="favorite.php" method="post">
+                                <!-- トークンを送る -->
+                                <input type="hidden" name="token" value="<?= $token; ?>">
+                                <input type="hidden" name="product_id" value="<?=$product_id?>">
+                                <button type="submit" name="delete_favorite" class="btn btn-secondary btn-sm">お気に入り取消</button>
+                            </form>
+                        <?php endif ; ?>
+                    </p>
+                    <!-- お気に入りボタン終了 -->
+
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
             </div>

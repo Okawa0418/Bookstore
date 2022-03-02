@@ -52,6 +52,21 @@
 
             $msg = '<h2 style="color:white;">ログインしました。</h2>';
 
+            // お気に入りに追加ボタンから遷移してきている場合
+            if (isset($_SESSION['favorite'])) {
+              // 該当する商品idを変数へ代入
+              $product_id = $_SESSION['product_id'];
+              // セッション情報を破棄
+              unset($_SESSION['favorite']);
+              unset($_SESSION['product_id']);
+              // メッセージを格納
+              $_SESSION['msg'] = 'ログインしました<br>もう一度「お気に入りに追加」ボタンを押してください';
+              // 元々見ていたshow.phpへ遷移する
+              $url = 'show.php?product_id=' . $product_id;
+              header('Location:' . $url);
+              exit;
+            }
+
             if (!isset($_SESSION['cart'])){
                 echo $msg;
                 echo '<h1><a href="index.php">トップページ</a></h1>';

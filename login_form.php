@@ -30,6 +30,14 @@
 <?php
     session_start();
 
+    // お気に入りに追加ボタンから遷移してきた場合
+    if (isset($_POST['favorite'])) {
+        // セッションで遷移してきた場所を保持
+        $_SESSION['favorite'] = $_POST['favorite'];
+        $_SESSION['product_id'] = $_POST['product_id'];
+        $msg = 'お気に入り機能を使用する際はログインしてください';
+    }
+
     if (isset($_SESSION['msg'])) {
     $msg = $_SESSION['msg'];
     unset($_SESSION['msg']);

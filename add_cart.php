@@ -32,7 +32,7 @@ if (isset($_POST["token"])
         // 選択した数量が0だった場合
         if ($quantity == 0) {
             // セッションにエラーメッセージ代入
-            $_SESSION['msg'] = '数量を選択してください';
+            $_SESSION['msg'] = '※数量を選択してください';
             // リダイレクト先のURLを変数へ代入
             $url = 'show.php?product_id=' . $product_id;
             // show.phpへリダイレクト

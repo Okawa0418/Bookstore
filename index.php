@@ -223,7 +223,7 @@
     <div style="margin-top: 130px;">
         <!-- 商品選択しない場合、エラーメッセージの表示 -->
         <?php if (isset($msg)) : ?>
-            <p>&#x26a0;<?= $msg; ?></p>
+            <p><?= $msg; ?></p>
         <?php endif ; ?>
     
         <!-- bootstrap grid  -->

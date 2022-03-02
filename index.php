@@ -143,6 +143,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="confirm.php">カートを見る</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="favorite_list.php">お気に入り</a>
+                                </li>
                             <!-- ログイン情報がない場合 -->
                             <?php else : ?>
                                 <li class="nav-item">
@@ -176,11 +179,11 @@
                             <li class="nav-item">
                             <!-- 本のリクエストページへ遷移するボタン -->
                                 <form action="request.php" method="get">
-                                    <button type="submit" class="btn btn-info" style="width:170px;">本のリクエストはこちら</button>
+                                    <button type="submit" class="btn btn-info" style="width:140px;">本のリクエストはこちら</button>
                                 </form>
                             </li>
                             <li class="nav-item">
-                                <button type="button" id="js-btn" class="btn btn-secondary" style="width: 50px;">詳細</button>
+                                <button type="button" id="js-btn" class="btn btn-secondary btn-sm" style="width: 45px;">詳細</button>
                                 <!-- 詳細ボタン押した後の表示内容 -->
                                 <div class="modal" id="js-modal">
                                     <div class="modal-inner">

@@ -9,7 +9,6 @@
     }
 ?>
 
-<!-- productテーブルの表示画面 -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -65,16 +64,22 @@
                     <th scope="col">名前</th>
                     <th scope="col">email</th>
                     <th scope="col">お問合せ内容</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <?php for ($i = 0; $i < count($results); $i++) : ?>
                     <tr>
                         <th scope="row"><?= $results[$i]['customer_id'];?></th>
-                        <td><?= h($results[$i]['name']);?></td>
+                        <td><?= $results[$i]['name'];?></td>
                         <td><?= $results[$i]['email'];?></td>
-                        <td><?= h($results[$i]['content']);?></td>
-                    </tr>
+                        <td><?= $results[$i]['content'];?></td>
+                        <td>
+                        <form action="delete_inquiry.php" method="post">
+                            <input type="hidden" name="customer_id" value="<?=  $results[$i]['customer_id']; ?>">
+                            <button type="submit" name="delete">削除</button>
+                        </form>
+                    </td>
                     </tr>
                 <?php endfor ; ?>
             </tbody>

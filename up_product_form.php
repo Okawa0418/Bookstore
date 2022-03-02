@@ -3,12 +3,10 @@
 session_start();
 require_once('database1.php');
 
-// 編集するボタンから画面遷移してきた場合に編集フォームを表示
+// 編集するボタンから画面遷移してきた場合
 if (isset($_POST['update'])) {
-
-    // 送信された値を変数へ代入
+    // 編集ボタンで送信された値を変数へ代入
     $product_id = $_POST['product_id'];
-
     // 該当商品のレコードを取得
     $database = new Database1;
     $results = $database->getProductByProductId($product_id);
@@ -16,11 +14,46 @@ if (isset($_POST['update'])) {
     $product_name = $results['product_name'];
     $price = $results['price'];
     $category = $results['category'];
-
+// 更新ボタン押した後、バリデーションに引っかかった場合
+} elseif (isset($_SESSION['msg'])){
+    //product_idを変数に代入 
+    $product_id = $_SESSION['product_id'];
+    // 名前・価格は変数に代入してセッション破棄
+    if (isset($_SESSION['p_name'])) {
+        $product_name = $_SESSION['p_name'];
+        unset($_SESSION['p_name']);
+    }
+    if (isset($_SESSION['p_price'])) {
+        $price = $_SESSION['p_price'];
+        unset($_SESSION['p_price']);
+    }
+    if (isset($_SESSION['p_category'])) {
+        $category = $_SESSION['p_category'];
+        unset($_SESSION['p_category']);
+    }
+    // エラーメッセージも変数に代入
+    $msg = $_SESSION['msg'];
+    // エラーメッセージのセッション破棄
+    unset($_SESSION['msg']);
+// エラーメッセージ表示させた状態でリロードした場合
 } else {
-    echo '不正アクセスです';
-    exit;
+    //product_idを変数に代入 
+    $product_id = $_SESSION['product_id'];
+    // 該当商品のレコードを取得
+    $database = new Database1;
+    $results = $database->getProductByProductId($product_id);
+
+    $product_name = $results['product_name'];
+    $price = $results['price'];
+    $category = $results['category'];
 }
+
+// 疑似ランダムなバイト文字列を生成
+$toke_byte = random_bytes(32);
+// バイナリデータを16進数に変換
+$token = bin2hex($toke_byte);
+// 生成したトークンをセッションに保存
+$_SESSION['token'] = $token;
 
 ?>
 
@@ -67,7 +100,14 @@ if (isset($_POST['update'])) {
     </div>
     <!-- 商品編集フォーム -->
     <div class="container-fluid">
-        <form enctype="multipart/form-data" action="#" method="post">
+        <!-- エラーがあればメッセージ表示 -->
+        <?php if (isset($msg)) : ?>
+            <?php foreach ($msg as $m) : ?>
+                <p><?= $m; ?></p>
+            <?php endforeach ; ?>
+        <?php endif ; ?>
+        <!-- フォームここから -->
+        <form enctype="multipart/form-data" action="up_validate.php" method="post">
             <div class="mb-3">
                 <label for="InputName" class="form-label">商品名：</label>
                 <!-- 商品名 -->
@@ -120,6 +160,11 @@ if (isset($_POST['update'])) {
                 </select>
                 <div id="categoryHelp" class="form-text">商品のカテゴリーを変更してください</div>
             </div>
+            <!-- トークンを送る -->
+            <input type="hidden" name="token" value="<?= $token; ?>">
+            <!-- product_idを送る -->
+            <input type="hidden" name="product_id" value="<?= $product_id; ?>">
+            <!-- 更新ボタンでUPDATE処理するファイルへ送信 -->
             <button type="submit" name="submit" class="btn btn-primary">更新</button>
         </form>
     </div> 

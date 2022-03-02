@@ -142,7 +142,7 @@ if (isset($_POST['searchid'])) {
                 <div id="categoryHelp" class="form-text">追加したい商品のカテゴリーを選択してください</div>
             </div>
 
-            <button type="submit" name="submit" class="btn btn-primary">追加する</button>
+            <button type="submit" name="include" class="btn btn-primary">追加する</button>
         </form>
     </div>
 </body>

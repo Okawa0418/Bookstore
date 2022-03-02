@@ -81,6 +81,21 @@ class Favorite extends Database1
         }
     }
 
+    // ユーザーIDにあたるお気に入り商品IDを取得する
+    public function getFavoriteProductId($user_id) {
+        $dbh = $this->dbConnect();
+        // SQL準備
+        $sql = 'SELECT product_id FROM favorite WHERE user_id = :user_id';
+        // SQL実行
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        // SQL実行
+        $stmt->execute();
+        // SQLの結果を受け取る
+        $product_id = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $product_id;
+    }
+
 
 
 }

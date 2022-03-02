@@ -50,93 +50,25 @@
         <form class="needs-validation" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="familyName">姓</label>
-              <input type="text" class="form-control" id="familyName" placeholder="" value="" required>
+              <label for="familyName">お名前</label>
+              <input type="text" class="form-control" id="familyName" name="name" placeholder="" value="" required>
               <div class="invalid-feedback">
-                名字を入力してください
+                お名前を入力してください
               </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="givenName">名</label>
-              <input type="text" class="form-control" id="givenName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                名前を入力してください
-              </div>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="username">ユーザー名</label>
-            <div class="input-group has-validation">
-              <div class="input-group-prepend">
-                <span class="input-group-text">@</span>
-              </div>
-              <input type="text" class="form-control" id="username" placeholder="ユーザー名" required>
-              <div class="invalid-feedback" style="width: 100%;">
-                ユーザー名が必要です
-              </div>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="email">Eメール <span class="text-muted">(任意)</span></label>
-            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-            <div class="invalid-feedback">
-              配送の更新に有効なメールアドレスを入力してください
             </div>
           </div>
 
           <div class="mb-3">
             <label for="address">住所</label>
-            <input type="text" class="form-control" id="address" placeholder="地番" required>
+            <input type="text" class="form-control" id="address" name="address" placeholder="" required>
             <div class="invalid-feedback">
               配送先住所を入力してください
             </div>
           </div>
 
-          <div class="mb-3">
-            <label for="address2">住所 2 <span class="text-muted">(任意)</span></label>
-            <input type="text" class="form-control" id="address2" placeholder="アパート・マンション名">
+          <div class="row">
           </div>
 
-          <div class="row">
-            <div class="col-md-5 mb-3">
-              <label for="pref">都道府県</label>
-              <select class="custom-select d-block w-100" id="pref" required>
-                <option>選択...</option>
-                <option>北海道</option>
-              </select>
-              <div class="invalid-feedback">
-                都道府県を選択してください
-              </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="city">市町村</label>
-              <select class="custom-select d-block w-100" id="city" required>
-                <option>選択...</option>
-                <option>札幌市</option>
-              </select>
-              <div class="invalid-feedback">
-                市町村を選択してください
-              </div>
-            </div>
-            <div class="col-md-3 mb-3">
-              <label for="zip">郵便番号</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required>
-              <div class="invalid-feedback">
-                郵便番号を入力してください
-              </div>
-            </div>
-          </div>
-          <hr class="mb-4">
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="addressCheck">
-            <label class="custom-control-label" for="addressCheck">配送先住所は、請求先住所と同じです</label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="keepCheck">
-            <label class="custom-control-label" for="keepCheck">次回のために、この情報を保存する</label>
-          </div>
           <hr class="mb-4">
 
           <h4 class="mb-3">お支払い方法</h4>
@@ -150,7 +82,7 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="cc-name">カードの名義</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <input type="text" class="form-control" id="cc-name" name="cc-name" placeholder="" required>
               <small class="text-muted">カード上に表示されているフルネーム</small>
               <div class="invalid-feedback">
                 カードの名義を入力してください
@@ -158,7 +90,7 @@
             </div>
             <div class="col-md-6 mb-3">
               <label for="cc-number">クレジットカード番号</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required>
+              <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder="" required>
               <div class="invalid-feedback">
                 クレジットカード番号を入力してください
               </div>
@@ -167,14 +99,14 @@
           <div class="row">
             <div class="col-md-3 mb-3">
               <label for="cc-expiration">有効期限</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+              <input type="text" class="form-control" id="cc-expiration" name="cc-time" placeholder="" required>
               <div class="invalid-feedback">
                 有効期限を入力してください
               </div>
             </div>
             <div class="col-md-3 mb-3">
               <label for="cc-cvv">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+              <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" placeholder="" required>
               <div class="invalid-feedback">
                 セキュリティコードを入力してください
               </div>

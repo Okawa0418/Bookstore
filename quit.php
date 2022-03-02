@@ -25,9 +25,35 @@
           <input type="hidden" name="is_delete" value="1">
           <input type="submit" class="btn btn-warning " value="退会する">
         </form><br>
+        
       <p><a href="index.php">トップに戻る</a></p>
     </div>
-
+    <!-- form 追加 -->
+    <div class="container">
+      <p class="bg-dark text-white">よろしければ退会理由を教えてくださいご協力ありがとうございます</p>
+      <form method="post" action="">
+        <!-- ラジオボタン選択肢 -->
+        <br>
+        <input id="marry-b" type="radio" name="marry-to" value="bianca" checked>
+        <label for="marry-b">1利用頻度が少なくなってきたため</label>
+        <!-- ラジオボタン選択肢 -->
+        <br>
+        <input id="marry-f" type="radio" name="marry-to" value="flora">
+        <label for="marry-f">2他社サイトを使用するもしくは使用しているため</label>
+        <!-- ラジオボタン選択肢 -->
+        <br>
+        <input id="marry-b" type="radio" name="marry-to" value="bianca" checked>
+        <label for="marry-b">3利用するに当たり不便な箇所があるため</label>
+        <!-- ラジオボタン選択肢 -->
+        <br>
+        <input id="marry-b" type="radio" name="marry-to" value="bianca" checked>
+        <label for="marry-b">4金銭面の問題で退会を希望する</label>
+        <!-- 送信ボタン -->
+        <br>
+        <input type="submit" class="btn btn-warning" value="送信する">
+      </form>
+    </div>
+      <!-- 追加 end -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

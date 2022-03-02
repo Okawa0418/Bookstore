@@ -153,6 +153,8 @@ if (isset($_SESSION['msg'])) {
                         <p class="card-text">
                             <form action="up_product_form.php" method="post">
                                 <input type="hidden" name="product_id" value="<?=$product_id?>">
+                                <!-- トークンを送る -->
+                                <input type="hidden" name="token" value="<?= $token; ?>">
                                 <button type="submit" name="update" class="btn btn-outline-dark">編集</button>
                             </form>
                         </p>

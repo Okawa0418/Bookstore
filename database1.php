@@ -191,6 +191,35 @@ class Database1 {
         }
     }
 
+    // 編集内容をデータベースに反映させる
+    function updateProductOther($product_id, $product_name, $price, $category) {
+        // データベース接続
+        $dbh = $this->dbConnect();
+        // データを更新する為、トランザクション使用
+        $dbh->beginTransaction();
+        try {
+            // SQL準備
+            $sql = 'UPDATE product SET 
+                product_name = :product_name,
+                price = :price,
+                category = :category
+                WHERE product_id = :product_id';
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':product_name', $product_name, PDO::PARAM_STR);
+            $stmt->bindValue(':price', $price, PDO::PARAM_INT);
+            $stmt->bindValue(':category', $category, PDO::PARAM_INT);
+            $stmt->bindValue(':product_id', $product_id, PDO::PARAM_STR);
+            // SQL実行
+            $stmt->execute();
+            $dbh->commit();
+        } catch (PDOException $e) {
+            $dbh->rollBack();
+            echo 'データベースにアクセスできません！'.$e->getMessage();
+            exit;
+        }
+    }
+
+
     
     // ページングで使用する↓
 

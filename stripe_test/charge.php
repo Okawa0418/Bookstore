@@ -1,6 +1,6 @@
 <?php
 // ダウンロードしたStripeのPHPライブラリのinit.phpを読み込む
-require_once('stripe-php/init.php');
+require_once('../stripe-php/init.php');
 
 // APIのシークレットキー
 \Stripe\Stripe::setApiKey('sk_test_51KZ3MBEO9TqopJC4qSlBU5G1yF6DEqp2vPDrggc3FBwXNLL8tmoTLQCRbB5bYvTZYGZY9xKpGO1SwVAUvKj6Fga20087biIJgu');
@@ -8,6 +8,7 @@ require_once('stripe-php/init.php');
 $chargeId = null;
 
 try {
+   
     // (1) オーソリ（与信枠の確保）
     $token = $_POST['stripeToken'];
     $charge = \Stripe\Charge::create(array(
@@ -17,8 +18,9 @@ try {
         'source' => $token,
         'capture' => false,
     ));
+    
     $chargeId = $charge['id'];
-
+   
     // (2) 注文データベースの更新などStripeとは関係ない処理
     // :
     // :
@@ -37,9 +39,10 @@ try {
             'charge' => $chargeId,
         ));
     }
-
-    // エラー画面にリダイレクト
-    header("Location: /error.html");
+    echo 'Error:' . $e->getMessage();
     exit;
+    // エラー画面にリダイレクト
+    // header("Location: /error.html");
+    // exit;
 }
 ?>

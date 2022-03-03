@@ -38,7 +38,7 @@
     <footer>
         <div>
             <p class="img_center">
-                <img src="describeschool.png" width="800" height="300" >
+                <img src="photojp/describeschool.png" width="800" height="300" >
             </p>
             <center><h1>BOOKSTORE</h1></center>
             <div>

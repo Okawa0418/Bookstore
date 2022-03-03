@@ -4,6 +4,7 @@
     <title>退会画面</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="quit.css">
   </head>
 
   <body>
@@ -17,15 +18,18 @@
         </button>
     <h2><font color="white">退会画面</font></h2>
     </nav>
-
+    
     <div class="container">
-      <p>本当に退会しますか？</p>
-        <form action="./quit.php" method="POST">
-          <input type="hidden" name="is_delete" value="1">
-          <input type="submit" class="btn btn-warning " value="退会する">
-        </form><br>
-        
-      <p><a href="index.php">トップに戻る</a></p>
+      <div class="card text-dark bg-dark mb-3" style="max-width:18rem">
+          <div class="card-header bg-warning mb-3">本当に退会しますか？</div>
+          <div class="card-body">
+            <form action="./quit.php" method="POST">
+              <input type="hidden" name="is_delete" value="1">
+              <input type="submit" class="btn btn-warning " value="退会する">
+            </form><br>
+            <a href="index.php" class="link-danger">トップに戻る</a>
+          </div>
+      </div>
     </div>
 <?php
   require_once('database1.php');

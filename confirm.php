@@ -148,7 +148,7 @@ function h($s) {
                                                 <div class="works_modal_window">
                                                     <div class="works_modal_content">
                                                         <h1>基本操作</h1>
-                                                        <img src="list.png" width="700" height="200">
+                                                        <img src="photojp/list.png" width="700" height="200">
                                                         <p>1</p>
                                                         <img src="show.png" width="700" height="200">
                                                         <p>1</p>

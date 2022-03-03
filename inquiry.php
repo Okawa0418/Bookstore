@@ -109,7 +109,7 @@
                         <td>
                         <form action="delete_inquiry.php" method="post">
                             <input type="hidden" name="customer_id" value="<?=  $results[$i]['customer_id']; ?>">
-                            <button type="submit" name="delete">削除</button>
+                            <button type="submit" name="delete" class="btn btn-secondary btn-sm">削除</button>
                         </form>
                     </td>
                     </tr>

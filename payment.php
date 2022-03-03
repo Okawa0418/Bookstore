@@ -8,6 +8,19 @@
   <style>.container {max-width: 960px;}.lh-condensed { line-height: 1.25; }</style>
 </head>
 
+<?php
+require_once('database1.php');
+$data1=new Database1();
+$dbh = $data1->dbConnect();
+session_start();
+
+$sql="SELECT*FROM user WHERE user_id = :user_id";
+$stmt = $dbh->prepare($sql);
+$stmt->bindValue(':user_id', $_SESSION['user_id']);
+$stmt->execute();
+$member = $stmt->fetch();
+?>
+
 <body class="bg-light">
   <div class="container">
     <div class="py-5 text-center">
@@ -41,7 +54,7 @@
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span>合計 (円)</span>
-            <strong>￥0</strong>
+            <strong><?php $total_amount?></strong>
           </li>
         </ul>
       </div>
@@ -51,7 +64,7 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="familyName">お名前</label>
-              <input type="text" class="form-control" id="familyName" name="name" placeholder="" value="" required>
+              <input type="text" class="form-control" id="familyName" name="name" placeholder="" value="<?php echo htmlspecialchars( $member['user_name'], ENT_QUOTES, 'UTF-8'); ?>" required>
               <div class="invalid-feedback">
                 お名前を入力してください
               </div>
@@ -60,7 +73,7 @@
 
           <div class="mb-3">
             <label for="address">住所</label>
-            <input type="text" class="form-control" id="address" name="address" placeholder="" required>
+            <input type="text" class="form-control" id="address" name="address" placeholder="" value="<?php echo htmlspecialchars( $member['post_address'], ENT_QUOTES, 'UTF-8'); ?>" required>
             <div class="invalid-feedback">
               配送先住所を入力してください
             </div>
@@ -72,13 +85,37 @@
           <hr class="mb-4">
 
           <h4 class="mb-3">お支払い方法</h4>
-
+          <form autocomplete=off>
+            
+<form>
           <div class="d-block my-3">
-            <div class="custom-control custom-radio">
-              <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-              <label class="custom-control-label" for="credit">クレジットカード</label>
+            <div class="form-check">
+                <input id="credit" name="paymentMethod" type="radio" value="1" onclick="formSwitch()" class="form-check-input" checked required>
+                <label class="form-check-label" for="credit">クレジットカード</label>
             </div>
           </div>
+            <script>var selecterBox = document.getElementById('sample');
+
+              function formSwitch() {
+                  check = document.getElementsByClassName('js-check')
+                  if (check[0].checked) {
+                      selecterBox.style.display = "none";
+                  
+                  } else if (check[1].checked) {
+                      selecterBox.style.display = "block";
+                  
+                  } else {
+                      selecterBox.style.display = "none";
+                  }
+              }
+              window.addEventListener('load', formSwitch());
+
+              function entryChange2(){
+                  if(document.getElementById('changeSelect')){
+                  id = document.getElementById('changeSelect').value;
+              }
+              }
+            </script>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="cc-name">カードの名義</label>
@@ -112,8 +149,37 @@
               </div>
             </div>
           </div>
+          <div class="form-check">
+                <input id="debit" name="paymentMethod" type="radio" value="1" onclick="formSwitch()" class="form-check-input" required>
+                <label class="form-check-label" for="debit">銀行口座</label>
+            </div><br>
+            <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="cc-name">口座名義</label>
+              <input type="text" class="form-control" id="cc-name" name="cc-name" placeholder="" required>
+              <small class="text-muted">カード上に表示されているフルネーム</small>
+              <div class="invalid-feedback">
+                口座名義を入力してください
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="cc-number">口座番号</label>
+              <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder="" required>
+              <div class="invalid-feedback">
+                口座番号を入力してください
+              </div>
+            </div><br>
+            <div class="col-md-3 mb-3">
+              <label for="cc-cvv">暗証番号</label>
+              <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" placeholder="" required>
+              <div class="invalid-feedback">
+                暗証番号を入力してください
+              </div>
+            </div>
+          </div>
           <hr class="mb-4">
-          <button class="btn btn-primary btn-lg btn-block" type="submit">精算を続ける</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">決済完了</button>
+        
         </form>
       </div>
     </div>
@@ -131,7 +197,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js" integrity="sha384-Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
   <script>
-	// 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
+	// 以下バリデーション(無効なフィールドがある場合にフォーム送信を無効にする)
 (function() {
 	'use strict';
 

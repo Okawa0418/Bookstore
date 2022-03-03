@@ -8,8 +8,9 @@
     <!-- bootstrap ｃｓｓ -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
 </head>
-<?php session_start(); ?>
+<body>
 <?php 
+    session_start();
 	//=======================================================================================
 	// 不正遷移チェック
 	//=======================================================================================
@@ -31,14 +32,22 @@
 	}
 	// 不正遷移チェック ここまで ============================================================
 ?>
-<body>
     <div class="container-fluid">
-        <header>
-            <a href="manager_index.php"  style="color:inherit;text-decoration: none;">
-                <h1>BOOK STORE</h1>
-                <h2>Manager</h2>
-            </a>
-        </header>
+        <div class="row">
+            <div class="col-3">
+                <header>
+                    <a href="manager_index.php"  style="color:inherit;text-decoration: none;">
+                        <h1>BOOK STORE</h1>
+                        <h2>Manager</h2>
+                    </a>
+                </header>
+            </div>
+            <div class="col-9">
+                <div class="mt-4">
+                    <img class="d-block mx-auto" src="imglayout/line_book.png">
+                </div>  
+            </div>
+        </div>    
     </div>
     <div class="container-fluid">
         <div class="row">
@@ -82,7 +91,7 @@
             <img class="d-block mx-auto mb-4" src="describe2.png"  width="800" height="400">
             <h1 class="display-5 fw-bold">BOOKSTORE</h1>
             <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4 bg-warning bm-3">3時間超過労働している方へ）しっかり休憩を取り体を休ませてください。3分間体を伸ばしリラックスしましょう。上から順番にストレッチをしていきましょう。1)ゆっくりで大丈夫です2)1項目一分間を目安に取り組みましょう。今日もお疲れ様です。</p>
+                <p class="lead mb-4 bg-warning bm-3">3時間超過労働している方へ）<br>しっかり休憩を取り体を休ませてください。<br>3分間体を伸ばしリラックスしましょう。<br>上から順番にストレッチをしていきましょう。<br>1)ゆっくりで大丈夫です<br>2)1項目一分間を目安に取り組みましょう。<br>今日もお疲れ様です。</p>
             </div>
         </div>
         <!-- card -->

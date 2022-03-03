@@ -29,12 +29,45 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+<?php 
+	//=======================================================================================
+	// 不正遷移チェック
+	//=======================================================================================
+	//* 直接のページのアクセスを禁止する。 正しいセッションフラグを持っていない場合
+	if(!isset($_SESSION['manager_id'])){
+		echo '
+			<div align="center">
+				<h1>不正遷移です。</h1>
+				<p style="color : red;">
+					このページの直接アクセスは禁止されています。
+				</p>
+				<p>誠にご面倒をおかけしますが、管理者ログインページから入力をお願い致します</p>
+				<p>
+					<a href="manager_login.php"><strong>管理者ログインページはこちら</strong></a>
+				</p>
+			</div><!--div center-->
+		';
+		exit();
+	}
+	// 不正遷移チェック ここまで ============================================================
+?>
     <div class="container-fluid">
         <header>
-            <a href="manager_index.php"  style="color:inherit;text-decoration: none;">
-                <h1>BOOK STORE</h1>
-                <h2>Manager</h2>
-            </a>
+            <div class="row">
+                <div class="col-3">
+                    <header>
+                        <a href="manager_index.php"  style="color:inherit;text-decoration: none;">
+                            <h1>BOOK STORE</h1>
+                            <h2>Manager</h2>
+                        </a>
+                    </header>
+                </div>
+                <div class="col-9">
+                    <div class="mt-4">
+                        <img class="d-block mx-auto" src="imglayout/line_book.png">
+                    </div>  
+                </div>
+            </div> 
         </header>
     </div>
     <div class="container-fluid">
@@ -57,6 +90,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="include.php">商品追加フォーム</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="inquiry.php">お問い合わせリスト</a>
                         </li>
                     </ul>
                 </div>
@@ -98,7 +134,7 @@
                         <td>
                             <form action="proList_show.php" method="post">
                                 <input type="hidden" name="product_id" value="<?=$results[$i]['product_id']?>">
-                                <button type="submit" class="btn btn-secondary">詳細</button>
+                                <button type="submit" class="btn btn-secondary btn-sm">詳細</button>
                             </form>                           
                         </td>
                     </tr>

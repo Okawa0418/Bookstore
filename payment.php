@@ -9,16 +9,16 @@
 </head>
 
 <?php
-require_once('database1.php');
-$data1=new Database1();
-$dbh = $data1->dbConnect();
-session_start();
+  require_once('database1.php');
+  $data1=new Database1();
+  $dbh = $data1->dbConnect();
+  session_start();
 
-$sql="SELECT*FROM user WHERE user_id = :user_id";
-$stmt = $dbh->prepare($sql);
-$stmt->bindValue(':user_id', $_SESSION['user_id']);
-$stmt->execute();
-$member = $stmt->fetch();
+  $sql="SELECT*FROM user WHERE user_id = :user_id";
+  $stmt = $dbh->prepare($sql);
+  $stmt->bindValue(':user_id', $_SESSION['user_id']);
+  $stmt->execute();
+  $member = $stmt->fetch();
 ?>
 
 <body class="bg-light">
@@ -64,7 +64,7 @@ $member = $stmt->fetch();
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="familyName">お名前</label>
-              <input type="text" class="form-control" id="familyName" name="name" placeholder="" value="<?php echo htmlspecialchars( $member['user_name'], ENT_QUOTES, 'UTF-8'); ?>" required>
+              <input type="text" class="form-control" id="familyName" name="name" placeholder="" maxlength="60" value="<?php echo htmlspecialchars( $member['user_name'], ENT_QUOTES, 'UTF-8'); ?>" required>
               <div class="invalid-feedback">
                 お名前を入力してください
               </div>
@@ -73,134 +73,109 @@ $member = $stmt->fetch();
 
           <div class="mb-3">
             <label for="address">住所</label>
-            <input type="text" class="form-control" id="address" name="address" placeholder="" value="<?php echo htmlspecialchars( $member['post_address'], ENT_QUOTES, 'UTF-8'); ?>" required>
+            <input type="text" class="form-control" id="address" name="address" placeholder="" maxlength="161" value="<?php echo htmlspecialchars( $member['post_address'], ENT_QUOTES, 'UTF-8'); ?>" required>
             <div class="invalid-feedback">
               配送先住所を入力してください
             </div>
           </div>
 
-          <div class="row">
-          </div>
-
           <hr class="mb-4">
 
           <h4 class="mb-3">お支払い方法</h4>
-          <form autocomplete=off>
-          <form autocomplete=off>
-  
-  <label>
-    <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()" >クレジットカード
-  </label>
-  <span id="sample">
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="cc-name">カードの名義</label>
-              <input type="text" class="form-control" id="cc-name" name="cc-name" placeholder="" required>
-              <small class="text-muted">カード上に表示されているフルネーム</small>
-              <div class="invalid-feedback">
-                カードの名義を入力してください
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="cc-number">クレジットカード番号</label>
-              <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder="" required>
-              <div class="invalid-feedback">
-                クレジットカード番号を入力してください
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3 mb-3">
-              <label for="cc-expiration">有効期限</label>
-              <input type="text" class="form-control" id="cc-expiration" name="cc-time" placeholder="" required>
-              <div class="invalid-feedback">
-                有効期限を入力してください
-              </div>
-            </div>
-            <div class="col-md-3 mb-3">
-              <label for="cc-cvv">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" placeholder="" required>
-              <div class="invalid-feedback">
-                セキュリティコードを入力してください
-              </div>
-            </div>
-          </div>
-          </span>
+            <form autocomplete=off>
+              <label>
+                <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch2()" >クレジットカード
+              </label>
+                 <span id="sample2">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="cc-name">カードの名義</label>
+                      <input type="text" class="form-control" id="cc-name" name="cc-name" placeholder="" required>
+                      <small class="text-muted">カード上に表示されているフルネーム</small>
+                      <div class="invalid-feedback">
+                        カードの名義を入力してください
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="cc-number">クレジットカード番号</label>
+                      <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder="" required>
+                      <div class="invalid-feedback">
+                        クレジットカード番号を入力してください
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 mb-3">
+                      <label for="cc-expiration">有効期限</label>
+                      <input type="text" class="form-control" id="cc-expiration" name="cc-time" placeholder="" required>
+                      <div class="invalid-feedback">
+                        有効期限を入力してください
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                      <label for="cc-cvv">CVV</label>
+                      <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" placeholder="" required>
+                      <div class="invalid-feedback">
+                        セキュリティコードを入力してください
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              
+              <label>
+                <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch2()">銀行口座
+              </label>
+              <span id="sample">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="b-name">口座名義</label>
+                    <input type="text" class="form-control" id="b-name" name="b-name" placeholder="" required>
+                    <small class="text-muted">カード上に表示されているフルネーム</small>
+                    <div class="invalid-feedback">
+                      口座名義を入力してください
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="b-number">口座番号</label>
+                    <input type="text" class="form-control" id="b-number" name="b-number" placeholder="" required>
+                    <div class="invalid-feedback">
+                      口座番号を入力してください
+                    </div>
+                  </div><br>
+                  <div class="col-md-3 mb-3">
+                    <label for="b-cvv">暗証番号</label>
+                    <input type="text" class="form-control" id="b-cvv" name="b-cvv" placeholder="" required>
+                    <div class="invalid-feedback">
+                      暗証番号を入力してください
+                    </div>
+                  </div>
+                </div>
+              </span>
 
-  <label>
-    <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()">銀行口座
-  </label>
-  <span id="sample2">
-  <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="b-name">口座名義</label>
-              <input type="text" class="form-control" id="b-name" name="b-name" placeholder="" required>
-              <small class="text-muted">カード上に表示されているフルネーム</small>
-              <div class="invalid-feedback">
-                口座名義を入力してください
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="b-number">口座番号</label>
-              <input type="text" class="form-control" id="b-number" name="b-number" placeholder="" required>
-              <div class="invalid-feedback">
-                口座番号を入力してください
-              </div>
-            </div><br>
-            <div class="col-md-3 mb-3">
-              <label for="b-cvv">暗証番号</label>
-              <input type="text" class="form-control" id="b-cvv" name="b-cvv" placeholder="" required>
-              <div class="invalid-feedback">
-                暗証番号を入力してください
-              </div>
-            </div>
-          </div>
-  </span>
-<form>
-<script type="text/javascript">var selecterBox = document.getElementById('sample');
+              <script type="text/javascript">var selecterBox = document.getElementById('sample2');
+              var selecterBox1 = document.getElementById('sample');
 
-function formSwitch() {
-    check = document.getElementsByClassName('js-check')
-    if (check[1].checked) {
-        selecterBox.style.display = "none";
-    
-    } else if (check[0].checked) {
-        selecterBox.style.display = "block";
-    
-    } else {
-        selecterBox.style.display = "none";
-    }
-}
-window.addEventListener('load', formSwitch());
+                  function formSwitch2() {
+                      check = document.getElementsByClassName('js-check')
+                      if (check[1].checked) {
+                          selecterBox.style.display = "none";  
+                          selecterBox1.style.display = "block";               
+                      } else if (check[0].checked) {
+                          selecterBox.style.display = "block";
+                          selecterBox1.style.display = "none";
+                      } else {
+                          selecterBox.style.display = "none";
+                      }
+                  }
+                  window.addEventListener('load', formSwitch2());
+                
+                  function entryChange2(){
+                      if(document.getElementById('changeSelect')){
+                      id = document.getElementById('changeSelect').value;
+                  }
+                  }
 
-function entryChange2(){
-    if(document.getElementById('changeSelect')){
-    id = document.getElementById('changeSelect').value;
-}
-}
-</script>
-<script type="text/javascript">var selecterBox = document.getElementById('sample');
-
-function formSwitch() {
-    check = document.getElementsByClassName('js-check')
-    if (check[1].checked) {
-        selecterBox.style.display = "none";
-    
-    } else if (check[0].checked) {
-        selecterBox.style.display = "block";
-    
-    } else {
-        selecterBox.style.display = "none";
-    }
-}
-window.addEventListener('load', formSwitch());
-
-function entryChange2(){
-    if(document.getElementById('changeSelect')){
-    id = document.getElementById('changeSelect').value;
-}
-}
-</script>
+              </script>
 
           <hr class="mb-4">
           <button class="btn btn-primary btn-lg btn-block" type="submit">決済完了</button>
@@ -223,25 +198,24 @@ function entryChange2(){
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
   <script>
 	// 以下バリデーション(無効なフィールドがある場合にフォーム送信を無効にする)
-(function() {
-	'use strict';
-
-	window.addEventListener('load', function() {
-		// Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
-		var forms = document.getElementsByClassName('needs-validation');
-
-		// ループして帰順を防ぐ
-		var validation = Array.prototype.filter.call(forms, function(form) {
-			form.addEventListener('submit', function(event) {
-				if (form.checkValidity() === false) {
-					event.preventDefault();
-					event.stopPropagation();
-				}
-				form.classList.add('was-validated');
-			}, false);
-		});
-	}, false);
-})();
+    (function() {
+    	'use strict';
+        window.addEventListener('load', function() {
+        		// Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
+        		var forms = document.getElementsByClassName('needs-validation');
+        
+        		// ループして帰順を防ぐ
+        		var validation = Array.prototype.filter.call(forms, function(form) {
+        			form.addEventListener('submit', function(event) {
+        				if (form.checkValidity() === false) {
+        					event.preventDefault();
+        					event.stopPropagation();
+        				}
+        				form.classList.add('was-validated');
+        			}, false);
+        		});
+        	}, false);
+        })();
 
 	</script>
 </body>

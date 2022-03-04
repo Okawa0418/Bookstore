@@ -148,12 +148,10 @@ function h($s) {
                                                 <div class="works_modal_window">
                                                     <div class="works_modal_content">
                                                         <h1>基本操作</h1>
-                                                        <img src="photojp/list.png" width="700" height="200">
-                                                        <p>1</p>
-                                                        <img src="show.png" width="700" height="200">
-                                                        <p>1</p>
+                                                        <img src="photojp/list.png" width="600" height="450">
+                                                <p>1）商品名 2)数量　値段  3)購入ボタン　4) リクエストシート詳細　5）お問い合わせフォーム</p>                                                                                                       
                                                     </div>
-                                                    <div class="works_modal_close">✖</div>
+                                                    <div class="works_modal_close"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -182,11 +180,8 @@ function h($s) {
                                 <div class="works_modal_mask"></div>
                                     <div class="works_modal_window">
                                         <div class="works_modal_content">
-                                            <h1>リクエストシート</h1>
-                                            <img src="question.png" width="800" height="200">
-                                            <p>あ</p>
-                                            <img src="confirm.png" width="700" height="200">
-                                            <p></p>
+                                        <img src="photojp/question.png" width="800" height="400">
+                                        <p>お客様の購入したい本をリクエストシートに記載後購入する事ができるシステムです。本のタイトル名の欄に著者も含めて記載してください。また入荷時の連絡をご希望の方は選択覧がありますのでチェックをしてください。</p>    
                                         </div>
                                         <div class="works_modal_close">✖</div>
                                     </div>

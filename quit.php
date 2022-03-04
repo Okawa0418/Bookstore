@@ -18,19 +18,36 @@
         </button>
     <h2><font color="white">退会画面</font></h2>
     </nav>
-    
-    <div class="container">
-      <div class="card text-dark bg-dark mb-3" style="max-width:18rem">
-          <div class="card-header bg-warning mb-3">本当に退会しますか？</div>
+    <div class="row">
+      <div class="col-4">
+      <div class="container">
+      <div class="card text-light bg-dark text-center" style="max-width:25rem">
+          <div class="card-header bg-info mb-3 fs-1">本当に退会しますか？</div>
           <div class="card-body">
             <form action="./quit.php" method="POST">
               <input type="hidden" name="is_delete" value="1">
-              <input type="submit" class="btn btn-warning " value="退会する">
+              <input type="submit" class="btn btn-info " value="退会する">
             </form><br>
             <a href="index.php" class="link-danger">トップに戻る</a>
           </div>
       </div>
     </div>
+      </div>
+      <div class="col-4 bg-dark text-center">
+        <img src="photojp/sad.png" width="400" height="300">
+      </div>
+      <div class="col-4 bg-dark text-center">
+        <img src="photojp/autom.jpg" width="400" height="300">
+      </div>
+    </div>
+    </div>
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">BOOKSTORE</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">looking forward and looking back that's our life</p>
+        </div>
+    </div>
+</body>
 <?php
   require_once('database1.php');
   $data1=new Database1();

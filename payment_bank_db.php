@@ -1,23 +1,22 @@
 <?php
 
-class PaymentCredit extends Database1
+class PaymentBank extends Database1
 {
 
     // payment_creditテーブルへインサートする
-    public function createPaymentCredit($name, $address, $cc_name, $cc_number, $cc_time, $cc_cvv) {
+    public function createPaymentBank($name, $address, $b_name, $b_number, $b_cvv) {
         $dbh = $this->dbConnect();
         try {
             // データ挿入の為トランザクション開始
             $dbh->beginTransaction();
-            $sql = 'INSERT INTO product (name, address, cc_name, cc_number, cc_time, cc_cvv)
-                    VALUES (:name, :address, :cc_name, :cc_number, cc_time, cc_cvv)';
+            $sql = 'INSERT INTO product (name, address, b_name, b_number, b_cvv)
+                    VALUES (:name, :address, :b_name, :b_number, b_cvv)';
             $stmt = $dbh->prepare($sql);
             $stmt->bindValue(':name', $name, PDO::PARAM_STR);
             $stmt->bindValue(':address', $address, PDO::PARAM_STR);
-            $stmt->bindValue(':cc_name', $cc_name, PDO::PARAM_STR);
-            $stmt->bindValue(':cc_number', $cc_number, PDO::PARAM_INT);
-            $stmt->bindValue(':cc_time', $cc_time, PDO::PARAM_INT);
-            $stmt->bindValue(':cc_cvv', $cc_cvv, PDO::PARAM_STR);
+            $stmt->bindValue(':b_name', $b_name, PDO::PARAM_STR);
+            $stmt->bindValue(':b_number', $b_number, PDO::PARAM_INT);
+            $stmt->bindValue(':b_cvv', $b_cvv, PDO::PARAM_STR);
             // SQL実行
             $stmt->execute();
             // コミット
@@ -31,10 +30,10 @@ class PaymentCredit extends Database1
     }
 
     // 最新のレコードidを取得する
-    public function getNewPaymentCredit() {
+    public function getNewPaymentBank() {
         $dbh = $this->dbConnect();
         // SQL準備
-        $sql = 'SELECT id FROM payment_credit ORDER BY id DESC LIMIT 1';
+        $sql = 'SELECT id FROM payment_bank ORDER BY id DESC LIMIT 1';
         // SQL実行
         $stmt = $dbh->query($sql);
         // SQLの結果を受け取る

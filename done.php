@@ -3,6 +3,8 @@
     require_once('database1.php');
     require_once('cart_db.php');
     require_once('purchase_db.php');
+    require_once('payment_credit_db.php');
+    require_once('payment_bank_db.php');
 
     unset($_SESSION['category1']);
     unset($_SESSION['category2']);
@@ -16,23 +18,40 @@
         exit;
     }
     
-    // ログインしている場合
     // user_idを変数へ代入
     $user_id = $_SESSION['user_id'];
     $cart = new Cart;
     // ログインしている人のカート情報を取得
     $results = $cart->getCartByUserId($user_id);
 
-    // カート内が空であった場合
+    // カート内が空であった場合（不正遷移）
     if (empty($results)) {
-        echo 'カートが空です';
+        echo '不正アクセスです';
         exit;
     }
 
-    // 決済情報のＩＤを取得する
-    $payment_id = ;
+    // クレジットカード決済だった場合
+    if ($_SESSION['payment'] == 1) {
+        $payment = 1;
+        // セッション破棄
+        unset($_SESSION['payment']);
+        // クレジットのテーブルから最新のレコードIDを取得
+        $payment_credit = new PaymentCredit;
+        $result = $payment_credit->getNewPaymentCredit();
+        $pay_id = $result['id'];
+    }
+    
+    // 銀行口座決済だった場合
+    if ($_SESSION['payment'] == 2) {
+        $payment = 2;
+        // セッション破棄
+        unset($_SESSION['payment']);
+        // 銀行口座のテーブルから最新のレコードIDを取得
+        $payment_credit = new PaymentBank;
+        $result = $payment_credit->getNewPaymentBank();
+        $pay_id = $result['id'];
+    }
 
-    // カート内に商品が入っていた場合
     $purchase = new Purchase;
     // for文を使用してpurchaseテーブルへインサートしていく（購入履歴）
     for ($i=0; $i < count($results); $i++) {
@@ -41,7 +60,7 @@
         $product_id = $results[$i]['product_id'];
         $quantity = $results[$i]['quantity'];
         // 購入テーブルへインサート
-        $purchase->createPurchase($product_name, $product_id, $quantity, $user_id);
+        $purchase->createPurchase($product_name, $product_id, $quantity, $user_id, $payment, $pay_id);
     }
 
     // カート内を削除する処理
@@ -52,4 +71,4 @@
     // 購入完了画面へ遷移
     header('Location: done_view.html');
     exit;
-?>
+

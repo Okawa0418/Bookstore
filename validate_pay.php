@@ -1,12 +1,13 @@
 <?php
 // payment.phpから送信された値のバリデーション実装
-sesson_start();
+session_start();
 require_once('database1.php');
 require_once('payment_credit_db.php');
 
 // 送信された送り先の値を変数へ代入
 $name = $_POST['name'];
 $address = $_POST['address'];
+
 
 // 名前・住所のバリデーション
 // 名前と住所がともに文字数オーバーだった場合
@@ -29,12 +30,14 @@ if (161 < mb_strlen($address, 'UTF-8')) {
 }
 
 // クレジットカード決済だった場合
-if ($_POST['paymentMethod'] == '1') {
+if ($_POST['rs'] == '1') {
+    // クレジットカード決済であることをセッション変数で保持
+    $_SESSION['payment'] = 1; 
     // 値を変数へ代入
-    $cc_name = $_POST['cc-name'];
-    $cc_number = $_POST['cc-number'];
-    $cc_time = $_POST['cc-time'];
-    $cc_cvv = $_POST['cc-cvv'];
+    $cc_name = $_POST['cc_name'];
+    $cc_number = $_POST['cc_number'];
+    $cc_time = $_POST['cc_time'];
+    $cc_cvv = $_POST['cc_cvv'];
 
     // カード情報のバリデーション
     // 名義（大文字半角アルファベット 姓名の間にスペース）
@@ -118,10 +121,43 @@ if ($_POST['paymentMethod'] == '1') {
 }
 
 // 銀行口座決済だった場合
-// 口座名義60文字
-// 銀行口座番号7桁まで
-// 暗証番号は4桁ハッシュ化
+if ($_POST['rs'] == '2') {
+    // クレジットカード決済であることをセッション変数で保持
+    $_SESSION['payment'] = 2; 
+    // 値を変数へ代入
+    $b_name = $_POST['b_name'];
+    $b_number = $_POST['b_number'];
+    $b_time = $_POST['b_time'];
+    $b_cvv = $_POST['b_cvv'];
 
+    // 全角カタカナ、スペース、全角カタカナ
+    if (!preg_match('/\A[ァ-ヴー]+　+[ァ-ヴー]\z+/u', $b_name)) {
+        $_SESSION['msg'] = '※カード名義は全角カタカナ、姓名の間にスペースを入れてください';
+        header('Location: payment.php');
+        exit;
+    }
+
+    // 口座名義60文字
+    if (60 < mb_strlen($b_name, 'UTF-8')) {
+        $_SESSION['msg'] = '※口座名義の文字数は60文字以内にしてください';
+        header('Location: payment.php');
+        exit;
+    }
+    
+    // 銀行口座番号7桁まで
+    if (7 < mb_strlen($b_number, 'UTF-8')) {
+        $_SESSION['msg'] = '※正しい口座番号を記入してください';
+        header('Location: payment.php');
+        exit;
+    }
+
+    // 暗証番号は4桁ハッシュ化
+    if (4 < mb_strlen($b_cvv, 'UTF-8')) {
+        $_SESSION['msg'] = '※暗証番号は4桁を記入してください';
+        header('Location: payment.php');
+        exit;
+    }
+}
 
 // 決済情報登録後
 header('Location: done.php');

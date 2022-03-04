@@ -9,7 +9,7 @@ class PaymentBank extends Database1
         try {
             // データ挿入の為トランザクション開始
             $dbh->beginTransaction();
-            $sql = 'INSERT INTO product (name, address, b_name, b_number, b_cvv)
+            $sql = 'INSERT INTO payment_bank (name, address, b_name, b_number, b_cvv)
                     VALUES (:name, :address, :b_name, :b_number, b_cvv)';
             $stmt = $dbh->prepare($sql);
             $stmt->bindValue(':name', $name, PDO::PARAM_STR);

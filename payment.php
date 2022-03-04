@@ -54,7 +54,7 @@
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span>合計 (円)</span>
-            <strong><?php $total_amount?></strong>
+            <strong><?php echo $total_amount?></strong>
           </li>
         </ul>
       </div>
@@ -82,7 +82,7 @@
           <hr class="mb-4">
 
           <h4 class="mb-3">お支払い方法</h4>
-            <form autocomplete=off>
+            <form autocomplete=off action="payment_confirm.php">
               <label>
                 <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch2()" >クレジットカード
               </label>
@@ -90,7 +90,7 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="cc-name">カードの名義</label>
-                      <input type="text" class="form-control" id="cc-name" name="cc-name" placeholder="" required>
+                      <input type="text" class="form-control" id="cc-name" name="cc_name" placeholder="" required>
                       <small class="text-muted">カード上に表示されているフルネーム</small>
                       <div class="invalid-feedback">
                         カードの名義を入力してください
@@ -98,7 +98,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="cc-number">クレジットカード番号</label>
-                      <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder="" required>
+                      <input type="text" class="form-control" id="cc-number" name="cc_number" placeholder="" required>
                       <div class="invalid-feedback">
                         クレジットカード番号を入力してください
                       </div>
@@ -107,14 +107,14 @@
                   <div class="row">
                     <div class="col-md-3 mb-3">
                       <label for="cc-expiration">有効期限</label>
-                      <input type="text" class="form-control" id="cc-expiration" name="cc-time" placeholder="" required>
+                      <input type="text" class="form-control" id="cc-expiration" name="cc_time" placeholder="" required>
                       <div class="invalid-feedback">
                         有効期限を入力してください
                       </div>
                     </div>
                     <div class="col-md-3 mb-3">
                       <label for="cc-cvv">CVV</label>
-                      <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" placeholder="" required>
+                      <input type="text" class="form-control" id="cc-cvv" name="cc_cvv" placeholder="" required>
                       <div class="invalid-feedback">
                         セキュリティコードを入力してください
                       </div>
@@ -129,7 +129,7 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="b-name">口座名義</label>
-                    <input type="text" class="form-control" id="b-name" name="b-name" placeholder="" required>
+                    <input type="text" class="form-control" id="b-name" name="b_name" placeholder="" required>
                     <small class="text-muted">カード上に表示されているフルネーム</small>
                     <div class="invalid-feedback">
                       口座名義を入力してください
@@ -137,14 +137,14 @@
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="b-number">口座番号</label>
-                    <input type="text" class="form-control" id="b-number" name="b-number" placeholder="" required>
+                    <input type="text" class="form-control" id="b-number" name="b_number" placeholder="" required>
                     <div class="invalid-feedback">
                       口座番号を入力してください
                     </div>
                   </div><br>
                   <div class="col-md-3 mb-3">
                     <label for="b-cvv">暗証番号</label>
-                    <input type="text" class="form-control" id="b-cvv" name="b-cvv" placeholder="" required>
+                    <input type="text" class="form-control" id="b-cvv" name="b_cvv" placeholder="" required>
                     <div class="invalid-feedback">
                       暗証番号を入力してください
                     </div>

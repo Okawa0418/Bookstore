@@ -16,7 +16,7 @@
     <!-- As a link -->
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid bg-warning mb-3">
-        <a class="navbar-brand" href="describe.jpg">BOOKSTORE</a>
+        <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     </div>
     </nav>
     <!-- As a heading -->
@@ -26,15 +26,22 @@
     </div>
 </nav>
 <!--ジャンボトロン  -->
-<div class="h-100 p-5 text-white bg-dark rounded-3">
-    <div class="box">
-        <img src ="describe.jpg" width="600" height="400">
-        <h2>BOOKSTOREへようこそ</h2>
+<div class="row">
+    <div class="col-8">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <div class="box">
+                <img src ="photojp/describe.jpg" width="600" height="400">
+                <h2>BOOKSTOREへようこそ</h2>
+            </div>
+            <p>便利、使いやすい ブックストアで本を購入しましょう。本の世界へLet's go </p>
+        </div>
     </div>
-    <p>便利、使いやすい ブックストアで本を購入しましょう。本の世界へLet's go </p>
+    <div class="col-4">
+        <iframe width="350" height="300" src="https://www.youtube.com/embed/7Qp5vcuMIlk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="350" height="300" src="https://www.youtube.com/embed/CZmu6YWtI58" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 </div>
-<!--ジャンボトロンEND  -->
-<!-- カード -->
+<!-- card -->
 <div class="container">
   <div class="row">
         <div class="col">
@@ -57,12 +64,26 @@
                                         <div class="works_modal_window">
                                             <div class="works_modal_content">
                                                 <h1>基本操作</h1>
-                                                <img src="list.png" width="700" height="200">
-                                                <p>1</p>
-                                                <img src="show.png" width="700" height="200">
-                                                <p>1</p>
+                                                <img src="photojp/list.png" width="600" height="450">
+                                                <p>1）商品名 2)数量　値段  3)購入ボタン　4) リクエストシート詳細　5）お問い合わせフォーム</p>
                                             </div>
-                                            <div class="works_modal_close">✖</div>
+                                            <div class="works_modal_close"></div>
+                                            <!-- pagination -->
+                                            <!-- <nav aria-label="...">
+                                                <ul class="pagination">
+                                                    <li class="page-item disabled">
+                                                    <a class="page-link">Previous</a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item active" aria-current="page">
+                                                    <a class="page-link" href="#">2</a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item">
+                                                    <a class="page-link" href="#">Next</a>
+                                                    </li>
+                                                </ul>
+                                                </nav> -->
                                         </div>
                                     </div>
                                 </div>
@@ -93,10 +114,10 @@
                                 <div class="works_modal_window">
                                     <div class="works_modal_content">
                                         <h1>リクエストシート</h1>
-                                        <img src="question.png" width="800" height="200">
-                                        <p>あ</p>
-                                        <img src="confirm.png" width="700" height="200">
-                                        <p></p>
+                                        <img src="photojp/question.png" width="800" height="400">
+                                        <p>お客様の購入したい本をリクエストシートに記載後購入する事ができるシステムです。本のタイトル名の欄に著者も含めて記載してください。また入荷時の連絡をご希望の方は選択覧がありますのでチェックをしてください。</p>
+                                        <!-- <img src="confirm.png" width="700" height="200"> -->
+                                        <!-- <p></p> -->
                                     </div>
                                     <div class="works_modal_close">✖</div>
                                 </div>
@@ -159,8 +180,8 @@
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">1)お支払い方法、注文内容の確認・変更・キャンセルについて2)会員登録・ログイン・退会について3)よくある質問</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <form method="post" action="customerformadd.php">
-                    <input type="submit" value="お問い合わせ" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+                <form method="post" action="trouble.php">
+                    <input type="submit" value="質問ボット" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
                 </form>
                 <form method="post" action="index.php">
                     <input type="submit" value="商品画面へ" name="index" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">

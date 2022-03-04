@@ -7,6 +7,7 @@
     <title>Document</title>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
      <!-- モーダル -->
      <link rel="stylesheet" href="modal2.css">
 </head>
@@ -14,7 +15,7 @@
     <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container-fluid">
-        <a class="navbar-brand">質問コーナー</a>
+        <a class="navbar-brand fs-1 text-center">質問コーナー</a>
         </div>
     </nav>
     <!--jumbotron  -->
@@ -33,7 +34,7 @@
         <div class="card" style="width: 60rem;">
             <ul class="list-group list-group-flush">
                 <!-- 文字 -->
-                <h1>1)新規登録、ログイン、退会に関する質問</h1>
+                <h1 class="bg-info">1)新規登録、ログイン、退会に関する質問</h1>
                     <p>各種お探しのリンクへ移動できます。以下の事にお困りの場合は詳細をクリックしてください。（クリックすると拡大されます）</p>
                 <li class="list-group-item">
                     <a href="signup.php"class="link-success">新規登録</a>
@@ -80,7 +81,7 @@
                                                     解決しない場合大変ご迷惑をお掛けしてます下のお問い合わせリンク先に行きお問い合わせフォームの項目番号1を選択した後要件を記入してください。
                                                 <!-- ※linkで退会へ繋げる -->
                                                 </div>
-                                                <div class="works_modal_close">✖</div>
+                                                <div class="works_modal_close"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +95,7 @@
         <div class="card" style="width: 60rem;">
             <ul class="list-group list-group-flush">
                         <!-- 文字 -->
-                <h1>2)クレジットカード使用について</h1>
+                <h1 class="bg-danger">2)クレジットカード使用について</h1>
                 <p>クレジットカード決済は現在使用する事はできません</p>
                 <li class="list-group-item">
                     <a href="customerformadd.php"class="link-primary">お問い合わせフォーム</a>
@@ -112,12 +113,11 @@
                                                 <div class="works_modal_content">
                                                     <!-- 中身内容変更 -->
                                                     <h1>クレジット決済</h1>
-                                                    <h1>クレジット決済の使用は現在行っていません。ご了承ください。
-                                                        本サイトでは商品画面をで商品、数量を選択した後ボタンをクリックするだけで購入できます
-                                                        解決しない場合大変ご迷惑をお掛けしてますが下のお問い合わせリンク先に行きクレジットカードの項目番号2を選択した後要件を記入してください。
-                                                    </h1>
+                                                    <img src="photojp/payment.png" width="400" height="400">
+                                                    <p>お支払い方法　当店では図書カードは使用できません。クレジットカード、銀行の口座振込が可能となっておりますのでご了承ください。※現在、カードでのお買い物限度額はございません。
+                                                    第三者に情報が洩れる恐れは決してございませんのでご安心してご利用おください</p>
                                                 </div>
-                                                <div class="works_modal_close">✖</div>
+                                                <div class="works_modal_close"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@
         <div class="card" style="width: 60rem;">
             <ul class="list-group list-group-flush">
                         <!-- 文字 -->
-                <h1>3）購入履歴について</h1>
+                <h1 class ="bg-success">3）購入履歴について</h1>
                 <p>購入履歴についてのよくある質問</p>
                 <li class="list-group-item">
                     <a href="pur_history.php"class="link-danger">購入履歴</a>
@@ -152,7 +152,7 @@
                                                         なおお手数をおかけしますが返信には時間がかかる場合がございますのでご了承ください。
                                                     </h1>
                                                 </div>
-                                                <div class="works_modal_close">✖</div>
+                                                <div class="works_modal_close"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -164,7 +164,7 @@
         <div class="card" style="width: 60rem;">
             <ul class="list-group list-group-flush">
                         <!-- 文字 -->
-                <h1>4)入荷日について</h1>
+                <h1 class="bg-primary">4)入荷日について</h1>
                 <p>ご希望日時の選択以外での入荷日はお客様の現在住所に左右される可能性があります</p>
                 <li class="list-group-item">
                     <a href="customerformadd.php"class="link-primary">お問い合わせフォーム</a>
@@ -187,7 +187,7 @@
                                                         大変申し訳ございません。1.2の場合はBOOKSTOREの出荷担当へお電話いてください 0534-7979-7979 
                                                     </h1>
                                                 </div>
-                                                <div class="works_modal_close">✖</div>
+                                                <div class="works_modal_close"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -199,7 +199,7 @@
         <div class="card" style="width: 60rem;">
             <ul class="list-group list-group-flush">
                         <!-- 文字 -->
-                <h1>5)利用規約について</h1>
+                <h1 class="bg-warning">5)利用規約について</h1>
                 <p>BOOKSTORは会員登録無料で提供させていただいています。</p>
                 <li class="list-group-item">
                         <a href="customerformadd.php"class="link-primary">お問い合わせフォーム</a>
@@ -231,7 +231,7 @@
                                                         ④ BOOKSTORに届け出た事項に虚偽、誤記または記入もれがあった場合。
                                                     </p>
                                                 </div>
-                                                <div class="works_modal_close">✖</div>
+                                                <div class="works_modal_close"></div>
                                             </div>
                                         </div>
                                     </div>

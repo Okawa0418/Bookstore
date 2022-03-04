@@ -15,21 +15,21 @@
 	// 不正遷移チェック
 	//=======================================================================================
 	//* 直接のページのアクセスを禁止する。 正しいセッションフラグを持っていない場合
-	if(!isset($_SESSION['manager_id'])){
-		echo '
-			<div align="center">
-				<h1>不正遷移です。</h1>
-				<p style="color : red;">
-					このページの直接アクセスは禁止されています。
-				</p>
-				<p>誠にご面倒をおかけしますが、管理者ログインページから入力をお願い致します</p>
-				<p>
-					<a href="manager_login.php"><strong>管理者ログインページはこちら</strong></a>
-				</p>
-			</div><!--div center-->
-		';
-		exit();
-	}
+	// if(!isset($_SESSION['manager_id'])){
+	// 	echo '
+	// 		<div align="center">
+	// 			<h1>不正遷移です。</h1>
+	// 			<p style="color : red;">
+	// 				このページの直接アクセスは禁止されています。
+	// 			</p>
+	// 			<p>誠にご面倒をおかけしますが、管理者ログインページから入力をお願い致します</p>
+	// 			<p>
+	// 				<a href="manager_login.php"><strong>管理者ログインページはこちら</strong></a>
+	// 			</p>
+	// 		</div><!--div center-->
+	// 	';
+	// 	exit();
+	// }
 	// 不正遷移チェック ここまで ============================================================
 ?>
     <div class="container-fluid">
@@ -87,28 +87,36 @@
     </div>
     <!--デザイン１  -->
     <footer>
-        <div class="px-4 py-5 my-5 text-center">
-            <img class="d-block mx-auto mb-4" src="describe2.png"  width="800" height="400">
+        <div class="px-4 py-5 my-5 text-center"> 
             <h1 class="display-5 fw-bold">BOOKSTORE</h1>
             <div class="col-lg-6 mx-auto">
                 <p class="lead mb-4 bg-warning bm-3">3時間超過労働している方へ）<br>しっかり休憩を取り体を休ませてください。<br>3分間体を伸ばしリラックスしましょう。<br>上から順番にストレッチをしていきましょう。<br>1)ゆっくりで大丈夫です<br>2)1項目一分間を目安に取り組みましょう。<br>今日もお疲れ様です。</p>
             </div>
         </div>
-        <!-- card -->
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <img src="workout1.png">
-                </div>
-                <div class="col">
-                    <img src="workout2.png">
-                </div>
-                <div class="col">
-                    <img src="workout3.png">
-                </div>
+        <!-- スライド -->
+        <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+        <div class="carousel-inner ">
+            <div class="carousel-item active">
+            <img src="photojp/workout1.png" class="d-block w-50" alt="...">
             </div>
+            <div class="carousel-item">
+            <img src="photojp/workout2.png" class="d-block w-50" alt="...">
+            </div>
+            <div class="carousel-item">
+            <img src="photojp/workout3.png" class="d-block w-50" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
         </div>
     </footer>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </html>

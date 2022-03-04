@@ -86,36 +86,12 @@ $member = $stmt->fetch();
 
           <h4 class="mb-3">お支払い方法</h4>
           <form autocomplete=off>
-            
-<form>
-          <div class="d-block my-3">
-            <div class="form-check">
-                <input id="credit" name="paymentMethod" type="radio" value="1" onclick="formSwitch()" class="form-check-input" checked required>
-                <label class="form-check-label" for="credit">クレジットカード</label>
-            </div>
-          </div>
-            <script>var selecterBox = document.getElementById('sample');
-
-              function formSwitch() {
-                  check = document.getElementsByClassName('js-check')
-                  if (check[0].checked) {
-                      selecterBox.style.display = "none";
-                  
-                  } else if (check[1].checked) {
-                      selecterBox.style.display = "block";
-                  
-                  } else {
-                      selecterBox.style.display = "none";
-                  }
-              }
-              window.addEventListener('load', formSwitch());
-
-              function entryChange2(){
-                  if(document.getElementById('changeSelect')){
-                  id = document.getElementById('changeSelect').value;
-              }
-              }
-            </script>
+          <form autocomplete=off>
+  
+  <label>
+    <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()" >クレジットカード
+  </label>
+  <span id="sample">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="cc-name">カードの名義</label>
@@ -149,34 +125,83 @@ $member = $stmt->fetch();
               </div>
             </div>
           </div>
-          <div class="form-check">
-                <input id="debit" name="paymentMethod" type="radio" value="1" onclick="formSwitch()" class="form-check-input" required>
-                <label class="form-check-label" for="debit">銀行口座</label>
-            </div><br>
-            <div class="row">
+          </span>
+
+  <label>
+    <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()">銀行口座
+  </label>
+  <span id="sample2">
+  <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="cc-name">口座名義</label>
-              <input type="text" class="form-control" id="cc-name" name="cc-name" placeholder="" required>
+              <label for="b-name">口座名義</label>
+              <input type="text" class="form-control" id="b-name" name="b-name" placeholder="" required>
               <small class="text-muted">カード上に表示されているフルネーム</small>
               <div class="invalid-feedback">
                 口座名義を入力してください
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <label for="cc-number">口座番号</label>
-              <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder="" required>
+              <label for="b-number">口座番号</label>
+              <input type="text" class="form-control" id="b-number" name="b-number" placeholder="" required>
               <div class="invalid-feedback">
                 口座番号を入力してください
               </div>
             </div><br>
             <div class="col-md-3 mb-3">
-              <label for="cc-cvv">暗証番号</label>
-              <input type="text" class="form-control" id="cc-cvv" name="cc-cvv" placeholder="" required>
+              <label for="b-cvv">暗証番号</label>
+              <input type="text" class="form-control" id="b-cvv" name="b-cvv" placeholder="" required>
               <div class="invalid-feedback">
                 暗証番号を入力してください
               </div>
             </div>
           </div>
+  </span>
+<form>
+<script type="text/javascript">var selecterBox = document.getElementById('sample');
+
+function formSwitch() {
+    check = document.getElementsByClassName('js-check')
+    if (check[1].checked) {
+        selecterBox.style.display = "none";
+    
+    } else if (check[0].checked) {
+        selecterBox.style.display = "block";
+    
+    } else {
+        selecterBox.style.display = "none";
+    }
+}
+window.addEventListener('load', formSwitch());
+
+function entryChange2(){
+    if(document.getElementById('changeSelect')){
+    id = document.getElementById('changeSelect').value;
+}
+}
+</script>
+<script type="text/javascript">var selecterBox = document.getElementById('sample');
+
+function formSwitch() {
+    check = document.getElementsByClassName('js-check')
+    if (check[1].checked) {
+        selecterBox.style.display = "none";
+    
+    } else if (check[0].checked) {
+        selecterBox.style.display = "block";
+    
+    } else {
+        selecterBox.style.display = "none";
+    }
+}
+window.addEventListener('load', formSwitch());
+
+function entryChange2(){
+    if(document.getElementById('changeSelect')){
+    id = document.getElementById('changeSelect').value;
+}
+}
+</script>
+
           <hr class="mb-4">
           <button class="btn btn-primary btn-lg btn-block" type="submit">決済完了</button>
         

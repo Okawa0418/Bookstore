@@ -26,7 +26,9 @@
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="BOOK STORE.jfif" alt="" width="200" height="72">
     </div>
-
+<?php 
+var_dump($_SESSION['msg']);
+?>
     <div class="row">
       <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -60,7 +62,7 @@
       </div>
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">請求先住所</h4>
-        <form class="needs-validation" novalidate>
+        <form action="validate_pay.php" method="post" class="needs-validation" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="familyName">お名前</label>
@@ -82,7 +84,7 @@
           <hr class="mb-4">
 
           <h4 class="mb-3">お支払い方法</h4>
-            <form autocomplete=off action="payment_confirm.php">
+            <form autocomplete=off action="validate_pay.php">
               <label>
                 <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch2()" >クレジットカード
               </label>

@@ -29,6 +29,8 @@
         exit;
     }
 
+    // 決済情報のＩＤを取得する
+    $payment_id = ;
 
     // カート内に商品が入っていた場合
     $purchase = new Purchase;

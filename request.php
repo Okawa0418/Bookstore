@@ -33,8 +33,8 @@
     </header>
 
     <p class="text-center">
-    <div class="container">
-      <h2>リクエストコーナー</h2>
+    <div class="container text-white bg-success">
+      <h2 class=" text-center fw-bolder w-100">リクエストコーナー</h2>
     </p>
 
         <!-- エラーメッセージの表示 -->
@@ -54,7 +54,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-4">
-            <p class="text-left">メールアドレス</p>
+            <p class="text-light text-left fw-bolder">メールアドレス</p>
           </div>
           <div class="container">
           <div class="col-md-8">
@@ -66,7 +66,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-4">
-            <p class="text-left">名前</p>
+            <p class="text-light text-left fw-bolder">名前</p>
           </div>
           <div class="container">
           <div class="col-md-8">
@@ -78,7 +78,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-4">
-            <p class="text-left">本のタイトル</p>
+            <p class="text-light text-left fw-bolder">本のタイトル</p>
           </div>
           <div class="container">
           <div class="col-md-8">
@@ -88,7 +88,7 @@
         </div>
       </div>
       <div>
-      <p class="text-left">入荷時の連絡をご希望される方はご選択ください。</p>
+      <p class="text-light text-left fw-bolder">入荷時の連絡をご希望される方はご選択ください。</p>
         <select name="receive" id="">
           <option hidden>選択してください</option>
           <option value="1">必要</option>
@@ -96,14 +96,14 @@
         </select>
       </div>
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary">送信</button>
+      <button type="submit" class="btn btn-warning">送信</button>
       </div>
     </form>
     <br>
     <div>
     <form action="index.php">
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary">トップページへ戻る</button>
+      <button type="submit" class="btn btn-warning">トップページへ戻る</button>
       </div>
     </form>
     </div>

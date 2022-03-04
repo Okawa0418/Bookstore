@@ -9,8 +9,8 @@ class PaymentCredit extends Database1
         try {
             // データ挿入の為トランザクション開始
             $dbh->beginTransaction();
-            $sql = 'INSERT INTO product (name, address, cc_name, cc_number, cc_time, cc_cvv)
-                    VALUES (:name, :address, :cc_name, :cc_number, cc_time, cc_cvv)';
+            $sql = 'INSERT INTO payment_credit (name, address, cc_name, cc_number, cc_time, cc_cvv)
+                    VALUES (:name, :address, :cc_name, :cc_number, :cc_time, :cc_cvv)';
             $stmt = $dbh->prepare($sql);
             $stmt->bindValue(':name', $name, PDO::PARAM_STR);
             $stmt->bindValue(':address', $address, PDO::PARAM_STR);

@@ -6,16 +6,43 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>リクエスト完了ページ</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="request_done.css">
 </head>
-
+<header>
+<a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
+</header>
 <body>
-    <header>
-    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
-    </header>
-        <h1>リクエスト完了ページ</h1>
-    <main>
-        <h2>リクエストありがとうございます！</h2>
-    </main>
+  <!-- アラート -->
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="..." class="rounded me-2" alt="...">
+      <strong class="me-auto">Bookstore</strong>
+      <small class="text-muted">11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+    リクエストはどうだったかな？好きな本をリクエストしたら商品画面に戻って確認しようね！
+    </div>
+  </div>
+  <!-- リクエスト完了　card -->
+  <div class="card border-warning mb-3 w-50" style="width: 35rem;">
+    <img src="photojp/describetwoguys.jpg" class="card-img-top" alt="text-center">
+    <div class="card-body text-center">
+      <h5 class="card-title bg-warning">リクエスト完了ページ</h5>
+      <p class="fs-3">リクエストありがとうございました。</p>
+    </div>
+    <!-- list -->
+    <ul class="list-group">
+      <li class="list-group-item text-center">商品画面に戻り新商品を確認しましょう</li>
+      <li class="list-group-item text-center">商品リクエストでは画像反映に時間がかかります。</li>
+    </ul>
+    <!-- link -->
+    <div class="card-body">
+      <a href="index.php" class="card-link-warning">商品購入画面</a>
+      <a href="logout.php" class="card-link-danger">ログアウト</a>
+    </div>
+  </div>
 </body>
 </html>
 
@@ -58,9 +85,9 @@
 
         if (!isset($_SESSION['product'])){
           echo $msg;
-          echo '<h1><a href="index.php">トップページ</a></h1>';
+          echo '<h2><a href="index.php">トップページ</a></h2>';
       } else{ echo $msg;
-              echo '<h1><a href="confirm.php">購入画面</a></h1>';
+              echo '<h2><a href="confirm.php">購入画面</a></h2>';
       }
         exit();
       } catch (PDOException $e) {

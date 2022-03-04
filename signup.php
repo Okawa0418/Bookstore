@@ -123,5 +123,23 @@
   <form action="index.php">
       <input type="submit" class="btn btn-secondary" value="トップページ">
   </form>
+  <!-- お問合せフォーム -->
+  <footer>
+      <div class="px-4 py-5 my-5 text-center">
+          <img class="d-block mx-auto mb-4" src="photojp/describetwoguys.jpg"  width="800" height="400">
+          <h1 class="display-5 fw-bold">BOOKSTORE</h1>
+          <div class="col-lg-6 mx-auto">
+              <p class="lead mb-4">BOOKSTOREへようこそ あなたの世界をもっと広げよう。毎日をより豊かに新たな開拓使をBOOKSTOREは応援します。</p>
+          </div>
+      </div>
+  </footer>
+  <div class="row">
+    <div class="col-8 bg-warning">
+      <iframe width="656" height="369" src="https://www.youtube.com/embed/Ye5mGkg8iyw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="col-4 bg-warning">
+      <video controls width="350" height="350" src="https://res.cloudinary.com/code-kitchen/video/upload/v1555082747/movie.mp4"></video>
+    </div>
+  </div>
 </body>
 </html>

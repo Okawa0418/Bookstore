@@ -13,34 +13,24 @@
 <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
 </header>
 <body>
-  <!-- アラート -->
-  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <img src="..." class="rounded me-2" alt="...">
-      <strong class="me-auto">Bookstore</strong>
-      <small class="text-muted">11 mins ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-    リクエストはどうだったかな？好きな本をリクエストしたら商品画面に戻って確認しようね！
-    </div>
-  </div>
   <!-- リクエスト完了　card -->
-  <div class="card border-warning mb-3 w-50" style="width: 35rem;">
-    <img src="photojp/describetwoguys.jpg" class="card-img-top" alt="text-center">
-    <div class="card-body text-center">
-      <h5 class="card-title bg-warning">リクエスト完了ページ</h5>
-      <p class="fs-3">リクエストありがとうございました。</p>
-    </div>
-    <!-- list -->
-    <ul class="list-group">
-      <li class="list-group-item text-center">商品画面に戻り新商品を確認しましょう</li>
-      <li class="list-group-item text-center">商品リクエストでは画像反映に時間がかかります。</li>
-    </ul>
-    <!-- link -->
-    <div class="card-body">
-      <a href="index.php" class="card-link-warning">商品購入画面</a>
-      <a href="logout.php" class="card-link-danger">ログアウト</a>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <div class="card border-warning mb-3">
+          <img src="photojp/describetwoguys.jpg" class="card-img-top" alt="text-center">
+          <div class="card-body text-center">
+            <h5 class="card-title bg-warning">リクエスト完了ページ</h5>
+            <p class="fs-3">リクエストありがとうございました。</p>
+          </div>
+          <div class="card-body">
+            <a href="index.php" class="card-link-warning">商品購入画面</a>
+            <a href="logout.php" class="card-link-danger">ログアウト</a>
+        </div>
+      </div>
+      <div class="col-4">
+        <img src="photojp/light.jpg" width="600" height="300">
+      </div>
     </div>
   </div>
 </body>

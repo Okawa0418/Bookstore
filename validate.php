@@ -89,3 +89,10 @@ if (move_uploaded_file($tmp_path, $upload_dir . $save_filename)) {
 $database = new Database1;
 // productテーブルにデータを挿入
 $database->createProduct($name, $price, $file_path, $category);
+
+// セッション変数に追加メッセージを代入
+$_SESSION['msg'] = '「' . $name . '」を追加しました。';
+
+// 商品リストへリダイレクト
+header('Location: productList.php');
+exit;

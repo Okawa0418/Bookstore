@@ -85,13 +85,6 @@
         unset($_SESSION['save_quantity']);
     }
 
-    // 疑似ランダムなバイト文字列を生成
-    $toke_byte = random_bytes(32);
-    // バイナリデータを16進数に変換
-    $token = bin2hex($toke_byte);
-    // 生成したトークンをセッションに保存
-    $_SESSION['token'] = $token;
-
     function h($s) {
         return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
     }
@@ -240,7 +233,8 @@
                             <a href="show.php?product_id=<?=$allProduct[$i]['product_id'];?>" class="card h-100">               
                                 <img src="<?= $allProduct[$i]['file_path']; ?>" class="card-img-top">
                                 <div class="card-body">
-                                    <p class="card-text"><?= h($allProduct[$i]['product_name']); ?></p>                       
+                                    <!-- バイト数40文字以降は・・・を表示させる -->
+                                    <p class="card-text"><?= h(mb_strimwidth($allProduct[$i]['product_name'], 0, 40, '…', 'utf8')); ?></p>                       
                                 </div>                           
                             </a>  
                         </div>
@@ -253,7 +247,7 @@
             <!-- フッターrowここから -->
             <div class="row">
                 <!-- フッター表示 -->
-                <footer id="footer" class="border-top bg-light" style="height:90px;margin-top:100px;">
+                <footer id="footer" class="border-top bg-light" style="height:150px;margin-top:100px;">
                     <ul>
                         <div class="mb-2">
                             <li style="list-style: none;"><a class="link-dark" href="trouble.php">質問ボット</a></li>
@@ -261,7 +255,9 @@
                         <div class="mb-2">
                             <li style="list-style: none;"><a class="link-dark" href="customerformadd.php">お問い合わせ</a></li>
                         </div>   
-                        
+                        <div class="mb-2">
+                            <li style="list-style: none;"><a class="link-dark" href="schedule.php">BOOK STOREスケジュール</a></li>
+                        </div>  
                         <div class="mb-2">
                             <?php if (isset($_SESSION['user_id'])) : ?>
                                 <li style="list-style: none;"><a class="link-dark" href="quit.php">退会する</a></li>

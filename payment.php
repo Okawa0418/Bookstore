@@ -24,7 +24,7 @@
 <body class="bg-light">
   <div class="container">
     <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="BOOK STORE.jfif" alt="" width="200" height="72">
+    <a href="index.php"><img class="d-block mx-auto mb-4" src="BOOK STORE.jfif" alt="" width="200" height="72"></a>
     </div>
     <div class="row">
       <div class="col-md-4 order-md-2 mb-4">
@@ -38,22 +38,10 @@
               <h6 class="my-0">商品名</h6>
             </div>
             <span class="text-muted">￥0</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">商品名</h6>
-            </div>
-            <span class="text-muted">￥0</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">商品名</h6>
-            </div>
-            <span class="text-muted">￥0</span>
-          </li> -->
+          </li>-->
           <li class="list-group-item d-flex justify-content-between">
             <span>合計 (円)</span>
-            <strong><?php echo $_SESSION ['total_amount']?></strong>
+            <strong><?php echo $_SESSION['total_amount']?></strong>
           </li>
         </ul>
       </div>
@@ -98,6 +86,9 @@
               <label>
                 <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()" >クレジットカード
               </label>
+              <label>
+                <input class="js-check" type="radio" name="rs" value="2" onclick="formSwitch()">銀行口座
+              </label>
                  <span id="card">
                   <div class="row">
                     <div class="col-md-6 mb-3">
@@ -134,9 +125,6 @@
                   </div>
                 </span>
               
-              <label>
-                <input class="js-check" type="radio" name="rs" value="2" onclick="formSwitch()">銀行口座
-              </label>
               <span id="bank">
                 <div class="row">
                   <div class="col-md-6 mb-3">
@@ -171,10 +159,24 @@
                       check = document.getElementsByClassName('js-check')
                       if (check[1].checked) {
                           selecterBox.style.display = "none";  
-                          selecterBox1.style.display = "block";               
+                          selecterBox1.style.display = "block"; 
+                          document.getElementById("cc-name").disabled = true; 
+                          document.getElementById("cc-number").disabled = true; 
+                          document.getElementById("cc-expiration").disabled = true; 
+                          document.getElementById("cc-cvv").disabled = true; 
+                          document.getElementById("b-name").disabled = false;              
+                          document.getElementById("b-number").disabled = false;              
+                          document.getElementById("b-cvv").disabled = false;              
                       } else if (check[0].checked) {
                           selecterBox.style.display = "block";
                           selecterBox1.style.display = "none";
+                          document.getElementById("cc-name").disabled = false;
+                          document.getElementById("cc-number").disabled = false;
+                          document.getElementById("cc-expiration").disabled = false;
+                          document.getElementById("cc-cvv").disabled = false;
+                          document.getElementById("b-name","b-number","b-cvv").disabled = true;
+                          document.getElementById("b-number").disabled = true;
+                          document.getElementById("b-cvv").disabled = true;
                       } else {
                           selecterBox.style.display = "none";
                       }

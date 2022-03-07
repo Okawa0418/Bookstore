@@ -46,6 +46,9 @@ function h($s) {
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php">ホーム</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="payment_history.php">お支払別</a>
+                    </li>
                 </ul>
             </div>
         </div>

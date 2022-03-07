@@ -4,30 +4,41 @@ session_start();
 require_once('database1.php');
 require_once('payment_credit_db.php');
 
+if (empty($_SESSION['user_id'])) {
+    echo '不正アクセスです';
+    exit;
+}
+
+// ユーザーIDを変数へ代入
+$user_id = $_SESSION['user_id'];
+
 // 送信された送り先の値を変数へ代入
 $name = $_POST['name'];
 $address = $_POST['address'];
 
+// 送信された合計金額を変数へ代入
+$total_amount = $_SESSION['total_amount'];
+unset($_SESSION['total_amount']);
 
 // 名前・住所のバリデーション
-// 名前と住所がともに文字数オーバーだった場合
-if (60 < mb_strlen($name, 'UTF-8') && 161 < mb_strlen($address, 'UTF-8')) {
-    $_SESSION['msg'] = '※お名前の文字数は60文字以内、住所の文字数は161文字以内にしてください';
-    header('Location: payment.php');
-    exit;
-}
-// 名前は最大60文字まで
-if (60 < mb_strlen($name, 'UTF-8')) {
-    $_SESSION['msg'] = '※お名前の文字数は60文字以内にしてください';
-    header('Location: payment.php');
-    exit;
-}
-// 住所161文字まで
-if (161 < mb_strlen($address, 'UTF-8')) {
-    $_SESSION['msg'] = '※住所の文字数は161文字以内にしてください';
-    header('Location: payment.php');
-    exit;
-}
+// 名前と住所がともに文字数オーバーだった場合(HTMLで実装済)
+// if (60 < mb_strlen($name, 'UTF-8') && 161 < mb_strlen($address, 'UTF-8')) {
+//     $_SESSION['msg'] = '※お名前の文字数は60文字以内、住所の文字数は161文字以内にしてください';
+//     header('Location: payment.php');
+//     exit;
+// }
+// 名前は最大60文字まで(HTMLで実装済)
+// if (60 < mb_strlen($name, 'UTF-8')) {
+//     $_SESSION['msg'] = '※お名前の文字数は60文字以内にしてください';
+//     header('Location: payment.php');
+//     exit;
+// }
+// 住所161文字まで(HTMLで実装済)
+// if (161 < mb_strlen($address, 'UTF-8')) {
+//     $_SESSION['msg'] = '※住所の文字数は161文字以内にしてください';
+//     header('Location: payment.php');
+//     exit;
+// }
 
 // クレジットカード決済だった場合
 if ($_POST['rs'] == '1') {
@@ -117,21 +128,20 @@ if ($_POST['rs'] == '1') {
 
     // データベースに登録する
     $payment_credit = new PaymentCredit;
-    $payment_credit->createPaymentCredit($name, $address, $cc_name, $cc_number, $cc_time, $save_cvv);
+    $payment_credit->createPaymentCredit($name, $address, $cc_name, $cc_number, $cc_time, $save_cvv, $total_amount, $user_id);
 
 }
 
 // 銀行口座決済だった場合
 if ($_POST['rs'] == '2') {
-    // クレジットカード決済であることをセッション変数で保持
+    // 銀行口座決済であることをセッション変数で保持
     $_SESSION['payment'] = 2; 
     // 値を変数へ代入
     $b_name = $_POST['b_name'];
     $b_number = $_POST['b_number'];
-    $b_time = $_POST['b_time'];
     $b_cvv = $_POST['b_cvv'];
 
-    // 全角カタカナ、スペース、全角カタカナ
+    // 口座名義は全角カタカナ、スペース、全角カタカナ
     if (!preg_match('/\A[ァ-ヴー]+　+[ァ-ヴー]\z+/u', $b_name)) {
         $_SESSION['msg'] = '※カード名義は全角カタカナ、姓名の間にスペースを入れてください';
         header('Location: payment.php');
@@ -158,10 +168,17 @@ if ($_POST['rs'] == '2') {
         header('Location: payment.php');
         exit;
     }
+
+    // 口座情報のバリデーション通過後
+    // 暗証番号をハッシュ化
+    $save_cvv = password_hash($b_cvv, PASSWORD_DEFAULT);
+    // データベースに登録する
+    $payment_credit = new PaymentCredit;
+    $payment_credit->createPaymentBank($name, $address, $b_name, $b_number, $save_cvv, $total_amount, $user_id);
 }
 
 // 決済情報登録後
-header('Location: done.php');
-exit;
 // done.phpでカート内を空にする
 // （決済情報登録の外部キーを持たせて）購入履歴に商品をインサートしていく
+header('Location: done.php');
+exit;

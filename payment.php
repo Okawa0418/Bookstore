@@ -26,9 +26,6 @@
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="BOOK STORE.jfif" alt="" width="200" height="72">
     </div>
-<?php 
-var_dump($_SESSION['msg']);
-?>
     <div class="row">
       <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -56,11 +53,24 @@ var_dump($_SESSION['msg']);
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span>合計 (円)</span>
-            <strong><?php echo $total_amount?></strong>
+            <strong><?php echo $_SESSION ['total amount']?></strong>
           </li>
         </ul>
       </div>
+
       <div class="col-md-8 order-md-1">
+      <?php
+        if (isset($_SESSION['msg'])) {
+        $msg = $_SESSION['msg'];
+        unset($_SESSION['msg']);
+      }
+      ?>
+      <?php if (isset($msg)) : ?>
+        <?= $msg; ?><br>
+      <?php endif ; ?>
+      </div>
+      
+        <div class="col-md-8 order-md-1">
         <h4 class="mb-3">請求先住所</h4>
         <form action="validate_pay.php" method="post" class="needs-validation" novalidate>
           <div class="row">

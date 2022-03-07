@@ -33,7 +33,7 @@
           <span class="badge badge-secondary badge-pill">3</span>
         </h4>
         <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">商品名</h6>
             </div>
@@ -50,10 +50,10 @@
               <h6 class="my-0">商品名</h6>
             </div>
             <span class="text-muted">￥0</span>
-          </li>
+          </li> -->
           <li class="list-group-item d-flex justify-content-between">
             <span>合計 (円)</span>
-            <strong><?php echo $_SESSION ['total amount']?></strong>
+            <strong><?php echo $_SESSION ['total_amount']?></strong>
           </li>
         </ul>
       </div>
@@ -102,7 +102,7 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="cc-name">カードの名義</label>
-                      <input type="text" class="form-control" id="cc-name" name="cc_name" placeholder="" required>
+                      <input type="text" class="form-control" id="cc-name" name="cc_name" placeholder="" disabled="disabled" required>
                       <small class="text-muted">カード上に表示されているフルネーム</small>
                       <div class="invalid-feedback">
                         カードの名義を入力してください
@@ -110,7 +110,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="cc-number">クレジットカード番号</label>
-                      <input type="text" class="form-control" id="cc-number" name="cc_number" placeholder="" required>
+                      <input type="text" class="form-control" id="cc-number" name="cc_number" placeholder="" disabled="disabled" required>
                       <div class="invalid-feedback">
                         クレジットカード番号を入力してください
                       </div>
@@ -119,14 +119,14 @@
                   <div class="row">
                     <div class="col-md-3 mb-3">
                       <label for="cc-expiration">有効期限</label>
-                      <input type="text" class="form-control" id="cc-expiration" name="cc_time" placeholder="" required>
+                      <input type="text" class="form-control" id="cc-expiration" name="cc_time" placeholder="" disabled="disabled" required>
                       <div class="invalid-feedback">
                         有効期限を入力してください
                       </div>
                     </div>
                     <div class="col-md-3 mb-3">
                       <label for="cc-cvv">CVV</label>
-                      <input type="text" class="form-control" id="cc-cvv" name="cc_cvv" placeholder="" required>
+                      <input type="text" class="form-control" id="cc-cvv" name="cc_cvv" disabled="disabled" placeholder="" required>
                       <div class="invalid-feedback">
                         セキュリティコードを入力してください
                       </div>
@@ -135,13 +135,13 @@
                 </span>
               
               <label>
-                <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()">銀行口座
+                <input class="js-check" type="radio" name="rs" value="2" onclick="formSwitch()">銀行口座
               </label>
               <span id="bank">
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="b-name">口座名義</label>
-                    <input type="text" class="form-control" id="b-name" name="b_name" placeholder="" required>
+                    <input type="text" class="form-control" id="b-name" name="b_name" disabled="disabled" placeholder="" required>
                     <small class="text-muted">カード上に表示されているフルネーム</small>
                     <div class="invalid-feedback">
                       口座名義を入力してください
@@ -149,14 +149,14 @@
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="b-number">口座番号</label>
-                    <input type="text" class="form-control" id="b-number" name="b_number" placeholder="" required>
+                    <input type="text" class="form-control" id="b-number" name="b_number" disabled="disabled" placeholder="" required>
                     <div class="invalid-feedback">
                       口座番号を入力してください
                     </div>
                   </div><br>
                   <div class="col-md-3 mb-3">
                     <label for="b-cvv">暗証番号</label>
-                    <input type="text" class="form-control" id="b-cvv" name="b_cvv" placeholder="" required>
+                    <input type="text" class="form-control" id="b-cvv" name="b_cvv" disabled="disabled" placeholder="" required>
                     <div class="invalid-feedback">
                       暗証番号を入力してください
                     </div>

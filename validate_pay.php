@@ -4,6 +4,7 @@ session_start();
 require_once('database1.php');
 require_once('payment_credit_db.php');
 
+// ユーザー情報がない場合
 if (empty($_SESSION['user_id'])) {
     echo '不正アクセスです';
     exit;
@@ -12,33 +13,20 @@ if (empty($_SESSION['user_id'])) {
 // ユーザーIDを変数へ代入
 $user_id = $_SESSION['user_id'];
 
+// 送信されてきた値がない場合
+if (empty($_POST['name']) || empty($_POST['address'])) {
+    echo '不正アクセスです';
+    exit;
+}
+
 // 送信された送り先の値を変数へ代入
 $name = $_POST['name'];
 $address = $_POST['address'];
 
 // 送信された合計金額を変数へ代入
 $total_amount = $_SESSION['total_amount'];
+// 以降、使用しないので合計金額セッション破棄
 unset($_SESSION['total_amount']);
-
-// 名前・住所のバリデーション
-// 名前と住所がともに文字数オーバーだった場合(HTMLで実装済)
-// if (60 < mb_strlen($name, 'UTF-8') && 161 < mb_strlen($address, 'UTF-8')) {
-//     $_SESSION['msg'] = '※お名前の文字数は60文字以内、住所の文字数は161文字以内にしてください';
-//     header('Location: payment.php');
-//     exit;
-// }
-// 名前は最大60文字まで(HTMLで実装済)
-// if (60 < mb_strlen($name, 'UTF-8')) {
-//     $_SESSION['msg'] = '※お名前の文字数は60文字以内にしてください';
-//     header('Location: payment.php');
-//     exit;
-// }
-// 住所161文字まで(HTMLで実装済)
-// if (161 < mb_strlen($address, 'UTF-8')) {
-//     $_SESSION['msg'] = '※住所の文字数は161文字以内にしてください';
-//     header('Location: payment.php');
-//     exit;
-// }
 
 // クレジットカード決済だった場合
 if ($_POST['rs'] == '1') {

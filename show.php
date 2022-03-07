@@ -21,6 +21,7 @@ $product = $database->getProductByProductId($product_id);
 $product_name = $product['product_name'];
 $price = $product['price'];
 $file_path =$product['file_path'];
+$category = $product['category'];
 
 // 疑似ランダムなバイト文字列を生成
 $toke_byte = random_bytes(32);
@@ -154,12 +155,25 @@ if (isset($_SESSION['user_id'])) {
     <div class="card mb-3">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="<?=$file_path?>" style="width: 320px; height: 500px;" >
+                <img src="<?=$file_path?>" style="width: 256px; height: 400px;" >
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <!-- 商品名 -->
                     <h5 class="card-title"><?= h($product_name); ?></h5>
+                    <!-- カテゴリー -->
+                    <p class="card-text">
+                        カテゴリー：
+                        <?php if ($category == 1) : ?>
+                            文学・評論・人文・思想
+                        <?php elseif ($category == 2) : ?>
+                            ビジネス・コンピュータ
+                        <?php elseif ($category == 3) : ?>
+                            生活・趣味・実用
+                        <?php else : ?>
+                            教育・資格
+                        <?php endif ; ?>
+                    </p>
                     <!-- 価格 -->
                     <p class="card-text">価格：<?= $price; ?>円</p>
                     <!-- 数量選択フォーム開始 -->
@@ -216,7 +230,7 @@ if (isset($_SESSION['user_id'])) {
                     </p>
                     <!-- お気に入りボタン終了 -->
 
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text"><small class="text-muted">↑気になる商品はお気に入りへ追加しましょう</small></p>
                 </div>
             </div>
         </div>

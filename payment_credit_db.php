@@ -10,7 +10,7 @@ class PaymentCredit extends Database1
             // データ挿入の為トランザクション開始
             $dbh->beginTransaction();
             $sql = 'INSERT INTO payment_credit (name, address, cc_name, cc_number, cc_time, cc_cvv, total_amount, user_id)
-                    VALUES (:name, :address, :cc_name, :cc_number, :cc_time, :cc_cvv, , :total_amount, :user_id)';
+                    VALUES (:name, :address, :cc_name, :cc_number, :cc_time, :cc_cvv, :total_amount, :user_id)';
             $stmt = $dbh->prepare($sql);
             $stmt->bindValue(':name', $name, PDO::PARAM_STR);
             $stmt->bindValue(':address', $address, PDO::PARAM_STR);
@@ -36,7 +36,7 @@ class PaymentCredit extends Database1
     public function getNewPaymentCredit() {
         $dbh = $this->dbConnect();
         // SQL準備
-        $sql = 'SELECT id FROM payment_credit ORDER BY pur_time DESC LIMIT 1';
+        $sql = 'SELECT id FROM payment_credit ORDER BY pay_time DESC LIMIT 1';
         // SQL実行
         $stmt = $dbh->query($sql);
         // SQLの結果を受け取る

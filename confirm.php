@@ -38,7 +38,7 @@ function h($s) {
     return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
 
 }
-$_SESSION ['total amount']=$total_amount
+$_SESSION['total_amount'] = $total_amount;
 ?>
 <!DOCTYPE html>
 <html lang="ja">

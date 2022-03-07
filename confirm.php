@@ -38,6 +38,7 @@ function h($s) {
     return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
 
 }
+$_SESSION ['total amount']=$total_amount
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -73,6 +74,7 @@ function h($s) {
                     <th><?php echo h($results[$i]['product_name']); ?></th>
                     <th><?php echo h($results[$i]['quantity']);  ?></th>
                     <th><?php echo h($results[$i]['price']);?></th>
+
                     <!-- 取り消しボタンで該当するカートの商品を削除 -->
                     <th>
                         <form action="cancel.php" method="post">

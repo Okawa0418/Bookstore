@@ -86,9 +86,9 @@ var_dump($_SESSION['msg']);
           <h4 class="mb-3">お支払い方法</h4>
             <form autocomplete=off action="validate_pay.php">
               <label>
-                <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch2()" >クレジットカード
+                <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()" >クレジットカード
               </label>
-                 <span id="sample2">
+                 <span id="card">
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="cc-name">カードの名義</label>
@@ -125,9 +125,9 @@ var_dump($_SESSION['msg']);
                 </span>
               
               <label>
-                <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch2()">銀行口座
+                <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()">銀行口座
               </label>
-              <span id="sample">
+              <span id="bank">
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="b-name">口座名義</label>
@@ -154,10 +154,10 @@ var_dump($_SESSION['msg']);
                 </div>
               </span>
 
-              <script type="text/javascript">var selecterBox = document.getElementById('sample2');
-              var selecterBox1 = document.getElementById('sample');
+              <script type="text/javascript">var selecterBox = document.getElementById('card');
+              var selecterBox1 = document.getElementById('bank');
 
-                  function formSwitch2() {
+                  function formSwitch() {
                       check = document.getElementsByClassName('js-check')
                       if (check[1].checked) {
                           selecterBox.style.display = "none";  
@@ -169,7 +169,7 @@ var_dump($_SESSION['msg']);
                           selecterBox.style.display = "none";
                       }
                   }
-                  window.addEventListener('load', formSwitch2());
+                  window.addEventListener('load', formSwitch());
                 
                   function entryChange2(){
                       if(document.getElementById('changeSelect')){

@@ -3,6 +3,7 @@
 session_start();
 require_once('database1.php');
 require_once('payment_credit_db.php');
+require_once('payment_bank_db.php');
 
 // ユーザー情報がない場合
 if (empty($_SESSION['user_id'])) {
@@ -22,11 +23,6 @@ if (empty($_POST['name']) || empty($_POST['address'])) {
 // 送信された送り先の値を変数へ代入
 $name = $_POST['name'];
 $address = $_POST['address'];
-
-// 送信された合計金額を変数へ代入
-$total_amount = $_SESSION['total_amount'];
-// 以降、使用しないので合計金額セッション破棄
-unset($_SESSION['total_amount']);
 
 // クレジットカード決済だった場合
 if ($_POST['rs'] == '1') {
@@ -111,6 +107,9 @@ if ($_POST['rs'] == '1') {
     }
 
     // カード情報のバリデーションを通過
+    // 送信された合計金額を変数へ代入
+    $total_amount = $_SESSION['total_amount'];
+
     // CVVハッシュ化
     $save_cvv = password_hash($cc_cvv, PASSWORD_DEFAULT);
 
@@ -128,13 +127,15 @@ if ($_POST['rs'] == '2') {
     $b_name = $_POST['b_name'];
     $b_number = $_POST['b_number'];
     $b_cvv = $_POST['b_cvv'];
+    // var_dump($b_name);
+    // exit;
 
     // 口座名義は全角カタカナ、スペース、全角カタカナ
-    if (!preg_match('/\A[ァ-ヴー]+　+[ァ-ヴー]\z+/u', $b_name)) {
-        $_SESSION['msg'] = '※カード名義は全角カタカナ、姓名の間にスペースを入れてください';
-        header('Location: payment.php');
-        exit;
-    }
+    // if (!preg_match('/\A[ァ-ヴー]+[ |　]+[ァ-ヴー]\z/', $b_name)) {
+    //     $_SESSION['msg'] = '※口座名義は全角カタカナ、姓名の間にスペースを入れてください';
+    //     header('Location: payment.php');
+    //     exit;
+    // }
 
     // 口座名義60文字
     if (60 < mb_strlen($b_name, 'UTF-8')) {
@@ -158,14 +159,19 @@ if ($_POST['rs'] == '2') {
     }
 
     // 口座情報のバリデーション通過後
+    // 送信された合計金額を変数へ代入
+    $total_amount = $_SESSION['total_amount'];
+   
     // 暗証番号をハッシュ化
     $save_cvv = password_hash($b_cvv, PASSWORD_DEFAULT);
     // データベースに登録する
-    $payment_credit = new PaymentCredit;
-    $payment_credit->createPaymentBank($name, $address, $b_name, $b_number, $save_cvv, $total_amount, $user_id);
+    $payment_bank = new PaymentBank;
+    $payment_bank->createPaymentBank($name, $address, $b_name, $b_number, $save_cvv, $total_amount, $user_id);
 }
 
 // 決済情報登録後
+// 以降、使用しないので合計金額セッション破棄
+unset($_SESSION['total_amount']);
 // done.phpでカート内を空にする
 // （決済情報登録の外部キーを持たせて）購入履歴に商品をインサートしていく
 header('Location: done.php');

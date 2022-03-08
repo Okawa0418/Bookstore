@@ -145,7 +145,7 @@
                                     <a class="nav-link" href="login_form.php">ログイン</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="signup.php">新規会員登録</a>
+                                    <a class="nav-link" href="signon.php">新規会員登録</a>
                                 </li>
                             <?php endif ; ?>
                             

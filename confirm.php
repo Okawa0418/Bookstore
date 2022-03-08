@@ -8,8 +8,8 @@ session_start();
 if (empty($_SESSION['user_id'])) {
     // エラーメッセージをセッションへ格納
     $_SESSION['msg'] = 'ログインしてください';
-    // signup.phpへリダイレクトする
-    header('Location: signup.php');
+    // signon.phpへリダイレクトする
+    header('Location: signon.php');
     exit;
 }
 

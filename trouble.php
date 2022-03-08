@@ -37,7 +37,7 @@
                 <h1 class="bg-info">1)新規登録、ログイン、退会に関する質問</h1>
                     <p>各種お探しのリンクへ移動できます。以下の事にお困りの場合は詳細をクリックしてください。（クリックすると拡大されます）</p>
                 <li class="list-group-item">
-                    <a href="signup.php"class="link-success">新規登録</a>
+                    <a href="signon.php"class="link-success">新規登録</a>
                     <a href="login.php"class="link-warning">ログイン画面</a>
                     <a href=""class="link-info">退会</a>
                     <!-- <a href="include.php"class="link-primary">商品追加フォーム</a>

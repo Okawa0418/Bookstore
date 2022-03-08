@@ -75,7 +75,7 @@
             }
 
         } else {
-            echo '<h2>メールアドレスもしくはパスワードが間違っています。<h2>';
+            echo '<h2 style="color:white">メールアドレスもしくはパスワードが間違っています。<h2>';
             echo '<a href="login_form.php">戻る</a>';
         }
 

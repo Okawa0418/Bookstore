@@ -164,6 +164,7 @@
                   <div class="col-md-6 mb-3">
                     <label for="b-number">口座番号</label>
                     <input type="text" class="form-control" id="b-number" name="b_number" disabled="disabled" placeholder="" required>
+                    <small class="text-muted">7桁の数字を入力</small>
                     <div class="invalid-feedback">
                       口座番号を入力してください
                     </div>

@@ -50,7 +50,7 @@ if ($_POST['rs'] == '1') {
     }
 
     // カード番号(VISA/MasterCard/American Express/Diners Club/Discover/JCB)
-    // 例）4111111111111000
+    // 許容例）4111111111111000
     if (!preg_match('/^(4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|^(?:2131|1800|35\d{3})\d{11}$)$/', $cc_number)) {
         // エラー
         $_SESSION['msg'] = '※正しいカード番号を入力してください';
@@ -131,11 +131,11 @@ if ($_POST['rs'] == '2') {
     // exit;
 
     // 口座名義は全角カタカナ、スペース、全角カタカナ
-    // if (!preg_match('/\A[ァ-ヴー]+[ |　]+[ァ-ヴー]\z/', $b_name)) {
-    //     $_SESSION['msg'] = '※口座名義は全角カタカナ、姓名の間にスペースを入れてください';
-    //     header('Location: payment.php');
-    //     exit;
-    // }
+    if (!preg_match("/^[ァ-ヶー]+[ |　]+[ァ-ヶー]/u", $b_name)) {
+        $_SESSION['msg'] = '※口座名義は全角カタカナ、姓名の間にスペースを入れてください';
+        header('Location: payment.php');
+        exit;
+    }
 
     // 口座名義60文字
     if (60 < mb_strlen($b_name, 'UTF-8')) {
@@ -144,8 +144,8 @@ if ($_POST['rs'] == '2') {
         exit;
     }
     
-    // 銀行口座番号7桁まで
-    if (7 < mb_strlen($b_number, 'UTF-8')) {
+    // 銀行口座番号7桁
+    if (!preg_match('/^[0-9]{7}\z/', $b_number)) {
         $_SESSION['msg'] = '※正しい口座番号を記入してください';
         header('Location: payment.php');
         exit;

@@ -19,6 +19,26 @@
   $stmt->bindValue(':user_id', $_SESSION['user_id']);
   $stmt->execute();
   $member = $stmt->fetch();
+
+  // カート情報を取得
+  require_once('cart_db.php');
+  $cart = new Cart;
+  // ログインしている人のカート情報を取得
+  $results = $cart->getCartByUserId($_SESSION['user_id']);
+  // 数量の合計を計算
+  $total_quantity = 0;
+  for ($i=0; $i<count($results); $i++) {
+    $total_quantity += $results[$i]['quantity'];
+  }
+  // カート内が空であった場合
+  if (empty($results)) {
+    echo '不正アクセスです';
+    echo '<a href="index.php">BOOK STORE Top</a>';
+  }
+
+  function h($s) {
+    return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+  }
 ?>
 
 <body class="bg-light">
@@ -30,15 +50,19 @@
       <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-muted">カート</span>
-          <span class="badge badge-secondary badge-pill">3</span>
+          <span class="badge badge-secondary badge-pill"><?=$total_quantity;?></span>
         </h4>
         <ul class="list-group mb-3">
-          <!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">商品名</h6>
-            </div>
-            <span class="text-muted">￥0</span>
-          </li>-->
+          <!-- カート内の商品を表示 -->
+          <?php for($i=0; $i<count($results); $i++) : ?>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0"><?=h(mb_strimwidth($results[$i]['product_name'], 0, 14, '…', 'utf8'));?></h6>
+              </div>
+              <span class="text-muted"><?=$results[$i]['price'];?>円</span>
+              <span class="text-muted"><?=$results[$i]['quantity'];?>個</span>
+            </li>
+          <?php endfor ; ?>
           <li class="list-group-item d-flex justify-content-between">
             <span>合計 (円)</span>
             <strong><?php echo $_SESSION['total_amount']?></strong>
@@ -89,11 +113,11 @@
               <label>
                 <input class="js-check" type="radio" name="rs" value="2" onclick="formSwitch()">銀行口座
               </label>
-                 <span id="card">
+                <span id="card">
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="cc-name">カードの名義</label>
-                      <input type="text" class="form-control" id="cc-name" name="cc_name" placeholder="" disabled="disabled" required>
+                      <input type="text" class="form-control" id="cc-name" name="cc_name" placeholder="TANAKA TARO" disabled="disabled" required>
                       <small class="text-muted">カード上に表示されているフルネーム</small>
                       <div class="invalid-feedback">
                         カードの名義を入力してください
@@ -102,6 +126,7 @@
                     <div class="col-md-6 mb-3">
                       <label for="cc-number">クレジットカード番号</label>
                       <input type="text" class="form-control" id="cc-number" name="cc_number" placeholder="" disabled="disabled" required>
+                      <small class="text-muted">カード上に表示されている番号</small>
                       <div class="invalid-feedback">
                         クレジットカード番号を入力してください
                       </div>
@@ -110,7 +135,8 @@
                   <div class="row">
                     <div class="col-md-3 mb-3">
                       <label for="cc-expiration">有効期限</label>
-                      <input type="text" class="form-control" id="cc-expiration" name="cc_time" placeholder="" disabled="disabled" required>
+                      <input type="text" class="form-control" id="cc-expiration" name="cc_time" placeholder="MMYY" disabled="disabled" required>
+                      <small class="text-muted">数字4桁で記入</small>
                       <div class="invalid-feedback">
                         有効期限を入力してください
                       </div>
@@ -129,8 +155,8 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="b-name">口座名義</label>
-                    <input type="text" class="form-control" id="b-name" name="b_name" disabled="disabled" placeholder="" required>
-                    <small class="text-muted">カード上に表示されているフルネーム</small>
+                    <input type="text" class="form-control" id="b-name" name="b_name" disabled="disabled" placeholder="タナカ　タロウ" required>
+                    <small class="text-muted">全角カタカナ・姓名の間にスペース</small>
                     <div class="invalid-feedback">
                       口座名義を入力してください
                     </div>
@@ -144,7 +170,7 @@
                   </div><br>
                   <div class="col-md-3 mb-3">
                     <label for="b-cvv">暗証番号</label>
-                    <input type="text" class="form-control" id="b-cvv" name="b_cvv" disabled="disabled" placeholder="" required>
+                    <input type="password" class="form-control" id="b-cvv" name="b_cvv" disabled="disabled" placeholder="" required>
                     <div class="invalid-feedback">
                       暗証番号を入力してください
                     </div>

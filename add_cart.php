@@ -49,8 +49,8 @@ if (isset($_POST["token"])
         $_SESSION['cart']['product_id'] = $product_id;
         $_SESSION['cart']['product_name'] = $product_name;
         $_SESSION['cart']['price'] = $price;
-        // signup.phpへ遷移
-        header('Location: signup.php');
+        // signon.phpへ遷移
+        header('Location: signon.php');
         exit;
     }
 

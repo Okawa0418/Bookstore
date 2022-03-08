@@ -41,39 +41,39 @@ session_start();
 
     if(empty($_POST['user_name'])){
             $_SESSION['msg'] = '※ユーザー名を入力してください。';
-            header('Location: signup.php');
+            header('Location: signon.php');
         }
         else{$_SESSION['user_name'] = $_POST['user_name'];}
     if(empty($_POST['mail_address'])){
             $_SESSION['msg2'] = '※メールアドレスを入力してください。';
-            header('Location: signup.php');
+            header('Location: signon.php');
         }
         else{$_SESSION['mail_address'] = $_POST['mail_address'];}
     if(empty($_POST['post_address'])){
             $_SESSION['msg3'] = '※住所を入力してください。';
-            header('Location: signup.php');
+            header('Location: signon.php');
         }
         else{$_SESSION['post_address'] = $_POST['post_address'];}
     if(empty($_POST['tel'])){
             $_SESSION['msg4'] = '※電話番号を入力してください。';
-            header('Location: signup.php');
+            header('Location: signon.php');
         }
         else{$_SESSION['tel'] = $_POST['tel'];}
     if(empty($_POST['password'])){
             $_SESSION['msg5'] = '※パスワードを入力してください。';
-            header('Location: signup.php');
+            header('Location: signon.php');
             exit;
         }
     if (!empty($_POST['password'])&&!preg_match("/\A[a-z\d]{8,100}+\z/i",$_POST['password'])){
             $_SESSION['msg6'] ='※パスワードは英数字8文字以上100文字以下にしてください。';
-            header('Location: signup.php');
+            header('Location: signon.php');
             exit;
         }
     
     // 入力されたメールアドレスとデータベースに存在するメールアドレスが一致した場合
     elseif(isset($member['mail_address'])&&$member['mail_address']===$mail){
       echo '<h2>同じメールアドレスが存在します。</h2>';
-      echo '<a href="signup.php">戻る</a>';
+      echo '<a href="signon.php">戻る</a>';
     }
 
     else{

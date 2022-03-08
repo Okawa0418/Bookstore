@@ -49,7 +49,7 @@
     }
 
     if(empty($_POST['name'])){
-        $_SESSION['msg2'] = '※名前を入力してください。';
+        $_SESSION['msg2'] = '※Webネームを入力してください。';
         header('Location: customerformadd.php');
     } else{$_SESSION['name'] = $_POST['name'];
     }

@@ -117,7 +117,7 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="cc-name">カードの名義</label>
-                      <input type="text" class="form-control" id="cc-name" name="cc_name" placeholder="TANAKA TARO" disabled="disabled" required>
+                      <input type="text" class="form-control" id="cc-name" name="cc_name" placeholder="TARO TANAKA" disabled="disabled" required>
                       <small class="text-muted">カード上に表示されているフルネーム</small>
                       <div class="invalid-feedback">
                         カードの名義を入力してください
@@ -136,7 +136,7 @@
                     <div class="col-md-3 mb-3">
                       <label for="cc-expiration">有効期限</label>
                       <input type="text" class="form-control" id="cc-expiration" name="cc_time" placeholder="MMYY" disabled="disabled" required>
-                      <small class="text-muted">数字4桁で記入</small>
+                      <small class="text-muted">半角数字4桁で記入</small>
                       <div class="invalid-feedback">
                         有効期限を入力してください
                       </div>
@@ -164,7 +164,7 @@
                   <div class="col-md-6 mb-3">
                     <label for="b-number">口座番号</label>
                     <input type="text" class="form-control" id="b-number" name="b_number" disabled="disabled" placeholder="" required>
-                    <small class="text-muted">7桁の数字を入力</small>
+                    <small class="text-muted">7桁の数字を半角で入力</small>
                     <div class="invalid-feedback">
                       口座番号を入力してください
                     </div>
@@ -172,6 +172,7 @@
                   <div class="col-md-3 mb-3">
                     <label for="b-cvv">暗証番号</label>
                     <input type="password" class="form-control" id="b-cvv" name="b_cvv" disabled="disabled" placeholder="" required>
+                    <small class="text-muted">4桁の暗証番号を入力</small>
                     <div class="invalid-feedback">
                       暗証番号を入力してください
                     </div>

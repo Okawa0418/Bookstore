@@ -114,7 +114,7 @@ if (isset($_SESSION['user_id'])) {
                     </li>
                     <li class="nav-item">
                     <!-- 本のリクエストページへ遷移するボタン -->
-                        <form action="request.php" method="get">
+                        <form action="invitation.php" method="get">
                             <button type="submit" class="btn btn-info">本のリクエストはこちら</button>
                         </form>
                     </li>

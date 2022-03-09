@@ -8,7 +8,7 @@
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- modal -->
-    <link rel="stylesheet" href="modal2.css">
+    <link rel="stylesheet" href="modal.css">
     <!-- 位置、画像 -->
     <link rel="stylesheet" href="describe.css">
 </head>
@@ -164,7 +164,7 @@
             <div class="card-body">
                 <h5 class="card-title">あなたの好きな本は何ですか？</h5>
                 <p class="card-text">予約リクエストを記入してあなたの好きな本を購入しましょう。</p>
-                <form method="post" action="request.php">
+                <form method="post" action="invitation.php">
                     <input type="submit" value="クリック" name="index" class="btn btn-outline-dark">
                 </form>
             </div>
@@ -190,7 +190,7 @@
         </div>
     </div>
 </footer>
-<script src="modal2.js"></script>
+<script src="modal.js"></script>
 </body>
 
 </html>

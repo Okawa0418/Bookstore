@@ -151,9 +151,9 @@ if ($_POST['rs'] == '2') {
         exit;
     }
 
-    // 暗証番号は4桁ハッシュ化
-    if (4 < mb_strlen($b_cvv, 'UTF-8')) {
-        $_SESSION['msg'] = '※暗証番号は4桁を記入してください';
+    // 暗証番号は半角4桁
+    if (!preg_match('/^[0-9]{4}\z/', $b_cvv)) {
+        $_SESSION['msg'] = '※暗証番号は半角数字4桁を記入してください';
         header('Location: payment.php');
         exit;
     }

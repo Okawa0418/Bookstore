@@ -108,7 +108,7 @@
         <!-- ヘッダーとナビバーのコンテナここから -->
         <div class="container-fluid">
             <div class="row">
-            <header>
+            <header style="background-color: white;">  
                 <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
             </header>
             </div>

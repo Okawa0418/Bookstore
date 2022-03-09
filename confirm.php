@@ -46,7 +46,7 @@ $_SESSION['total_amount'] = $total_amount;
     <!-- bootstrap ｃｓｓ -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
     <!-- モーダル -->
-    <link rel="stylesheet" href="modal2.css">
+    <link rel="stylesheet" href="modal.css">
 </head>
 <body>
 <header>
@@ -195,7 +195,7 @@ $_SESSION['total_amount'] = $total_amount;
             </div>
         </div>         
     </div>
-    <!-- <a href="request.php" class="link-info">リクエストシートへ</a> -->
+    <!-- <a href="invitation.php" class="link-info">リクエストシートへ</a> -->
     <!-- 必要な際 -->
     <!-- <a href="#" class="card-link">お問い合わせフォーム</a> -->
     <!-- お問い合わせフォームを作成したい -->
@@ -209,7 +209,7 @@ $_SESSION['total_amount'] = $total_amount;
         </div>
     </div>
     <!-- モーダル -->
-    <script src="modal2.js"></script>
+    <script src="modal.js"></script>
 </footer>
 </body>
 </html>

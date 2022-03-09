@@ -91,7 +91,7 @@ function h($s) {
                             </li>
                             <li class="nav-item">
                             <!-- 本のリクエストページへ遷移するボタン -->
-                                <form action="request.php" method="get">
+                                <form action="invitation.php" method="get">
                                     <button type="submit" class="btn btn-info" style="width:140px;">本のリクエストはこちら</button>
                                 </form>
                             </li>

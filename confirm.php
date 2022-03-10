@@ -101,7 +101,7 @@ $_SESSION['total_amount'] = $total_amount;
         </tbody>
     </table>
     <!--アクションで完了画面へ -->
-    <form name ="form1" method="post" action="payment.php">
+    <form name ="form1" method="post" action="remitment.php">
         <span class="text-light bg-dark">商品購入ボタンを押してください</span><br>
         <input type="submit" value="購入する" name="confirm" class="btn btn-outline-danger">
     </form>

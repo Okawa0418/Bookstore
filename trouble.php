@@ -39,7 +39,7 @@
                 <li class="list-group-item">
                     <a href="signon.php"class="link-success">新規登録</a>
                     <a href="login.php"class="link-warning">ログイン画面</a>
-                    <a href="quit.php"class="link-info">退会</a>
+                    <a href="vacate.php"class="link-info">退会</a>
                     <!-- <a href="include.php"class="link-primary">商品追加フォーム</a>
                     <a href="inquiry.php"class="link-secondary">お問合せリスト</a>
                     <a href="manager_logout.php"class="link-danger">ログアウト</a> -->

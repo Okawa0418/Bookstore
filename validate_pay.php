@@ -1,5 +1,5 @@
 <?php
-// payment.phpから送信された値のバリデーション実装
+// remitment.phpから送信された値のバリデーション実装
 session_start();
 require_once('database1.php');
 require_once('payment_credit_db.php');
@@ -38,14 +38,14 @@ if ($_POST['rs'] == '1') {
     // 名義（大文字半角アルファベット 姓名の間にスペース）
     if (!preg_match('/^[A-Z]+\s[A-Z]+\z/', $cc_name)) {
         $_SESSION['msg'] = '※カード名義は大文字半角アルファベット、姓名の間にスペースを入れてください';
-        header('Location: payment.php');
+        header('Location: remitment.php');
         exit;
     }
 
     // カード名義は60文字まで
     if (60 < mb_strlen($cc_name, 'UTF-8')) {
         $_SESSION['msg'] = '※カード名義の文字数は60文字以内にしてください';
-        header('Location: payment.php');
+        header('Location: remitment.php');
         exit;
     }
 
@@ -54,7 +54,7 @@ if ($_POST['rs'] == '1') {
     if (!preg_match('/^(4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|^(?:2131|1800|35\d{3})\d{11}$)$/', $cc_number)) {
         // エラー
         $_SESSION['msg'] = '※正しいカード番号を入力してください';
-        header('Location: payment.php');
+        header('Location: remitment.php');
         exit;
     }
 
@@ -62,7 +62,7 @@ if ($_POST['rs'] == '1') {
     if (! preg_match('/^([0-9]{2})([0-9]{2})\z/', $cc_time, $matches)) {
         // エラー
         $_SESSION['msg'] = '※有効期限を正しく記入してください';
-        header('Location: payment.php');
+        header('Location: remitment.php');
         exit;
     } else {
         // 最初の([0-9]{2})にマッチしている数字（月）
@@ -74,7 +74,7 @@ if ($_POST['rs'] == '1') {
         if (!checkdate($month, 1, $year)) {
             // エラー
             $_SESSION['msg'] = '※有効期限を正しく記入してください';
-            header('Location: payment.php');
+            header('Location: remitment.php');
             exit;
         }
         // カードの有効期限範タイムスタンプ
@@ -85,7 +85,7 @@ if ($_POST['rs'] == '1') {
         if ($expiration < $today) {
             // エラー
             $_SESSION['msg'] = '※カード有効期限が切れています';
-            header('Location: payment.php');
+            header('Location: remitment.php');
             exit;
         }
         // 未来の場合（有効期限は最長10年程度？）
@@ -93,7 +93,7 @@ if ($_POST['rs'] == '1') {
         if ($expiration > $future) {
             // エラー
             $_SESSION['msg'] = '※有効期限を正しく記入してください';
-            header('Location: payment.php');
+            header('Location: remitment.php');
             exit;
         }
     }
@@ -102,7 +102,7 @@ if ($_POST['rs'] == '1') {
     if (!preg_match('/^[0-9]{3,4}\z/', $cc_cvv)) {
         // エラー
         $_SESSION['msg'] = '※セキュリティコードを正しく記入してください';
-        header('Location: payment.php');
+        header('Location: remitment.php');
         exit;
     }
 
@@ -133,28 +133,28 @@ if ($_POST['rs'] == '2') {
     // 口座名義は全角カタカナ、スペース、全角カタカナ
     if (!preg_match("/^[ァ-ヶー]+[ |　]+[ァ-ヶー]/u", $b_name)) {
         $_SESSION['msg'] = '※口座名義は全角カタカナ、姓名の間にスペースを入れてください';
-        header('Location: payment.php');
+        header('Location: remitment.php');
         exit;
     }
 
     // 口座名義60文字
     if (60 < mb_strlen($b_name, 'UTF-8')) {
         $_SESSION['msg'] = '※口座名義の文字数は60文字以内にしてください';
-        header('Location: payment.php');
+        header('Location: remitment.php');
         exit;
     }
     
     // 銀行口座番号7桁
     if (!preg_match('/^[0-9]{7}\z/', $b_number)) {
         $_SESSION['msg'] = '※正しい口座番号を記入してください';
-        header('Location: payment.php');
+        header('Location: remitment.php');
         exit;
     }
 
     // 暗証番号は4桁ハッシュ化
     if (4 < mb_strlen($b_cvv, 'UTF-8')) {
         $_SESSION['msg'] = '※暗証番号は4桁を記入してください';
-        header('Location: payment.php');
+        header('Location: remitment.php');
         exit;
     }
 

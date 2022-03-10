@@ -260,7 +260,7 @@
                         </div>  
                         <div class="mb-2">
                             <?php if (isset($_SESSION['user_id'])) : ?>
-                                <li style="list-style: none;"><a class="link-dark" href="quit.php">退会する</a></li>
+                                <li style="list-style: none;"><a class="link-dark" href="vacate.php">退会する</a></li>
                             <?php endif ; ?>
                         </div>
                     </ul>

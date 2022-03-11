@@ -100,12 +100,6 @@ if (isset($_SESSION['msg'])) {
                 <div class="mb-3">
                     <button type="submit" name="searchid" class="btn btn-primary">追加する</button>
                 </div>
-                <!-- <label>
-                    追加したい商品ID:
-                    <input type="number" name="id" value="">
-                </label>
-                <br>
-                <input type="submit" name="searchid" value="追加する"> -->
             </form>
         </div>
         <div class="row">

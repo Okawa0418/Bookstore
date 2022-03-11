@@ -16,6 +16,12 @@ $stmt = $dbh->query($sql);
 // *データベースからの結果を取取
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// エラーメッセージが格納されている場合
+if (isset($_SESSION['msg'])) {
+    $msg = $_SESSION['msg'];
+    unset($_SESSION['msg']);
+}
+
 
 
     
@@ -23,6 +29,10 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品リクエスト一覧</title>
     <!-- bootstrap ｃｓｓ -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
 </head>
@@ -97,7 +107,11 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <!-- Navbarここまで -->
         </div>
     </div>
-    <div class="container-fluid">    
+    <div class="container-fluid">
+        <!-- エラーメッセージ表示 -->
+        <?php if (isset($msg)) : ?>
+            <p><?= $msg; ?></p>
+        <?php endif ; ?>    
         <table class="table table-warning" >
         <!-- table分け名前列を分離 -->
             <!-- table項目 -->

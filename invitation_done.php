@@ -48,6 +48,12 @@
     $book=$_POST['book'];
     $receive=$_POST['receive'];
 
+    $sql="SELECT*FROM newbook WHERE product_name = :book";
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':book', $book);
+    $stmt->execute();
+    $member = $stmt->fetch();
+
     if(empty($_POST['email'])){
       $_SESSION['msg'] = '※メールアドレスを入力してください。';
       header('Location: invitation.php');
@@ -60,10 +66,14 @@
       $_SESSION['msg3'] = '※本のタイトルを入力してください。';
       header('Location: invitation.php');
     }
-    if(!in_array($receive, ['必要','不要'])){
+    if(!in_array($receive, ['1','2'])){
       $_SESSION['msg4'] = '※要否を選択してください。';
       header('Location: invitation.php');
       exit;
+    }
+    elseif(isset($member['book'])&&$member['product_name']===$book){
+      echo '<h2>同じタイトルの本が存在します。</h2>';
+      echo '<a href="invitation.php">戻る</a>';
     }
     else{
         try{

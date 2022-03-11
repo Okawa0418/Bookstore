@@ -43,7 +43,7 @@
     session_start();
 
     if(empty($_POST['email'])){
-        $_SESSION['msg1'] = '※メールアドレスを入力してください。';
+        $_SESSION['msg'] = '※メールアドレスを入力してください。';
         header('Location: customerformadd.php');
     } else{$_SESSION['email'] = $_POST['email'];
     }

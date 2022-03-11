@@ -5,9 +5,31 @@
     $database = new Database1;
     // productテーブルから降順にデータを取得する
     $allProduct = $database->getAllProductDesc();
-
+    
     // categoryテーブルから全レコード取得
     $allCategory = $database->getAllRecord('category');
+
+    // ホームリンクをクリックした場合
+    if (isset($_GET['home'])) {
+        // 各セッションを破棄していく
+        // 検索した言葉がセッション変数に入っている場合
+        if (isset($_SESSION['search_word'])) {
+            unset($_SESSION['search_word']);
+        }
+        // categoryセッションに値が入っていた場合
+        if (isset($_SESSION['category1'])) {
+            unset($_SESSION['category1']);
+        }
+        if (isset($_SESSION['category2'])) {
+            unset($_SESSION['category2']);
+        }
+        if (isset($_SESSION['category3'])) {
+            unset($_SESSION['category3']);
+        }
+        if (isset($_SESSION['category4'])) {
+            unset($_SESSION['category4']);
+        }
+    }
     
     // セッション変数にエラーメッセージが格納されていた場合
     if (isset($_SESSION['msg'])) {
@@ -51,8 +73,8 @@
     }
 
     // 検索欄に値が入って送信された場合
-    if (isset($_POST['search'])) {
-        $search = $_POST['search'];
+    if (isset($_GET['search'])) {
+        $search = $_GET['search'];
         // 検索結果の配列
         $allProduct = $database->searchProduct($search);
         // 検索した言葉をセッションで保持
@@ -75,14 +97,6 @@
         } else {
             $_SESSION['category4'] = $ctg_id;
         }
-    }
-
-    // 数量選択して購入画面へ遷移後、また商品選択へ戻ってきた場合
-    if (isset($_SESSION['save_quantity'])) {
-        // 数量のセッションを変数へ代入
-        $save_quantity = $_SESSION['save_quantity'];
-        // 数量セッションを破棄
-        unset($_SESSION['save_quantity']);
     }
 
     function h($s) {
@@ -123,7 +137,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.php">ホーム</a>
+                                <a class="nav-link active" aria-current="page" href="index.php?home">ホーム</a>
                             </li>
                             <!-- ログイン情報がセッションで保持されている場合 -->
                             <?php if (isset($_SESSION['user_id'])) : ?>
@@ -191,8 +205,6 @@
                                                 2）入荷時の連絡を希望される方は「必要」を選択ください。<br>
                                                 3）記入された情報がお間違いのないよう確認した後送信ボタンを押してください。
                                             </p>
-                                            <!-- 自分の保存データ挿入したい　スクリーンショットしたリクエストページ -->
-                                            <img src="">
                                         </div>
                                     </div>
                                 </div> 
@@ -200,7 +212,7 @@
                         </ul>
                         
                         <!-- 検索フォーム -->
-                        <form class="d-flex" action="index.php" method="post">
+                        <form class="d-flex" action="index.php" method="get">
                             <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-success" type="submit">Search</button>
                         </form>

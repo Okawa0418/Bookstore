@@ -138,7 +138,7 @@
             <div class="card-body">
                 <h5 class="card-title">BOOKSTOREを使ってみよう</h5>
                 <p class="card-text">最短5分で簡単登録人気NO1のBOOKSTORE。</p>
-                <form method="post" action="signup.php">
+                <form method="post" action="signon.php">
                     <input type="submit" value="クリック" name="index" class="btn btn-outline-dark">
                 </form>
             </div>

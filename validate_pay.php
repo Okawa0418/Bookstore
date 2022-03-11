@@ -14,6 +14,20 @@ if (empty($_SESSION['user_id'])) {
 // ユーザーIDを変数へ代入
 $user_id = $_SESSION['user_id'];
 
+// トークンがセットされていない、またはセッションに入っているトークンと送信されてきたトークンが一致しない場合
+if (!isset($_POST["token"]) || $_POST["token"] !== $_SESSION['token']) {
+    echo '不正アクセスです';
+    exit;
+}
+
+// トークンが正しい場合
+// トークンの破棄
+unset($_SESSION['token']);
+// セッションの保存
+session_write_close();
+// セッションの再開
+session_start();
+
 // 送信されてきた値がない場合
 if (empty($_POST['name']) || empty($_POST['address'])) {
     echo '不正アクセスです';

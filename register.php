@@ -64,7 +64,7 @@ session_start();
             header('Location: signon.php');
             exit;
         }
-    if (!empty($_POST['password'])&&!preg_match("/\A[a-z\d]{8,100}+\z/i",$_POST['password'])){
+    if (!empty($_POST['password'])&&!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i',$_POST['password'])){
             $_SESSION['msg6'] ='※パスワードは英数字8文字以上100文字以下にしてください。';
             header('Location: signon.php');
             exit;

@@ -9,9 +9,9 @@
 <?php
 // 変数値確認
 session_start();
-    if (isset($_SESSION['msg1'])) {
-    $msg = $_SESSION['msg1'];
-    unset($_SESSION['msg1']);
+    if (isset($_SESSION['msg'])) {
+    $msg = $_SESSION['msg'];
+    unset($_SESSION['msg']);
 }
 ?>
 <?php
@@ -33,7 +33,7 @@ session_start();
     <!--bootstrap  -->
     <div class="mb-3">
     <!-- message　エラー表示 -->
-    <?php if (isset($msg1)) : ?>
+    <?php if (isset($msg)) : ?>
         <?= $msg; ?>
         <br>
     <?php endif ; ?>
@@ -49,7 +49,7 @@ session_start();
         <?php endif ; ?>
 
     連絡先メールアドレス<br>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="<?php if( !empty($_SESSION['email']) ){ echo htmlspecialchars( $_SESSION['email'], ENT_QUOTES, 'UTF-8'); } ?>">
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1">
     <br>
     <div class="mb-3">
     webネーム<br>
@@ -68,7 +68,7 @@ session_start();
             <p class="lead mb-4">お問合せありがとうございました。またのご利用お待ちしております。</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <form method="post" action="index.php">
-                    <input type="submit" value="商品画面へ" name="index" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+                    <input type="submit" value="商品一覧" name="index" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
                 </form>
             </div>
         </div>

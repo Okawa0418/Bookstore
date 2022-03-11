@@ -55,7 +55,7 @@
                         <li class="works_item">
                             <div class="works_image">
                                 <div class="works_modal_open" data-modal-open="modal-3">
-                                    <p>商品を購入の流れ</p>
+                                    <p>商品一覧の流れ</p>
                                     <div class="works_image_mask">
                                         <div class="mask_text">クリックで拡大</div>
                                     </div>
@@ -184,7 +184,7 @@
                     <input type="submit" value="質問ボット" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
                 </form>
                 <form method="post" action="index.php">
-                    <input type="submit" value="商品画面へ" name="index" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+                    <input type="submit" value="商品一覧" name="index" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
                 </form>
             </div>
         </div>

@@ -108,7 +108,7 @@
           <h4 class="mb-3">お支払い方法</h4>
             <form autocomplete=off action="validate_pay.php">
               <label>
-                <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()" >クレジットカード
+                <input class="js-check" type="radio" name="rs" value="1" onclick="formSwitch()" checked >クレジットカード
               </label>
               <label>
                 <input class="js-check" type="radio" name="rs" value="2" onclick="formSwitch()">銀行口座

@@ -54,6 +54,9 @@
     $stmt->execute();
     $member = $stmt->fetch();
 
+    // var_dump($member);
+    // exit;
+
     if(empty($_POST['email'])){
       $_SESSION['msg'] = '※メールアドレスを入力してください。';
       header('Location: invitation.php');
@@ -71,9 +74,9 @@
       header('Location: invitation.php');
       exit;
     }
-    elseif(isset($member['book'])&&$member['product_name']===$book){
-      echo '<h2>同じタイトルの本が存在します。</h2>';
-      echo '<a href="invitation.php">戻る</a>';
+    elseif(isset($member['product_name'])&&$member['product_name']===$book){
+      $_SESSION['msg5'] = '同じタイトルの本が存在します。';
+      header('Location: invitation.php');
     }
     else{
         try{

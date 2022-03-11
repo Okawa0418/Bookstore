@@ -59,6 +59,10 @@
     if(empty($_POST['book'])){
       $_SESSION['msg3'] = '※本のタイトルを入力してください。';
       header('Location: invitation.php');
+    }
+    if(!in_array($receive, ['必要','不要'])){
+      $_SESSION['msg4'] = '※要否を選択してください。';
+      header('Location: invitation.php');
       exit;
     }
     else{

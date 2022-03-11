@@ -26,6 +26,12 @@
         unset($_SESSION['msg3']);
     }
     ?>
+        <?php
+        if (isset($_SESSION['msg4'])) {
+        $msg4 = $_SESSION['msg4'];
+        unset($_SESSION['msg4']);
+    }
+    ?>
 
 <body>
     <header>
@@ -48,6 +54,10 @@
 
     <?php if (isset($msg3)) : ?>
       <?= $msg3; ?><br>
+    <?php endif ; ?>
+
+    <?php if (isset($msg4)) : ?>
+      <?= $msg4; ?><br>
     <?php endif ; ?><br>
 
 <form method="post" action="invitation_done.php">

@@ -43,9 +43,8 @@ session_start();
             exit;
         }
     
-    // 入力されたメールアドレスとデータベースに存在するメールアドレスが一致した場合
-    elseif(isset($member['mail_address'])&&$member['mail_address']===$mail){
-      echo '<h2>同じメールアドレスが存在します。</h2>';
+    elseif(isset($member['name'])&&$member['name']===$name){
+      echo '<h2>同じ管理者名が存在します。</h2>';
       echo '<a href="manager_signup.php">戻る</a>';
     }
 

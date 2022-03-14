@@ -30,6 +30,7 @@ session_start();
     if(empty($_POST['name'])){
             $_SESSION['msg'] = '※管理者名を入力してください。';
             header('Location: manager_signup.php');
+            exit;
         }
 
     if(empty($_POST['password'])){

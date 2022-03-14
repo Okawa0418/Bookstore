@@ -28,10 +28,9 @@ session_start();
     $member = $stmt->fetch();
 
     if(empty($_POST['name'])){
-            $_SESSION['msg'] = '※ユーザー名を入力してください。';
+            $_SESSION['msg'] = '※管理者名を入力してください。';
             header('Location: manager_signup.php');
         }
-        else{$_SESSION['name'] = $_POST['name'];}
 
     if(empty($_POST['password'])){
             $_SESSION['msg2'] = '※パスワードを入力してください。';

@@ -5,33 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <a href="index.php"  style="color:inherit;text-decoration: none;"><h1>BOOK STORE</h1></a>
     <link rel="stylesheet" href="quitform.css">
 </head>
 <body>
+<?php
+session_start();
+    if (isset($_SESSION['msg'])) {
+    $msg = $_SESSION['msg'];
+    unset($_SESSION['msg']);
+}
+?>
+<?php
+    if (isset($_SESSION['msg2'])) {
+    $msg2 = $_SESSION['msg2'];
+    unset($_SESSION['msg2']);
+}
+
+?>
     <center><h1>よろしければ退会理由を教えてください。ご協力ありがとうございます</h1></center>
     <center><p>任意調査のため強制ではありません。下画面の商品ページボタンでトップ画面に戻ります。</p></center>
 <!-- form 追加 -->
     <div class="container">
-        <form method="post" action="">
+        <form method="post" action="quitdone.php">
         <!-- ラジオボタン選択肢 -->
+        <?php if (isset($msg)) : ?>
+            <?= $msg; ?>
+            <br>
+        <?php endif ; ?>
+
+        <?php if (isset($msg2)) : ?>
+            <?= $msg2; ?>
+            <br>
+        <?php endif ; ?>
         <label>名前</label><br>
         <input type="text" class="txt" name="username" placeholder="名前を入力してください"/><br>
         <label>ご意見板</label><br>
         <input type="text" class="txt" name="opinion" placeholder="どんなことでも良いですご意見を頂ければ幸いです。"/><br>
-        <label> 選択覧</label><br><br>
-        <input type="radio"  name="question" value="1使用頻度が少なくなってきたため"/>1使用頻度が少なくなってきたため
-        <!-- ラジオボタン選択肢 -->
-        <br>
-        <input type="radio" name="question" value="2他社サイトを使用するもしくは使用しているため"/>2他社サイトを使用するもしくは使用しているため
-        <!-- ラジオボタン選択肢 -->
-        <br>
-        <input type="radio"  name="question" value="3利用するに当たり不便な箇所があるため"/>3利用するに当たり不便な箇所があるため
-        <!-- ラジオボタン選択肢 -->
-        <br>
-        <input type="radio"  name="question" value="4金銭面の問題で退会を希望する"/>4金銭面の問題で退会を希望する
-        <!-- 送信ボタン -->
-        <br><br>
-        <input type="submit" class="txt" name="insert" value="送信する"/>
+        <input type="submit" class="txt" value="送信する"/>
         </form>
     </div>
 <!-- お問合せフォーム -->
@@ -53,28 +64,3 @@
     </footer>
 </body>
 </html>
-<?php
-
-$connection= mysqli_connect("localhost", "root","Rilakkuma1231","bookstore");
-$db = mysqli_select_db($connection,'bookstore');
-
-if(isset($_POST['insert']))
-{
-$username = $_POST['username'];
-$opinion = $_POST['opinion'];
-$question = $_POST['question'];
-
-$query = "INSERT INTO `quit` (`username`,`opinion`,`question`)VALUES('$username','$opinion','$question')";
-//左値 ローカルusername,pass 右SQL  
-$query_run = mysqli_query($connection,$query);
-
-if($query_run)
-{
-    echo '<script type="text/javascript"> alert("投稿完了しました。この度はBOOKSTOREをご使用頂き誠にありがとうございました。またのご利用お待ちしております。")</script>';
-}
-else
-{
-    echo '<script type="text/javascript"> alert("不具合対応中です誠に申し訳ございません")</script>';
-}
-}
-?>

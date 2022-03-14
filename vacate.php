@@ -72,6 +72,14 @@
                 $stmt = $dbh->prepare('DELETE FROM purchase WHERE user_id = :user_id');
                 $stmt->bindValue(1, $_SESSION['user_id']);
                 $stmt->execute();
+
+                $stmt = $dbh->prepare('DELETE FROM cart WHERE user_id = :user_id');
+                $stmt->bindValue(1, $_SESSION['user_id']);
+                $stmt->execute();
+
+                $stmt = $dbh->prepare('DELETE FROM favorite WHERE user_id = :user_id');
+                $stmt->bindValue(1, $_SESSION['user_id']);
+                $stmt->execute();
             
                 session_destroy();
             

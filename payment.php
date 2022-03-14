@@ -50,7 +50,7 @@
 	// セッションにメッセージが入っていた場合
 	if (isset($_SESSION['msg'])) {
 		// 変数へ代入
-		$msg = $_SESSION['msg'];
+		$msgs = $_SESSION['msg'];
 		// セッション破棄
 		unset($_SESSION['msg']);
 	}
@@ -96,13 +96,15 @@
 
 			<div class="col-md-8 order-md-1">
 				<!-- メッセージが入っている場合 -->
-				<?php if (isset($msg)) : ?>
-					<p><?= $msg; ?></p>
+				<?php if (isset($msgs)) : ?>
+					<?php foreach ($msgs as $msg) : ?>
+						<p><?= $msg; ?></p>
+					<?php endforeach ; ?>
 				<?php endif ; ?>
 			</div>
 			
 			<div class="col-md-8 order-md-1">
-				<h4 class="mb-3">請求先住所</h4>
+				<h4 class="mb-3">お届け先</h4>
 				<form action="validate_pay.php" method="post" class="needs-validation" novalidate>
 					<div class="row">
 						<div class="col-md-6 mb-3">

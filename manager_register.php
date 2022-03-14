@@ -28,10 +28,10 @@ session_start();
     $member = $stmt->fetch();
 
     if(empty($_POST['name'])){
-            $_SESSION['msg'] = '※ユーザー名を入力してください。';
+            $_SESSION['msg'] = '※管理者名を入力してください。';
             header('Location: manager_signup.php');
+            exit;
         }
-        else{$_SESSION['name'] = $_POST['name'];}
 
     if(empty($_POST['password'])){
             $_SESSION['msg2'] = '※パスワードを入力してください。';
@@ -44,9 +44,8 @@ session_start();
             exit;
         }
     
-    // 入力されたメールアドレスとデータベースに存在するメールアドレスが一致した場合
-    elseif(isset($member['mail_address'])&&$member['mail_address']===$mail){
-      echo '<h2>同じメールアドレスが存在します。</h2>';
+    elseif(isset($member['name'])&&$member['name']===$name){
+      echo '<h2>同じ管理者名が存在します。</h2>';
       echo '<a href="manager_signup.php">戻る</a>';
     }
 

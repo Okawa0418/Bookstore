@@ -28,7 +28,7 @@
                 <input type="hidden" name="is_delete" value="1">
                 <input type="submit" class="btn btn-info " value="退会する">
                 </form><br>
-                <a href="index.php" class="link-danger">トップに戻る</a>
+                <a href="index.php" class="link-danger">商品一覧</a>
             </div>
         </div>
     </div>

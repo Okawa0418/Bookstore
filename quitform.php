@@ -24,7 +24,7 @@ session_start();
 
 ?>
     <center><h1>よろしければ退会理由を教えてください。ご協力ありがとうございます</h1></center>
-    <center><p>任意調査のため強制ではありません。下画面の商品ページボタンでトップ画面に戻ります。</p></center>
+    <center><p>任意調査のため強制ではありません。下画面の商品ページボタンで商品一覧に戻ります。</p></center>
 <!-- form 追加 -->
     <div class="container">
         <form method="post" action="quitdone.php">
@@ -41,7 +41,7 @@ session_start();
         <label>名前</label><br>
         <input type="text" class="txt" name="username" placeholder="名前を入力してください"/><br>
         <label>ご意見板</label><br>
-        <input type="text" class="txt" name="opinion" placeholder="どんなことでも良いですご意見を頂ければ幸いです。"/><br>
+        <input type="text" class="txt" name="opinion" placeholder="ご意見を頂ければ幸いです。"/><br>
         <input type="submit" class="txt" value="送信する"/>
         </form>
     </div>
@@ -56,7 +56,7 @@ session_start();
                 <center><p class="lead mb-4">誠にありがとうございました。またのご利用お待ちしております。</p></center>
                 <div>
                     <form method="post" action="index.php">
-                        <center> <input type="submit" value="商品画面へ" name="index"></center>
+                        <center> <input type="submit" value="商品一覧" name="index"></center>
                     </form>
                 </div>
             </div>

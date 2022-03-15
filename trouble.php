@@ -23,7 +23,7 @@
         <h2>BOOKSTOREに関するご質問にお答えするボットです。</h2>
         <p>お問い合わせフォームへお客様が行く前に問題が解決しなかった場合はお手数をおかけしますがお問い合わせフォームからお問合せください。</p>
         <form method="post" action="index.php">
-            <input type="submit" value="商品画面へ" name="index" class="btn btn-warning btn-lg px-4 me-sm-3 fw-bold">
+            <input type="submit" value="商品一覧" name="index" class="btn btn-warning btn-lg px-4 me-sm-3 fw-bold">
         </form>
     </div>
     <!--jumbotron end  -->
@@ -255,7 +255,7 @@
                         <input type="submit" value="お問い合わせ" name="confirm" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
                     </form>
                     <form method="post" action="index.php">
-                        <input type="submit" value="商品画面へ" name="index" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
+                        <input type="submit" value="商品一覧" name="index" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">
                     </form>
                 </div>
             </div>

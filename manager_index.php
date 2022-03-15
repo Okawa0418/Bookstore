@@ -97,13 +97,13 @@
         <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
         <div class="carousel-inner ">
             <div class="carousel-item active">
-            <img src="photojp/workout1.png" class="d-block w-50" alt="...">
+            <img src="photojp/workout1.png" class="d-block w-100" alt="text-center">
             </div>
             <div class="carousel-item">
-            <img src="photojp/workout2.png" class="d-block w-50" alt="...">
+            <img src="photojp/workout2.png" class="d-block w-100" alt="text-center">
             </div>
             <div class="carousel-item">
-            <img src="photojp/workout3.png" class="d-block w-50" alt="...">
+            <img src="photojp/workout3.png" class="d-block w-100" alt="text-center">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">

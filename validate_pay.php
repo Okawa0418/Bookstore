@@ -152,9 +152,12 @@ if ($_POST['rs'] == '2') {
 }
 
 // エラーメッセージが一つでも格納されていたらpayment.phpへリダイレクト
-if (0 < count($_SESSION['msg'])) {
-    header('Location: payment.php');
-    exit;
+if (isset($_SESSION['msg'])) {
+    if (0 < count($_SESSION['msg'])) {
+        header('Location: payment.php');
+        exit;
+}
+
 }
 
 // 決済情報登録後

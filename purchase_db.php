@@ -42,7 +42,7 @@ class Purchase extends Database1
             $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
             $stmt->bindValue(':payment', $payment, PDO::PARAM_INT);
             $stmt->bindValue(':pay_id', $pay_id, PDO::PARAM_INT);
-            // SQL実行（データベースに投稿内容を入れる）
+            // SQL実行（データベースに購入情報を挿入）
             $stmt->execute();
             // 処理確定
             $dbh->commit();

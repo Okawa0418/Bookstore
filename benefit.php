@@ -35,7 +35,6 @@
     <table class="table table-success table-striped">
         <thead>
             <tr>
-                <th scope="col">カテゴリー</th>
                 <th scope="col">商品名</th>
                 <th scope="col">住所</th>
                 <th scope="col">クレジット番号</th>
@@ -49,12 +48,9 @@
                     <td><?= $results[$i]['address'];?></td>
                     <td><?= $results[$i]['cc_number'];?></td>
                     <td>
-                        <?php if ($results[$i]['product'] == 1) : ?>
-                            
-                        <?php elseif ($results[$i]['payment_credit'] == 2) : ?>
-                            
-                        <?php elseif ($results[$i]['payment_credit'] == 3) : ?>
-                                                                    
+                        <?php if ($results[$i]['product']) : ?>      
+                        <?php elseif ($results[$i]['payment_credit']) : ?>                            
+                        <?php elseif ($results[$i]['payment_credit']) : ?>                                                                    
                         <?php endif ; ?>
                     </td>
                 </tr>

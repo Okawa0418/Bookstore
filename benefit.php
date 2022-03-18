@@ -13,9 +13,9 @@
         unset($_SESSION['msg']);
     }
     
-    function h($s) {
-        return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
-    }
+    // function h($s) {
+    //     return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+    // }
 ?> 
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
             <?php for ($i = 0; $i < count($results); $i++) : ?>
                 <tr>
                     <th><?= $results[$i]['product_name'];?></th>
-                    <td><?= h($results[$i]['address']);?></td>
+                    <td><?= $results[$i]['address'];?></td>
                     <td><?= $results[$i]['cc_number'];?></td>
                     <td>
                         <?php if ($results[$i]['product'] == 1) : ?>
